@@ -1,0 +1,31 @@
+{
+  "name": "ServerAPI",
+  "version": "0.0.1",
+  "description": "server api of learnFast project",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo 'nothing yet'",
+    "nodemon": "nodemon server.js",
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shSina/learnFast.git"
+  },
+  "author": "shSina,Farideh",
+  "license": "Private,Copy right 2014",
+  "bugs": {
+    "url": "https://github.com/shSina/learnFast/issues"
+  },
+  "dependencies": {
+    "express": "~4.10.0",
+    "socket.io": "~1.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "~1.2.1",
+    "gulp": "~3.8.9",
+    "gulp-nodemon": "~1.0.4",
+    "gulp-jshint": "~1.8.5",
+    "jshint-stylish": "~1.0.0"
+  }
+}
