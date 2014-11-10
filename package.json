@@ -17,6 +17,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "connect-modrewrite": "^0.7.9",
     "event-stream": "^3.1.7",
     "gulp": "~3.8.9",
     "gulp-connect": "^2.2.0",
