@@ -17,13 +17,15 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "browser-sync": "^1.6.5",
     "connect-modrewrite": "^0.7.9",
     "event-stream": "^3.1.7",
     "gulp": "~3.8.9",
-    "gulp-connect": "^2.2.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-filter": "^1.0.2",
     "gulp-inject": "^1.0.2",
     "gulp-jshint": "~1.8.5",
-    "gulp-livereload": "^2.1.1",
+    "gulp-plumber": "^0.6.6",
     "main-bower-files": "^2.4.0"
   }
 }
