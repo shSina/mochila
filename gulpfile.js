@@ -6,7 +6,6 @@ var gulp = require('gulp')
     ,modRewrite = require('connect-modrewrite')
     ,sass = require('gulp-ruby-sass')
     ,filter = require('gulp-filter')
-    ,plumber = require('gulp-plumber')
     ,clean = require('gulp-clean')
     ,es = require('event-stream');
 
@@ -26,7 +25,7 @@ gulp.task('sass',function(){
 	    	sourcemap:true,
 	    	sourcemapPath:'.'
 	    }))
-	    .pipe(plumber())
+        .on('error', function (err) { console.log(err.message); })
         .pipe(gulp.dest('./.tmp/styles'))
         .pipe(filter('**/*.css'))
         .pipe(reload({stream:true}));
