@@ -4,7 +4,7 @@ var gulp = require('gulp')
     ,browserSync = require('browser-sync')
 	,reload = browserSync.reload	
     ,modRewrite = require('connect-modrewrite')
-    ,sass = require('gulp-ruby-sass')
+    ,sass = require('gulp-compass')
     ,filter = require('gulp-filter')
     ,clean = require('gulp-clean')
     ,es = require('event-stream');
@@ -22,8 +22,9 @@ gulp.task('html', function () {
 gulp.task('sass',function(){
 	gulp.src('./app/styles/*.scss')
 	    .pipe(sass({
-	    	sourcemap:true,
-	    	sourcemapPath:'.'
+            sass:'./app/styles',
+            css:'./.tmp/styles',
+            sourcemap:true
 	    }))
         .on('error', function (err) { console.log(err.message); })
         .pipe(gulp.dest('./.tmp/styles'))
