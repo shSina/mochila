@@ -41,7 +41,8 @@ gulp.task('livereload',function(){
             middleware: [modRewrite(['!\\.html|\\.js|\\.svg|\\.css|\\.png|\\.jpg|\\.woff|\\.ttf|\\.jpeg|\\.css.map|\\.scss$ /index.html [L]'])],
             routes: {
 		        "/bower_components": "./bower_components",
-		        "/styles":"./.tmp/styles"
+		        "/styles":"./.tmp/styles",
+                "/app":"./app"
 		    }
         },
         startPath: '/',
