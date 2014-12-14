@@ -1,23 +1,8 @@
-var app = require('./lib/expressio').app;
-var io  = require('./lib/expressio').io;
+var app = require('./lib/exp_app')
+    , http = require('./lib/sio_io').http
+    , router = require('./controllers/routing')
+    , db_init = require('./lib/mongo_init');
 
-app.use('/', require('./controllers/api/index'));
-app.use(function(req, res) {
-	res.status(404);
-	res.send('what you look for???');
+http.listen(app.get('port'),app.get('domain'), function(){
+	console.log('listening on '+ app.get('domain') + ':' + app.get('port'));
 });
-if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        console.log(err.stack);
-        res.send(err.message);
-    });
-}else{
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.send('server internal error.');
-    });    
-}
-
-require('./controllers/events/connection');
-io.use(require('./controllers/events/hello'));

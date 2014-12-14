@@ -17,8 +17,10 @@
     "url": "https://github.com/shSina/learnFast/issues"
   },
   "dependencies": {
-    "express": "~4.10.0",
     "body-parser": "~1.8.1",
+    "express": "~4.10.0",
+    "jsonwebtoken": "^1.3.0",
+    "mongoose": "^3.8.20",
     "morgan": "~1.3.0",
     "socket.io": "~1.2.0",
     "socket.io-events": "~0.4.5"
