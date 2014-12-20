@@ -1,7 +1,7 @@
 {
   "name": "ServerAPI",
   "version": "0.0.1",
-  "description": "server api of learnFast project",
+  "description": "server api of mochila project",
   "main": "server.js",
   "private": true,
   "scripts": {
@@ -9,12 +9,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/shSina/learnFast.git"
+    "url": "https://github.com/shSina/mochila.git"
   },
   "author": "shSina,Farideh",
   "license": "Private,Copy right 2014",
   "bugs": {
-    "url": "https://github.com/shSina/learnFast/issues"
+    "url": "https://github.com/shSina/mochila/issues"
   },
   "dependencies": {
     "body-parser": "~1.8.1",
