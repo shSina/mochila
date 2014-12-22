@@ -13,5 +13,5 @@ var userSchema = new Schema({
     classId : [ObjectId],
     accesss_token: String
 });
- 
-module.exports = mongoose.model('user', userSchema);
+
+module.exports = userSchema;

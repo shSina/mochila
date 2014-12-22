@@ -18,4 +18,4 @@ var itemSchema = new Schema({
 	}]
 });
  
-module.exports = mongoose.model('item', itemSchema);
+module.exports = itemSchema;

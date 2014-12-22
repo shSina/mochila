@@ -10,4 +10,4 @@ var classSchema = new Schema({
     endDate : Date  
 });
  
-module.exports = mongoose.model('class', classSchema);
+module.exports = classSchema;
