@@ -10,7 +10,7 @@ var userSchema = new Schema({
     email: String,
     date : {type : Date , default : Date.now},
     lastLogin : {type : Date , default : Date.now},
-    classId : [ObjectId],
+    classId : [{type : ObjectId , ref : 'class'}],
     accesss_token: String
 });
 

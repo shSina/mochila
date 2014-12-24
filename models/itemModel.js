@@ -4,6 +4,3 @@ var mongoose = require('mongoose'),
 var item = mongoose.model('item', itemSchema);
 
 
-
-
-module.exports = exports;

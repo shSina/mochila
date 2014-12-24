@@ -4,7 +4,7 @@ var mongoose = require('mongoose')
 
 var classSchema = new Schema({
     teacherId : ObjectId,
-    studentsIds : [ObjectId],
+    studentsIds : [{type : ObjectId , ref : 'user'}],
     studentsCount : Number,
     startDate : {type : Date , default : Date.now},
     endDate : Date  

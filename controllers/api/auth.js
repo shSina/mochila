@@ -1,6 +1,6 @@
 var router = require('express').Router()
 	, user_token = require('../../lib/access')
-	, user = require('../../models/users')
+	, user = require('../../models/userModel')
 	, jwt = require('jsonwebtoken');
 
 router.post('/signin',function (req,res){
