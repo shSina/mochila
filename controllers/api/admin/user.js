@@ -1,5 +1,5 @@
 var router = require('express').Router();
-var user = require('../../../models/userModel');
+var user = require('models/userModel');
 
 router.post('/',function (req,res,next) {
 	user.addUser( req.body , function(err){
