@@ -1,4 +1,4 @@
-var app = require('lib/exp_app');
+var app = require('lib/app');
 
 app.use(function(req, res) {
 	res.status(404);

@@ -1,5 +1,5 @@
-var app = require('lib/exp_app')
-	, io = require('lib/sio_io').io;
+var app = require('lib/app')
+	, io = require('lib/sio').io;
 
 app.use('/', require('controllers/api/index'));
 app.use('/auth', require('controllers/api/auth'));

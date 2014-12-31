@@ -1,7 +1,7 @@
-var app = require('lib/exp_app')
-    , http = require('lib/sio_io').http
+var app = require('lib/app')
+    , http = require('lib/sio').http
     , router = require('controllers/routing')
-    , db_init = require('lib/mongo_init');
+    , db_init = require('lib/mongoInit');
 
 http.listen(app.get('port'),app.get('domain'), function(){
 	console.log('listening on '+ app.get('domain') + ':' + app.get('port'));
