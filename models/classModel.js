@@ -31,3 +31,19 @@ exports.getAllClasses = function(next) {
 			next(docs);
 	});
 }
+
+exports.addUserToClass = function(classId,userId,next){
+	Class.update({_id:classId},
+				{$push:{"studentsIds":userId} , $inc : {"studentsCount" : 1}})
+				.exec(function(err,res){
+					if(err)
+						next(err);
+				});
+}	
+// var Schema = mongoose.Schema
+//  	, ObjectId = mongoose.Types.ObjectId;
+// Class.find({}).populate('studentsIds').exec(function(err,res){
+// 	console.log(res);
+// 	// Class.update({_id:res[0]._id},
+// 	// 	{$push:{"studentsIds":ObjectId('54992bf43cb5329a16188e18')}}).exec();
+// });

@@ -1,7 +1,12 @@
-var router = require('express').Router();
-var user = require('../../../models/userModel');
+var router = require('express').Router(),
+	user = require('../../../models/userModel'),
+	ObjectId = require('mongoose').Types.ObjectId; 
 
 router.post('/',function (req,res,next) {
+	for (var i = req.body.classId.length - 1; i >= 0; i--) {
+		
+		req.body.classId[i] = ObjectId(req.body.classId[i]);
+	};
 	user.addUser( req.body , function(err){
 		next(err);
 	});

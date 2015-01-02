@@ -1,12 +1,16 @@
 var mongoose = require('mongoose'), 
-    userSchema = require('./schema/userSchema');
+    userSchema = require('./schema/userSchema'),
+    Class = require('./classModel');
  
 var user = mongoose.model('user', userSchema);
 
 exports.addUser = function(item,next) {
-	new user(item).save(function(err){
+	new user(item).save(function(err,dbRes){
 		if (err)
 			next(err);
+
+		// Class.addUserToClass()
+		// dbRes._id
 	});
 }
 
