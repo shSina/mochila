@@ -1,5 +1,5 @@
 var router = require('express').Router(),
-	user = require('../../../models/userModel'),
+var user = require('models/userModel'),
 	ObjectId = require('mongoose').Types.ObjectId; 
 
 router.post('/',function (req,res,next) {

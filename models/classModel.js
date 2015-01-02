@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'), 
-    classSchema = require('./schema/classSchema');
+    classSchema = require('models/schema/classSchema');
 
  
 var Class = mongoose.model('class', classSchema);

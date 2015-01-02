@@ -1,11 +1,11 @@
-var app = require('../lib/exp_app')
-	, io = require('../lib/sio_io').io;
+var app = require('lib/app')
+	, io = require('lib/sio').io;
 
-app.use('/', require('./api/index'));
-app.use('/auth', require('./api/auth'));
-app.use('/admin/user',require('./api/admin/user'));
-app.use('/admin/class',require('./api/admin/class'));
+app.use('/', require('controllers/api/index'));
+app.use('/auth', require('controllers/api/auth'));
+app.use('/admin/user',require('controllers/api/admin/user'));
+app.use('/admin/class',require('controllers/api/admin/class'));
 // require('./api/server_errors');
 
-require('./events/connection');
-io.use(require('./events/hello'));
+require('controllers/events/connection');
+io.use(require('controllers/events/hello'));

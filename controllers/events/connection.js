@@ -1,4 +1,4 @@
-var io = require('../../lib/sio_io').io;
+var io = require('lib/sio').io;
 
 io.on('connection', function(socket){ 
 	console.log('connected');
