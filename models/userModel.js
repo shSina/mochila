@@ -5,12 +5,8 @@ var mongoose = require('mongoose'),
 var user = mongoose.model('user', userSchema);
 
 exports.addUser = function(item,next) {
-	new user(item).save(function(err,dbRes){
-		if (err)
-			next(err);
-
-		// Class.addUserToClass()
-		// dbRes._id
+	new user(item).save(function(err,doc){
+		return next(err,doc);
 	});
 }
 
@@ -20,15 +16,16 @@ exports.deleteUser = function(id,next) {
 	});
 }
 
-exports.findUser = function(id,options,next){ 
-	user.find({_id : id},options,function(err,doc){
-		if(err)
-			next(err);
-		else
-			next(doc);
+exports.findUser = function(id,next){ 
+	user.find({_id : id},function(err,doc){
+		return next(err,doc);
 	});
 }
-
+exports.userExist = function(email,password,next) {
+	user.findOne({email :email,password:password},function(err,doc){
+		return next(err,doc);
+	});
+}
 exports.updateUser = function(query,item,next){
 	user.update(query,{$set:item},function(err,num) {
 		if(err)
@@ -39,10 +36,7 @@ exports.updateUser = function(query,item,next){
 }
 exports.getAllUsers = function(next) {
 	user.find({},function(err,docs) {
-		if (err)
-			next(err);
-		else
-			next(docs);
+		return next(err,docs);
 	});
 }
 exports.getUsersByClassId = function(id,next) {

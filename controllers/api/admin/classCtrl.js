@@ -3,7 +3,10 @@ var router = require('express').Router()
 	, classModel = require('models/classModel')
 	, userModel = require('models/userModel')
     , success = require('lib/resFormat').success()
-    , error = require('lib/resFormat').error(); 
+    , error = require('lib/resFormat').error()
+    , userToken = require('controllers/middlewares/userTokenMidd');
+
+router.use(userToken);
 
 router.post('/',function(req,res,next){
 	classModel.addClass( req.body , function(err,item){
