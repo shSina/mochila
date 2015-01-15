@@ -22,9 +22,11 @@ exports.findUser = function(id,next){
 	});
 }
 exports.userExist = function(email,password,next) {
-	user.findOne({email :email,password:password},function(err,doc){
-		return next(err,doc);
-	});
+	user.findOne({email :email,password:password})
+		.lean()
+		.exec(function(err,doc){
+			return next(err,doc);
+		});
 }
 exports.updateUser = function(query,item,next){
 	user.update(query,{$set:item},function(err,num) {

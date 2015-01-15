@@ -1,11 +1,18 @@
 //admin/user
 var router = require('express').Router()
+	, bodyParser = require('body-parser')
 	, user = require('models/userModel')
 	, ObjectId = require('mongoose').Types.ObjectId
-    , success = require('lib/resFormat').success()
-    , error = require('lib/resFormat').error(); 
+    , success = require('lib/resFormat').success
+    , error = require('lib/resFormat').error
+    , userToken = require('controllers/middlewares/userTokenMidd')
+    , jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
+
+//all admin/user routing must have userToken
+router.use(userToken);
     
-router.post('/',function (req,res,next) {
+router.post('/',jsonParser,function (req,res,next) {
+	//add this part to mongoose itself pre save validation
 	for (var i = req.body.classId.length - 1; i >= 0; i--) {	
 		req.body.classId[i] = ObjectId(req.body.classId[i]);
 	};
@@ -13,21 +20,21 @@ router.post('/',function (req,res,next) {
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = item;
-			res.json(success);
+			res.json(success(item));
 		}
 	});
 })
+
 router.get('/',function(req,res,next){
 	user.getAllUsers(function(err,items){
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = items;
-			res.json(success);
+			res.json(success(items));
 		}
 	})
 })
+
 router.delete('/:userId',function(req,res,next){
 	user.deleteUser(req.param('userId') , function(err){
 		next(err);

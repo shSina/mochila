@@ -1,14 +1,17 @@
 //admin/class
 var router = require('express').Router()
+	, bodyParser = require('body-parser')
 	, classModel = require('models/classModel')
 	, userModel = require('models/userModel')
     , success = require('lib/resFormat').success()
     , error = require('lib/resFormat').error()
-    , userToken = require('controllers/middlewares/userTokenMidd');
+    , userToken = require('controllers/middlewares/userTokenMidd')
+    , jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
 
+//all admin/class routing must have userToken
 router.use(userToken);
 
-router.post('/',function(req,res,next){
+router.post('/',jsonParser,function(req,res,next){
 	classModel.addClass( req.body , function(err,item){
 		if(err)
 			return next(new Error(err));

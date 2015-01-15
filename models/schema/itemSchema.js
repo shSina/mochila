@@ -1,20 +1,21 @@
 var mongoose = require('mongoose')
 	, Schema = mongoose.Schema
-	, ObjectId = Schema.Types.ObjectId;
+	, ObjectId = Schema.Types.ObjectId
+	, enumTypes = require('model/schema/enumTypes');
 
 var itemSchema = new Schema({
-    authorId : ObjectId, 
-    authorType : String, 
+    authorId : { type:ObjectId, required:true, ref : 'user' },
+    authorType : { type:String, required:true, enum:enumTypes.userTypes },
     body : String,
-    itemType : String,
+    itemType : {type:String,required:true,enum:enumTypes.itemTypes},
     itemTag : Array, 
     date : {type : Date , default : Date.now},
-	classId : ObjectId,   
+	classId : { type:ObjectId, ref : 'class' },   
     comment : [{
 		body : String, 
 		date : {type : Date , default : Date.now},
-		authorId : ObjectId,
-		replyIds : [ObjectId]
+		authorId : { type:ObjectId, required:true, ref : 'user' },
+		replyTo : [{ type:ObjectId, ref : 'user' }]
 	}]
 });
  
