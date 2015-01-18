@@ -8,15 +8,28 @@ var router = require('express').Router()
     , userToken = require('controllers/middlewares/userTokenMidd')
     , jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
 
-//all admin/class routing must have userToken
+//all admin/class routing must have userToken 
+//simple user in token added to req object
 router.use(userToken);
 
+//adding parameters to req object
+router.param('classId', function (req, res, next, classId) {
+	classModel.getClassById(classId,function(err,dbRes){
+		if(err)
+			return next(new Error('failed to load classId'));
+		else{
+			req.class = dbRes;
+			next();
+		}
+	})
+});
+
 router.post('/',jsonParser,function(req,res,next){
-	classModel.addClass( req.body , function(err,item){
+	classModel.addClass( req.body , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = item;
+			success.data = dbRes;
 			res.json(success);
 		}
 	});
@@ -34,7 +47,7 @@ router.get('/',function(req,res,next) {
 })
 
 router.get('/:classId',function (req,res,next) {
-	classModel.getUsersByClassId( req.param('classId') , function(err,dbRes){
+	classModel.getClassById( req.class._id , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
@@ -45,10 +58,14 @@ router.get('/:classId',function (req,res,next) {
 })
 
 router.delete('/:classId',function(req,res,next){
-	classModel.deleteClass(req.param('classId') , function(err){
-		next(err);
+	classModel.deleteClass(req.class._id , function(err){
+		if(err)
+			return next(new Error(err));
+		else{
+			success.data = dbRes;
+			res.json(success);
+		}
 	});
-	res.send("class deleted");
 })
 
 router.put('/:classId',function(req,res,next){

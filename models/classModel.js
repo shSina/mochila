@@ -9,21 +9,27 @@ exports.addClass = function(item,next) {
 		return next(err,item);
 	});
 }
-exports.deleteClass = function(id,next) {
+exports.deleteClassById = function(id,next) {
 	Class.remove({_id : id}).exec(function(err){
 		return next(err);
 	});
 }
-exports.updateClass = function(query,item,next){
-	Class.update(query,{$set:item},function(err,num) {
+exports.updateClassById = function(item,item,next){
+	Class.update(item,{$set:item},function(err,num) {
 		if(err)
 			next(err);
 		// else
 		// 	next(num);
 	});
 }
+exports.getClassById = function(classId,next){
+	Class.findOne({_id : classId}).exec(function(err,doc){
+		return next(err,doc);
+	});	
+}
+
 exports.getAllClasses = function(next) {
-	Class.find({},function(err,docs) {
+	Class.find({}).exec(function(err,docs) {
 		return next(err,docs);
 	});
 }
