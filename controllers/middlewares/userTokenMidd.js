@@ -20,7 +20,7 @@ var attachToken = function(req,res,next){
             		.json(error(undefined,'invalid token'));
 		}
 		else{
-			req.user = decoded;
+			req.userToken = decoded;
 			return next();
 		}
 	});

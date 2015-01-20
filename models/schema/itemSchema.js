@@ -16,7 +16,8 @@ var itemSchema = new Schema({
 		date : {type : Date , default : Date.now},
 		authorId : { type:ObjectId, required:true, ref : 'user' },
 		replyTo : [{ type:ObjectId, ref : 'user' }]
-	}]
+	}],
+	__v: { type: Number, select: false}
 });
  
 module.exports = itemSchema;

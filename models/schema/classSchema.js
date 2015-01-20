@@ -3,11 +3,12 @@ var mongoose = require('mongoose')
 	, ObjectId = Schema.Types.ObjectId;
 
 var classSchema = new Schema({
-    teacherId : ObjectId,
+    teacherId : {type : ObjectId , ref : 'user'},
     studentsIds : [{type : ObjectId , ref : 'user'}],
-    studentsCount : Number,
+    studentsCount : {type:Number, select:false},
     startDate : {type : Date , default : Date.now},
-    endDate : Date  
+    endDate : Date,
+    __v: { type: Number, select: false}
 });
  
 module.exports = classSchema;

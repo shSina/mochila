@@ -10,12 +10,35 @@ var router = require('express').Router()
 
 //all admin/user routing must have userToken
 router.use(userToken);
-    
+
+router.param('userId', function (req, res, next, userId) {
+	user.getUserById(userId,function(err,dbRes){
+		if(err)
+			return next(new Error('userId not valid'));
+		else if (dbRes === null){
+			return res
+					.status(400)
+					.json(error(undefined,'user not exist'));
+		}
+		else{
+			req.userParam = dbRes;
+			next();
+		}
+	})
+});
+
 router.post('/',jsonParser,function (req,res,next) {
 	//add this part to mongoose itself pre save validation
-	for (var i = req.body.classId.length - 1; i >= 0; i--) {	
-		req.body.classId[i] = ObjectId(req.body.classId[i]);
-	};
+	if(req.body && req.body.classId && Array.isArray(req.body.classId)){
+		for(var i = req.body.classId.length - 1; i >= 0; i--) {	
+			req.body.classId[i] = ObjectId(req.body.classId[i]);
+		};
+	}else{
+		return res
+				 .status(400)
+				 .json(error(undefined,'classId invalid or not exist'));
+	}
+
 	user.addUser( req.body , function(err,item){
 		if(err)
 			return next(new Error(err));
@@ -36,10 +59,13 @@ router.get('/',function(req,res,next){
 })
 
 router.delete('/:userId',function(req,res,next){
-	user.deleteUser(req.param('userId') , function(err){
-		next(err);
+	user.deleteUser(req.userParam._id,function(err){
+		if(err)
+			return next(new Error(err));
+		else{
+			res.json(success(undefined,"user deleted."));
+		}
 	});
-	res.send("user deleted");
 })
 
 router.put('/:userId',function(req,res,next){

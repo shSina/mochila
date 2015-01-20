@@ -4,7 +4,7 @@ var itemTypes = ['sPost'];
 // ad reffers to admin
 // te reffers to teacher
 // st reffers to student
-var userTypes = ['ad','te','st'];
+var userTypes = ['te','st'];
 
 var enums = {
 	itemTypes:itemTypes,

@@ -3,8 +3,8 @@ var router = require('express').Router()
 	, bodyParser = require('body-parser')
 	, classModel = require('models/classModel')
 	, userModel = require('models/userModel')
-    , success = require('lib/resFormat').success()
-    , error = require('lib/resFormat').error()
+    , success = require('lib/resFormat').success
+    , error = require('lib/resFormat').error
     , userToken = require('controllers/middlewares/userTokenMidd')
     , jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
 
@@ -16,7 +16,12 @@ router.use(userToken);
 router.param('classId', function (req, res, next, classId) {
 	classModel.getClassById(classId,function(err,dbRes){
 		if(err)
-			return next(new Error('failed to load classId'));
+			return next(new Error('classId not valid'));
+		else if (dbRes === null){
+			return res
+					.status(400)
+					.json(error(undefined,'class not exist'));
+		}
 		else{
 			req.class = dbRes;
 			next();
@@ -25,12 +30,23 @@ router.param('classId', function (req, res, next, classId) {
 });
 
 router.post('/',jsonParser,function(req,res,next){
+	//add this part to mongoose itself pre save validation
+	if(req.body && req.body.classId && Array.isArray(req.body.classId)){
+		for(var i = req.body.classId.length - 1; i >= 0; i--) {	
+			req.body.classId[i] = ObjectId(req.body.classId[i]);
+		};
+	}
+	if(req.body && req.body.teacherId){
+		req.body.teacherId = ObjectId(req.body.teacherId);
+	}else{
+		delete req.body.teacherId;
+	}
+	
 	classModel.addClass( req.body , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = dbRes;
-			res.json(success);
+			res.json(success(dbRes));
 		}
 	});
 })
@@ -40,8 +56,7 @@ router.get('/',function(req,res,next) {
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = dbRes;
-			res.json(success);
+			res.json(success(dbRes));
 		}
 	});
 })
@@ -51,28 +66,27 @@ router.get('/:classId',function (req,res,next) {
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = dbRes;
-			res.json(success);
+			res.json(success(dbRes));
 		}
 	});
 })
-
 router.delete('/:classId',function(req,res,next){
-	classModel.deleteClass(req.class._id , function(err){
+	classModel.deleteClassById(req.class._id, function(err){
 		if(err)
 			return next(new Error(err));
 		else{
-			success.data = dbRes;
-			res.json(success);
+			res.json(success(undefined,'class deleted.'));
 		}
 	});
 })
-
-router.put('/:classId',function(req,res,next){
-	classModel.updateClass(req.param('classId') , req.body , function(err){
-		next(err);
+router.put('/:classId',jsonParser,function(req,res,next){
+	classModel.updateClassById(req.class._id, req.body , function(err){
+		if(err)
+			return next(new Error(err));
+		else{
+			res.json(success(undefined,'user updated.'));
+		}
 	});
-	res.send("class updated");
 }) 
 
 module.exports = router;

@@ -1,23 +1,34 @@
-var mongoose = require('mongoose'), 
-   	userSchema = require('models/schema/userSchema'),
-    Class = require('./classModel');
+var mongoose = require('mongoose')
+   	, userSchema = require('models/schema/userSchema')
+    , Class = require('./classModel')
+    , ObjectId = require('mongoose').Types.ObjectId;
  
 var user = mongoose.model('user', userSchema);
 
 exports.addUser = function(item,next) {
-	new user(item).save(function(err,doc){
-		return next(err,doc);
+	new user(item).save(function(err2,doc){
+		if(err2)
+			return next(err2,doc);
+		Class.addUserToClasses(item.classId,doc._id,function(err1){
+			return next(err1,doc);
+		})
 	});
 }
 
 exports.deleteUser = function(id,next) {
-	user.remove({_id : id}).exec(function(err){
-		next(err);
+	console.log(id);
+	user.findOneAndRemove({_id : id}).exec(function(err,doc){
+		if(err)
+			return next(err);
+		console.log(doc);
+		Class.removeUserFromClasses(doc.classId,id,function(err){
+			next(err);
+		});
 	});
 }
 
-exports.findUser = function(id,next){ 
-	user.find({_id : id},function(err,doc){
+exports.getUserById = function(id,next){ 
+	user.findOne({_id : id},function(err,doc){
 		return next(err,doc);
 	});
 }
@@ -48,4 +59,17 @@ exports.getUsersByClassId = function(id,next) {
 		else
 			next(docs);
 	});
+}
+exports.removeClassFromUsers = function(classId,userIds,next){
+	if( userIds.length !=0){
+		for(var i = userIds.length - 1; i >= 0; i--) {	
+			userIds[i] = ObjectId(userIds[i]);
+		};
+	}
+	user.update({_id: {$in:userIds}},
+				 {$pull:{classId:ObjectId(classId)}},
+				 {multi:true})
+				.exec(function(err){
+					next(err);
+				})
 }
