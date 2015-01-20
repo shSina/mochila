@@ -8,9 +8,9 @@ angular
             	$locationProvider.html5Mode(true).hashPrefix('!');
 
             $stateProvider
-                .state('baseURL',{
+                .state('auth',{
                 	url:'/',
-                	templateUrl:'views/baseURL.html',
-                	controller:'baseURLCtrl'
+                	templateUrl:'views/auth.html',
+                	controller:'authCtrl'
                 })
     }]);

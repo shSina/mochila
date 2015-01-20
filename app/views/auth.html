@@ -1,0 +1,12 @@
+<form name="loginForm"
+      ng-submit="login(loginInput)" novalidate>
+        <div class="ui input">
+            <input type="email" name="email" ng-model="loginInput.email" required>
+        </div>
+        <div class="ui input">
+            <input type="password" name="password" ng-model="loginInput.password" required>
+        </div>
+        <button type="submit" class='ui button' ng-disabled="loginForm.$invalid">
+          login
+        </button>
+</form>
