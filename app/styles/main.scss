@@ -1,5 +1,8 @@
-@import "compass/reset";
+@import "modoules/_colors.scss";
+@import "modoules/_inputMixin.scss";
+@import "modoules/_fontFarsi.scss";
 
-body{
-	background-color:gray;
-}
+@import "frameworks/_defaults.scss";
+@import "frameworks/_media.scss";
+
+@import "section/_authState.scss";
