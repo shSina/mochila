@@ -2,7 +2,7 @@ var gulp = require('gulp')
 	,bowerFiles = require('main-bower-files')
     ,inject = require('gulp-inject')
     ,browserSync = require('browser-sync')
-	,reload = browserSync.reload	
+	,reload = browserSync.reload
     ,modRewrite = require('connect-modrewrite')
     ,sass = require('gulp-compass')
     ,filter = require('gulp-filter')
@@ -20,7 +20,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('sass',function(){
-	gulp.src('./app/styles/*.scss')
+	gulp.src('./app/styles/**/*.scss')
 	    .pipe(sass({
             sass:'./app/styles',
             css:'./.tmp/styles',
@@ -52,7 +52,7 @@ gulp.task('livereload',function(){
 
 gulp.task('watch', function () {
   gulp.watch(['./app/**/*.html','./app/**/*.js'], ['html']);
-  gulp.watch('./app/styles/*.scss', ['sass']);
+  gulp.watch('./app/styles/**/*.scss', ['sass']);
 });
 
 gulp.task('default', ['bower-inject','livereload','sass','watch']);

@@ -1,12 +1,21 @@
-<form name="loginForm"
-      ng-submit="login(loginInput)" novalidate>
-        <div class="ui input">
-            <input type="email" name="email" ng-model="loginInput.email" required>
-        </div>
-        <div class="ui input">
-            <input type="password" name="password" ng-model="loginInput.password" required>
-        </div>
-        <button type="submit" class='ui button' ng-disabled="loginForm.$invalid">
-          login
-        </button>
-</form>
+<div class='container'>
+      <form name="loginForm"
+      ng-submit="login(loginInput)" class="loginForm" novalidate>
+            <span class="input input--hoshi ">
+                  <input  type="email" name="email" ng-model="loginInput.email" class="input__field input__field--hoshi" id="input-4" required>
+                  <label class="input__label input__label--hoshi" for="input-1">
+                        <span class="input__label-content input__label-content--hoshi">Email</span>
+                  </label>
+            </span>
+            <span class="input input--hoshi ">
+                  <input  type="password" name="password" ng-model="loginInput.password" class="input__field input__field--hoshi" id="input-5" required>
+                  <label class="input__label input__label--hoshi" for="input-1">
+                        <span class="input__label-content input__label-content--hoshi">Password</span>
+                  </label>
+            </span>
+            <button type="submit" ng-disabled="loginForm.$invalid">
+                  login
+            </button>
+      </form>
+
+<div>

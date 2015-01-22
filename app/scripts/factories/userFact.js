@@ -13,13 +13,15 @@ angular
 
 		authService.login = function (loginInput) {
 			return $http
-			  .post('http://localhost:9000/auth/singin',{
+			  .post('http://localhost:9000/auth/signin',{
 				    	email:loginInput.email,
 				    	password:loginInput.password
 			    	})
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);
+				$state.go('stream');
+				localStorage.setItem('k',success.data.token);
 			    return success;
 			  },function(error){
 			  	console.log(error);

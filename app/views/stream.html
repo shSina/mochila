@@ -1,0 +1,14 @@
+<div class='container'>
+    <form name="itemPost"
+        ng-submit="addItem(post)" class="loginForm" novalidate>
+        <span class="input input--hoshi ">
+            <input  type="text" name="text" ng-model="post.text" class="input__field input__field--hoshi" id="input-4" required>
+            <label class="input__label input__label--hoshi" for="input-1">
+                <span class="input__label-content input__label-content--hoshi">what to say?</span>
+            </label>
+        </span>
+        <button type="submit" ng-disabled="loginForm.$invalid">
+            post
+        </button>
+    </form
+<div>
