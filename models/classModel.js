@@ -7,8 +7,8 @@ var mongoose = require('mongoose')
 var Class = mongoose.model('class', classSchema);
 
 exports.addClass = function(item,next) {
-	new Class(item).save(function(err,item){
-		return next(err,item);
+	new Class(item).save(function(err,dbRes){
+		return next(err,dbRes);
 	});
 }
 exports.deleteClassById = function(classId,next) {

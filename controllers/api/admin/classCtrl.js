@@ -62,13 +62,7 @@ router.get('/',function(req,res,next) {
 })
 
 router.get('/:classId',function (req,res,next) {
-	classModel.getClassById( req.class._id , function(err,dbRes){
-		if(err)
-			return next(new Error(err));
-		else{
-			res.json(success(dbRes));
-		}
-	});
+	res.json(success(req.class));
 })
 router.delete('/:classId',function(req,res,next){
 	classModel.deleteClassById(req.class._id, function(err){
