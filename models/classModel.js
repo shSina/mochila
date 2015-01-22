@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
-    , classSchema = require('models/schema/classSchema')
-    , ObjectId = require('mongoose').Types.ObjectId
-    , user = require('models/userModel');
+	, classSchema = require('models/schema/classSchema')
+	, ObjectId = require('mongoose').Types.ObjectId
+	, user = require('models/userModel');
 
  
 var Class = mongoose.model('class', classSchema);

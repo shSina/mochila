@@ -3,10 +3,10 @@ var router = require('express').Router()
 	, bodyParser = require('body-parser')
 	, classModel = require('models/classModel')
 	, userModel = require('models/userModel')
-    , success = require('lib/resFormat').success
-    , error = require('lib/resFormat').error
-    , userToken = require('controllers/middlewares/userTokenMidd')
-    , jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
+	, success = require('lib/resFormat').success
+	, error = require('lib/resFormat').error
+	, userToken = require('controllers/middlewares/userTokenMidd')
+	, jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
 
 //all admin/class routing must have userToken 
 //simple user in token added to req object

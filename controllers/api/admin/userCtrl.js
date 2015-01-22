@@ -3,10 +3,10 @@ var router = require('express').Router()
 	, bodyParser = require('body-parser')
 	, user = require('models/userModel')
 	, ObjectId = require('mongoose').Types.ObjectId
-    , success = require('lib/resFormat').success
-    , error = require('lib/resFormat').error
-    , userToken = require('controllers/middlewares/userTokenMidd')
-    , jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
+	, success = require('lib/resFormat').success
+	, error = require('lib/resFormat').error
+	, userToken = require('controllers/middlewares/userTokenMidd')
+	, jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
 
 //all admin/user routing must have userToken
 router.use(userToken);

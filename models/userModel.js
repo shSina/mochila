@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
-   	, userSchema = require('models/schema/userSchema')
-    , Class = require('./classModel')
-    , ObjectId = require('mongoose').Types.ObjectId;
+	, userSchema = require('models/schema/userSchema')
+	, Class = require('./classModel')
+	, ObjectId = require('mongoose').Types.ObjectId;
  
 var user = mongoose.model('user', userSchema);
 
@@ -44,7 +44,7 @@ exports.updateUser = function(query,item,next){
 		if(err)
 			next(err);
 		// else
-		// 	next(num);
+		//  next(num);
 	});
 }
 exports.getAllUsers = function(next) {
@@ -62,7 +62,7 @@ exports.getUsersByClassId = function(id,next) {
 }
 exports.removeClassFromUsers = function(classId,userIds,next){
 	if( userIds.length !=0){
-		for(var i = userIds.length - 1; i >= 0; i--) {	
+		for(var i = userIds.length - 1; i >= 0; i--) {  
 			userIds[i] = ObjectId(userIds[i]);
 		};
 	}

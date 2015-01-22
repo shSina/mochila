@@ -1,7 +1,7 @@
 var gulp = require('gulp')
-  , nodemon = require('gulp-nodemon')
-  , jshint = require('gulp-jshint')
-  , stylish = require('jshint-stylish');
+	, nodemon = require('gulp-nodemon')
+	, jshint = require('gulp-jshint')
+	, stylish = require('jshint-stylish');
 
 gulp.task('default', function() {
 	// place code for your default task here
@@ -10,15 +10,15 @@ gulp.task('default', function() {
 });
 
 gulp.task('lint', function () {
-  gulp.src('./**/*.js')
-    .pipe(jshint())
-  	.pipe(jshint.reporter(stylish))
+	gulp.src('./**/*.js')
+		.pipe(jshint())
+		.pipe(jshint.reporter(stylish))
 })
 
 gulp.task('nodemon', function () {
-  nodemon({ script: 'server.js', ext: 'js', ignore: [] })
-    // .on('change', ['lint'])
-    .on('restart', function () {
-      console.log('restarted!')
-    })
+	nodemon({ script: 'server.js', ext: 'js', ignore: [] })
+		// .on('change', ['lint'])
+		.on('restart', function () {
+			console.log('restarted!')
+		})
 })
