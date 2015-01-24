@@ -7,7 +7,7 @@
 
 angular
 	.module('app')
-	.factory('userFact', function ($http,$state,$location) {
+	.factory('userFact',['$http','$state','$location', function ($http,$state,$location) {
 		console.log('userFact');
 		var authService = {};
 
@@ -29,4 +29,4 @@ angular
 			  });
 		};
 		return authService;
-	});
+	}]);

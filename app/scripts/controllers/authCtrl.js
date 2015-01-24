@@ -9,7 +9,7 @@ angular
 	.controller('authCtrl', ['$scope','$rootScope','$state','$http','userFact',
 	  	function($scope,$rootScope,$state,$http,userFact){
 			if(localStorage.getItem('k') !== null)
-				$state.go('stream');
+				return $state.go('stream');
 			console.log('authCtrl');
 			$scope.login = function(loginInput) {
 				console.log(loginInput);

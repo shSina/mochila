@@ -6,19 +6,27 @@
 */
 angular
     .module('app')
-    .controller('streamCtrl', ['$scope','$rootScope','$state','$http','userFact','itemFact',
-        function($scope,$rootScope,$state,$http,userFact,itemFact){
+    .controller('streamCtrl', ['$scope','$rootScope','$state','$http','userFact','itemFact','eventFact',
+        function($scope,$rootScope,$state,$http,userFact,itemFact,eventFact){
             console.log('streamCtrl');
             $scope.items = [];
+
+            eventFact.emit('hello',{salam:1});
 
             $scope.addItem = function(postInput) {
                 console.log(postInput);
                 itemFact.addItem(postInput);
             }
             $scope.getItems = function(){
-                itemFact.getItems().then(function(data){
-                    $scope.items = data.data.data;
-                });
+                itemFact.getItems()
+                    .then(function (success) {
+                        if(!success.data)
+                            return;
+                        $scope.items = success.data.data;
+                    });
 
             }
+            eventFact.on('newItem', function () {
+                $scope.getItems();
+            });
     }]);

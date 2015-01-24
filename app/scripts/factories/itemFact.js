@@ -7,10 +7,8 @@
 
 angular
     .module('app')
-    .factory('itemFact', function ($http,$state,$location,socketFactory) {
+    .factory('itemFact', ['$http','$state','$location',function ($http,$state,$location) {
         console.log('itemFact');
-        // var socket = socketFactory();
-        // socket('http://localhost:9000');
 
         var itemService = {};
         var token = localStorage.getItem('k');
@@ -42,4 +40,4 @@ angular
                 });
         }
         return itemService;
-    });
+    }]);
