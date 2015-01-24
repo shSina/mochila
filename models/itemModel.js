@@ -27,7 +27,9 @@ exports.getItemById = function(itemId,next){
 	});	
 }
 exports.getAllByClassId = function(classId,next){
-	item.find({classId : classId}).exec(function(err,doc){
+	item.find({classId : classId})
+	.populate('authorId')
+	.exec(function(err,doc){
 		return next(err,doc);
 	});	
 }
