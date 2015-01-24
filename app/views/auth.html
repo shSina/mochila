@@ -2,15 +2,15 @@
       <form name="loginForm"
       ng-submit="login(loginInput)" class="loginForm" novalidate>
             <span class="input input--hoshi ">
-                  <input  type="email" name="email" ng-model="loginInput.email" class="input__field input__field--hoshi" id="input-4" required>
-                  <label class="input__label input__label--hoshi" for="input-1">
-                        <span class="input__label-content input__label-content--hoshi">Email</span>
+                  <input  type="text" name="email" ng-model="loginInput.email" class="input__field input__field--hoshi" required>
+                  <label class="mat_input mat_input--hoshi" for="input-1">
+                        <span class="mat_input-content mat_input-content--hoshi">Email</span>
                   </label>
             </span>
             <span class="input input--hoshi ">
-                  <input  type="password" name="password" ng-model="loginInput.password" class="input__field input__field--hoshi" id="input-5" required>
-                  <label class="input__label input__label--hoshi" for="input-1">
-                        <span class="input__label-content input__label-content--hoshi">Password</span>
+                  <input  type="password" name="password" ng-model="loginInput.password" class="input__field input__field--hoshi" required>
+                  <label class="mat_input mat_input--hoshi" for="input-1">
+                        <span class="mat_input-content mat_input-content--hoshi">Password</span>
                   </label>
             </span>
             <button type="submit" ng-disabled="loginForm.$invalid">

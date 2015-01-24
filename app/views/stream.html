@@ -1,14 +1,27 @@
-<div class='container'>
+<div class='container' ng-controller='streamCtrl'>
     <form name="itemPost"
         ng-submit="addItem(post)" class="loginForm" novalidate>
         <span class="input input--hoshi ">
             <input  type="text" name="text" ng-model="post.text" class="input__field input__field--hoshi" id="input-4" required>
-            <label class="input__label input__label--hoshi" for="input-1">
-                <span class="input__label-content input__label-content--hoshi">what to say?</span>
+            <label class="mat_input mat_input--hoshi" for="input-1">
+                <span class="mat_input-content mat_input-content--hoshi">what to say?</span>
             </label>
         </span>
         <button type="submit" ng-disabled="loginForm.$invalid">
             post
         </button>
-    </form
+    </form>
+    <button name="get" ng-click='getItems()'>get items</button>
+    <div class="items">
+        <div ng-repeat="item in items ">
+            <div class='item'>
+                <div class='message'>
+                    {{item.body.text}}
+                </div>
+                <div class='date'>
+                    {{item.date | date:'medium'}}
+                </div>
+            </div>
+        </div>
+    </div>
 <div>

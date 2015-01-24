@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('app', ['ui.router'])
+    .module('app', ['ui.router','btford.socket-io'])
     .config(['$urlRouterProvider','$stateProvider','$locationProvider',
         function($urlRouterProvider,$stateProvider,$locationProvider){
             $urlRouterProvider.otherwise('/');
