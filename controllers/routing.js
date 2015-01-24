@@ -10,3 +10,4 @@ app.use(require('controllers/middlewares/500Midd'));
 
 require('controllers/events/connection');
 io.use(require('controllers/events/hello'));
+io.use(require('controllers/events/newItem'));
