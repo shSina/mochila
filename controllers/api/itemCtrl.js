@@ -12,9 +12,23 @@ router.use(userToken);
 
 
 router.post('/',jsonParser,function(req,res,next){
-	// console.log(req.body);
+	
+	//req.body.classId : add later! 
 	req.body.authorId = req.userToken._id;
+	req.body.authorType = req.userToken.type;
+	req.body.classId = req.userToken.classId[0];
+
 	itemModel.addItem( req.body , function(err,dbRes){
+		if(err)
+			return next(new Error(err));
+		else{
+			res.json(success(dbRes));
+		}
+	});
+})
+
+router.get('/' , function(req,res,next){
+	itemModel.getAllByClassId (req.userToken.classId[0] , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{

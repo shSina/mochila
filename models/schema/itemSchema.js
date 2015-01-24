@@ -10,7 +10,7 @@ var itemSchema = new Schema({
 	itemType : {type:String,required:true,enum:enumTypes.itemTypes},
 	itemTag : Array, 
 	date : {type : Date , default : Date.now},
-	classId : { type:ObjectId, ref : 'class' },   
+	classId : { type:ObjectId,required:true ,ref : 'class' },   
 	comment : [{
 		body : String, 
 		date : {type : Date , default : Date.now},

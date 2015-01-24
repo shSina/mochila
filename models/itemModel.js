@@ -26,3 +26,8 @@ exports.getItemById = function(itemId,next){
 		return next(err,doc);
 	});	
 }
+exports.getAllByClassId = function(classId,next){
+	item.find({classId : classId}).exec(function(err,doc){
+		return next(err,doc);
+	});	
+}
