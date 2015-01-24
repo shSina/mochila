@@ -11,7 +11,7 @@
             post
         </button>
     </form>
-    <button name="get" ng-click='getItems()'>get items</button>
+    <!-- <button name="get" ng-click='getItems()'>get items</button> -->
     <div class="items">
         <div ng-repeat="item in items ">
             <div class='item'>
@@ -19,7 +19,10 @@
                     {{item.body.text}}
                 </div>
                 <div class='date'>
-                    {{item.date | date:'medium'}}
+                    {{item.date | date:'shortTime'}}
+                </div>
+                <div class='author'>
+                    {{item.authorId.userName}}
                 </div>
             </div>
         </div>
