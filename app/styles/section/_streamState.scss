@@ -8,9 +8,11 @@
     position:relative;
     float:left;
 }
-.item{
-    height:40px;
-}
-.input__field--hoshi,.mat_input span{
-    color:black;
+.stream{
+    .item{
+        height:40px;
+    }
+    .input__field--hoshi,.mat_input span{
+        color:black;
+    }
 }
