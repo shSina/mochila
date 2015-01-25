@@ -1,21 +1,34 @@
 <div class='container'>
-      <form name="loginForm"
-      ng-submit="login(loginInput)" class="loginForm" novalidate>
-            <span class="input input--hoshi ">
-                  <input  type="text" name="email" ng-model="loginInput.email" class="input__field input__field--hoshi" required>
-                  <label class="mat_input mat_input--hoshi" for="input-1">
-                        <span class="mat_input-content mat_input-content--hoshi">Email</span>
-                  </label>
-            </span>
-            <span class="input input--hoshi ">
-                  <input  type="password" name="password" ng-model="loginInput.password" class="input__field input__field--hoshi" required>
-                  <label class="mat_input mat_input--hoshi" for="input-1">
-                        <span class="mat_input-content mat_input-content--hoshi">Password</span>
-                  </label>
-            </span>
-            <button type="submit" ng-disabled="loginForm.$invalid">
-                  login
-            </button>
-      </form>
-
+      <div class="parallax">
+            <div class="parallax__layer parallax__layer__0">
+                  <img src="images/bag.jpg" alt="" />
+            </div>
+            <div class="parallax__layer parallax__layer__1">
+                  <!-- <img src="images/bag.jpg" alt="" /> -->
+                  <div class='quto'>
+                        You can connect to your class from every where , any time, commiunicate and review
+                        with your friends with help of your teacher.
+                  </div>
+            </div>
+            <div class="parallax__cover"></div>
+            <form name="loginForm"
+            ng-submit="login(loginInput)" class="loginForm" novalidate>
+                  <div class="blur"></div>
+                  <span class="input input--hoshi ">
+                        <input  type="text" name="email" ng-model="loginInput.email" class="input__field input__field--hoshi" autocomplete=off required>
+                        <label class="mat_input mat_input--hoshi" for="input-1">
+                              <span class="mat_input-content mat_input-content--hoshi">Email</span>
+                        </label>
+                  </span>
+                  <span class="input input--hoshi ">
+                        <input  type="password" name="password" ng-model="loginInput.password" class="input__field input__field--hoshi" required>
+                        <label class="mat_input mat_input--hoshi" for="input-1">
+                              <span class="mat_input-content mat_input-content--hoshi">Password</span>
+                        </label>
+                  </span>
+                  <button type="submit" ng-disabled="loginForm.$invalid">
+                        login
+                  </button>
+            </form>
+      </div>
 <div>

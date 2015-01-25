@@ -1,7 +1,84 @@
+*{
+     box-sizing: border-box;
+}
 .container{
+     .parallax {
+          perspective: 100px;
+          height: 100vh;
+          overflow-x: hidden;
+          overflow-y: auto;
+          position: absolute;
+          top: 0;
+          left: 50%;
+          right: 0;
+          bottom: 0;
+          margin-left: -1500px;
+     }
+     .quto{
+          font-family:$font-railway;
+          position:absolute;
+          left:1000px;
+          font-size:60px;
+          font-weight:700;
+          color:white;
+          top:400px;
+     }
+     .parallax__layer{
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          img{
+               display: block;
+               position: absolute;
+               bottom: -421px;
+               width: 100%;
+               left: 428px;
+          }
+     }
+
+     .parallax__cover{
+          background: #2D112B;
+          position: absolute;
+          top: 100%;
+          width:100%;
+          left: 0;
+          right: 0;
+          height: 1500px;
+          z-index: 2;
+     }
+
      .loginForm{
           position: relative;
           width:400px;
           margin:0 auto;
+          padding:2em;
+          border-radius:4px;
+          .blur{
+               width: 82%;
+               position: absolute;
+               height: 83%;
+               top: 3em;
+               background-color: rgba(255, 255, 255, 0.27);
+               -webkit-filter: blur(12px);
+               filter: blur(12px);
+          }
+          button{
+               width: 9em;
+               height: 3em;
+               border: none;
+               border-radius: 4px;
+               position: relative;
+               margin-left: 16px;
+          }
+     }
+}
+$parallax__layers: 2;
+
+@for $i from 0 through $parallax__layers {
+     $x: ($parallax__layers - $i) / 2;
+     .parallax__layer__#{$i}{
+          transform: translateZ(-100 * $x#{px}) scale($x + 1);
      }
 }
