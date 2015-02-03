@@ -1,5 +1,6 @@
 var router = require('express').Router()
 	, bodyParser = require('body-parser')
+	, postModel = require('models/postModel')
 	, itemModel = require('models/itemModel')
 	, success = require('lib/resFormat').success
 	, error = require('lib/resFormat').error
@@ -18,8 +19,9 @@ router.post('/',jsonParser,function(req,res,next){
 	req.body.authorId = req.userToken._id;
 	req.body.authorType = req.userToken.type;
 	req.body.classId = req.userToken.classId[0];
-
-	itemModel.addItem( req.body , function(err,dbRes){
+	req.body.itemType = 'post';
+	
+	postModel.addPost( req.body , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
@@ -41,15 +43,15 @@ router.get('/' , function(req,res,next){
 	});
 })
 
-router.get('/:itemId',function (req,res,next) {
-	itemModel.getItemById( req.params.itemId , function(err,dbRes){
-		if(err)
-			return next(new Error(err));
-		else{
-			res.json(success(dbRes));
-		}
-	});
-})
+// router.get('/:itemId',function (req,res,next) {
+// 	itemModel.getItemById( req.params.itemId , function(err,dbRes){
+// 		if(err)
+// 			return next(new Error(err));
+// 		else{
+// 			res.json(success(dbRes));
+// 		}
+// 	});
+// })
 
 router.delete('/:itemId',function(req,res,next){
 	itemModel.deleteItemById(req.params.itemId, req.userToken._id,function(err){
@@ -62,7 +64,7 @@ router.delete('/:itemId',function(req,res,next){
 })
 // solamente update body,tag, comments
 router.put('/:itemId',jsonParser,function(req,res,next){
-	itemModel.updateItemById(req.params.itemId, req.userToken._id ,req.body , function(err){
+	postModel.updateItemById(req.params.itemId, req.userToken._id ,req.body , function(err){
 		if(err)
 			return next(new Error(err));
 		else{
