@@ -15,7 +15,7 @@ angular
 
             $scope.addItem = function(postInput) {
                 console.log(postInput);
-                itemFact.addItem(postInput);
+                itemFact.addItem(postInput.text);
             }
             $scope.getItems = function(){
                 itemFact.getItems()
