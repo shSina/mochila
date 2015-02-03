@@ -15,10 +15,10 @@ angular
 
         itemService.addItem = function (itemInput) {
             return $http
-                .post('http://localhost:9000/item',{
-                        body:itemInput,
+                .post('http://localhost:9000/items/post',{
+                        body:{message:itemInput},
                         authorType:'st',
-                        itemType:'sPost'
+                        itemType:'post'
                     },{headers: {'x-access-token': token}})
                 .then(function (success) {
                     // console.log(success);
@@ -30,7 +30,7 @@ angular
         };
         itemService.getItems = function(){
             return $http
-                .get('http://localhost:9000/item',{headers: {'x-access-token': token}})
+                .get('http://localhost:9000/items/post',{headers: {'x-access-token': token}})
                 .then(function (success) {
                     console.log(success);
                     return success;
