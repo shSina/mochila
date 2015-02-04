@@ -24,16 +24,3 @@ exports.getAllByClassId = function(classId,next){
 		return next(err,doc);
 	});	
 }
-exports.getTodayWords = function(userId , next){
-	var nowDate = {year : new Date().getFullYear() , day : new Date().getDate()}
-	console.log(nowDate);
-	item.aggregate( 
-	 {$match:{itemType:'sPost',authorId : userId}}
-	,{$project:{body:1 ,year: { $year: "$body.startDate" }, day: { $dayOfYear: "$body.startDate" }}}
-	,{$project:{body:1 ,dy : { $subtract: [nowDate.year , "$year"] } , dd : {$subtract :[nowDate.day,"$day"]} } }
-	,{$match:{dy:0, dd:{$in:[1,-31,3]}}}
-	,{$project:{body:1}}
-	,function (err,res) {
-		console.log(res);
-	});
-}

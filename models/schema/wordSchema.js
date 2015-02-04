@@ -9,7 +9,6 @@ var wordSchema = new Schema({
 	body : {
 		word:{ type:String ,default:'' , required:true},
 		definition:{type:String , default:'', required:true},
-		createDate:{type : Date , default : Date.now},
 		startDate:{type : Date }
 	},
 	itemType : {type:String,required:true,enum:['word']},
