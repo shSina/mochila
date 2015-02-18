@@ -20,7 +20,20 @@ angular
                 })
     }])
     .run(['$state',function($state){
-        // $state.go('stream');
-        // if(localStorage.getItem('k') !== null)
-        //     $state.go('stream');
+        skel.init({
+          reset: 'full',
+          containers: '100%',
+          viewport:{
+            scalable:false,
+            height:'device-height'
+          },
+          breakpoints: {
+            medium: {
+              media: '(min-width: 769px) and (max-width: 1024px)'
+            },
+            small: {
+              media: '(max-width: 768px)'
+            }
+          }
+        });
     }]);

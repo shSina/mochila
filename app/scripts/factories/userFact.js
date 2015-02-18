@@ -28,5 +28,7 @@ angular
 			  	return error;
 			  });
 		};
+		authService.token = localStorage.getItem('k');
+
 		return authService;
 	}]);

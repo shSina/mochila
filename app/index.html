@@ -4,8 +4,7 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <meta charset="utf-8">
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Learn Fast</title>
+    <title>mochila</title>
 
     <!-- angular html5mode base -->
     <base href="/">
@@ -14,26 +13,18 @@
     <!-- endinject -->
 
     <link rel="stylesheet" href="styles/main.css">
-    <script src="https://cdn.socket.io/socket.io-1.3.2.js"></script>
 </head>
-<body>
+<body state-class>
     <div class="container">
       <div ui-view></div>
     </div>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID and uncomment it -->
-    <script>
-       // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       // })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-       // ga('create', 'UA-XXXXX-X');
-       // ga('send', 'pageview');
-    </script>
+
     <!-- bower:js -->
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="/bower_components/skrollr/src/skrollr.js"></script>
     <script src="/bower_components/angular-socket-io/socket.js"></script>
+    <script src="/bower_components/sio-client/socket.io.js"></script>
+    <script src="/bower_components/skel/src/skel.js"></script>
     <!-- endinject -->
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/authCtrl.js"></script>
