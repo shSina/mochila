@@ -1,7 +1,8 @@
 var mongoose = require('mongoose')
 	, userSchema = require('models/schema/userSchema')
 	, Class = require('./classModel')
-	, ObjectId = require('mongoose').Types.ObjectId;
+	, ObjectId = require('mongoose').Types.ObjectId
+	, gravatar = require('gravatar');
  
 var user = mongoose.model('user', userSchema);
 
@@ -73,3 +74,12 @@ exports.removeClassFromUsers = function(classId,userIds,next){
 					next(err);
 				})
 }
+
+user.schema.path('imageUrl').validate(function (value) {
+	if(!value && !this.imageUrl && this.email){
+		this.imageUrl = gravatar.url(this.email, {s:'50',r:'pg',d:'identicon'}, true);
+	}else if(this.imageUrl){
+		this.imageUrl = value;
+	}
+	return true;
+}, 'Invalid image URL');

@@ -16,7 +16,7 @@ router.post('/signin',jsonParser,function (req,res,next){
 			var accessToken = token.sign(userItem,{expiresInMinutes:expAfter._1M});
 			// shoud 
 			// add token for userItem later here
-			res.json(success(userItem,undefined,accessToken,expAfter._1M));
+			res.json(success(userItem,undefined,accessToken,userItem.exp*1000));
 		} else {
 			res
 			.status(403)

@@ -15,6 +15,7 @@ var userSchema = new Schema({
 	classId: [{type : ObjectId , ref : 'class'}],
 	accesssToken: {type:String, select:false},
 	tokenExpDate: {type:Date, select:false},
+	imageUrl:{type:String, default:""},
 	__v: { type: Number, select: false}
 });
 
