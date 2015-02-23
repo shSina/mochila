@@ -12,7 +12,9 @@ angular
             $scope.items = [];
 
             eventFact.emit('hello',{salam:1});
-
+            eventFact.on('test',function(msg){
+                console.log(msg)
+            })
             $scope.addItem = function(postInput) {
                 console.log(postInput);
                 itemFact.addItem(postInput.text);

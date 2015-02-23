@@ -1,12 +1,5 @@
 .stream{
-    width: 100%;
     height: 100%;
-    .main{
-    }
-    .navbar{
-        height:40px;
-    }
-    .main{
-
-    }
+    overflow: auto;
+    position: relative;
 }

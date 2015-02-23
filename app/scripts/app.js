@@ -13,11 +13,17 @@ angular
                 	templateUrl:'views/auth.html',
                 	controller:'authCtrl'
                 })
-                .state('stream',{
-                    url:'/',
-                    templateUrl:'views/stream.html',
-                    controller:'streamCtrl'
+                .state('user',{
+                    templateUrl:'views/userMain.html',
+                    controller:'userCtrl',
+                    abstract:true
                 })
+                    .state('stream',{
+                        url:'/',
+                        parent:'user',
+                        templateUrl:'views/stream.html',
+                        controller:'streamCtrl'
+                    })
     }])
     .run(['$state',function($state){
         skel.init({

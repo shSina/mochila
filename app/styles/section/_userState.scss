@@ -1,0 +1,54 @@
+//dimentions
+$navbar_height:50px;
+$sidebar_width: 270px;
+$float :    left;
+$direction: rtl;
+//colors
+$navbar_bg:     $blue;
+$sidebar_bg:    $blue;
+$stream_bg:     $white;
+$profile_bg:    $orange;
+$stream_main:   $light_gray;
+$user_image_bg: $orange;
+
+.user{
+    width: 100%;
+    height: 100%;
+    background-color: $stream_bg;
+    .main{
+        overflow: hidden;
+        width:auto;
+        height:100%;
+        padding-top:$navbar_height;
+        background-color:$stream_main;
+    }
+    .navbar{
+        height:$navbar_height;
+        width: 100%;
+        position: fixed;
+        background-color: $navbar_bg;
+        .profile{
+            float: $float;
+            width: $sidebar_width;
+            height: $navbar_height;
+            // background-color: $profile_bg;
+            .user-image{
+                width: 40px;
+                height: 40px;
+                float: $float;
+                margin: 5px;
+                border-radius: 5px;
+                background-color: $user_image_bg;
+            }
+        }
+    }
+    .sidebar{
+        height:100%;
+        position: static;
+        padding-top:$navbar_height;
+        width: $sidebar_width;
+        top:$navbar_height;
+        float:$float;
+        background-color: $sidebar_bg;
+    }
+}
