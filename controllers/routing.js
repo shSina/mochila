@@ -3,6 +3,7 @@ var app = require('lib/app')
 
 app.use('/stream'	  ,	require('controllers/api/streamCtrl'));
 app.use('/auth'       ,	require('controllers/api/authCtrl'));
+app.use('/user'		  ,	require('controllers/api/user/userCtrl'));
 app.use('/items/post' ,	require('controllers/api/items/postCtrl'));
 app.use('/items/word' ,	require('controllers/api/items/wordCtrl'));
 app.use('/admin/user' ,	require('controllers/api/admin/userCtrl'));
@@ -12,5 +13,6 @@ app.use(require('controllers/middlewares/404Midd'));
 app.use(require('controllers/middlewares/500Midd'));
 
 require('controllers/events/connection');
-io.use(require('controllers/events/hello'));
-io.use(require('controllers/events/newItem'));
+//io.use(require('controllers/events/hello'));
+//io.use(require('controllers/events/newItem'));
+//io.use(require('controllers/events/message'));

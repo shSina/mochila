@@ -5,8 +5,8 @@ var mongoose = require('mongoose')
 
 var userSchema = new Schema({
 	userName: { type:String, lowercase: true},
-	firstName: String,
-	lastName: String,
+	firstName:{ type:String, lowercase: true},
+	lastName: { type:String, lowercase: true},
 	password: {type:String, select:false},
 	type: { type:String, required:true, enum:enumTypes.userTypes ,select:true},
 	email: { type:String, required:true , lowercase: true , trim: true},

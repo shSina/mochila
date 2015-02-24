@@ -33,6 +33,21 @@ exports.getUserById = function(id,next){
 		return next(err,doc);
 	});
 }
+exports.getUserInfo = function(id,userClassId,reqId,next){ 
+	if(id == reqId){
+		console.log("MyInfo");
+		user.findOne({_id : reqId},function(err,doc){
+			return next(err,doc);
+		});
+	}
+	else{
+		console.log("UserInfo");
+		user.findOne({_id : reqId,classId:{$in:userClassId}},{'userName':1 ,'imageUrl': 1 },function(err,doc){
+			return next(err,doc);
+		});
+	}
+
+}
 exports.userExist = function(email,password,next) {
 	user.findOne({email :email,password:password})
 		.lean()
@@ -53,12 +68,10 @@ exports.getAllUsers = function(next) {
 		return next(err,docs);
 	});
 }
-exports.getUsersByClassId = function(id,next) {
-	user.find({classId:id},function(err,docs) {
-		if (err)
-			next(err);
-		else
-			next(docs);
+exports.getAllFriends = function(ids,next) {
+
+	user.find({classId:{$in:ids}},function(err,docs) {
+		return next(err,docs);
 	});
 }
 exports.removeClassFromUsers = function(classId,userIds,next){
