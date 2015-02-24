@@ -11,8 +11,7 @@ var router = require('express').Router()
 router.use(userToken);
 
 router.get('/',function(req,res,next){
-	console.log(req.userToken.classId);
-	userModel.getAllFriends(req.userToken.classId, function(err,dbRes){
+	userModel.getMyInfo(req.userToken._id,function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
@@ -20,12 +19,17 @@ router.get('/',function(req,res,next){
 		}
 	});
 })
-var util = require('util');
+router.get('/friends',function(req,res,next){
+	userModel.getAllFriends(req.userToken._id,req.userToken.classId, function(err,dbRes){
+		if(err)
+			return next(new Error(err));
+		else{
+			res.json(success(dbRes));
+		}
+	});
+})
 router.get('/:userId',function (req,res,next) {
-	// console.log("My Id  : " + req.userToken._id);
-	// console.log("Id  : " + req.params.userId);
-	console.log("ClassId  : " + util.inspect(req.userToken));
-	userModel.getUserInfo(req.userToken._id,req.userToken.classId
+	userModel.getUserInfoById(req.userToken._id,req.userToken.classId
 						 ,req.params.userId, function(err,dbRes){
 		if(err)
 			return next(new Error(err));
