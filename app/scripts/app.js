@@ -16,7 +16,12 @@ angular
                 .state('user',{
                     templateUrl:'views/userMain.html',
                     controller:'userCtrl',
-                    abstract:true
+                    abstract:true,
+                    resolve:{
+                        userMyInfo:['userFact',function(userFact){
+                            return userFact.getMyInfo();
+                        }]
+                    }
                 })
                     .state('stream',{
                         url:'/',

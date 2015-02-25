@@ -34,7 +34,7 @@ angular
                             headers: {'x-access-token': userFact.token}
                         })
                     .then(function (success) {
-                        console.log(success);
+                        // console.log(success);
                         return success;
                     },function(error){
                         console.log(error);

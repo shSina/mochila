@@ -22,13 +22,40 @@ angular
 				console.log(success);
 				$state.go('stream');
 				localStorage.setItem('k',success.data.token);
+				if(!authService.token)
+					authService.loadToken();
 			    return success;
 			  },function(error){
 			  	console.log(error);
 			  	return error;
 			  });
 		};
-		authService.token = localStorage.getItem('k');
+		authService.getMyInfo = function(){
+			return $http
+				.get('http://localhost:9000/user',{
+					headers: {'x-access-token': authService.token}
+				});
+		}
+		authService.getMyFriends = function(){
+			return $http
+				.get('http://localhost:9000/user/friends',{
+					headers: {'x-access-token': authService.token}
+				})
+				.then(function (success) {
+					// console.log(success);
+					authService.friends = success.data.data;
+					return success;
+				},function(error){
+					console.log(error);
+					return error;
+				});
+		}
+		authService.loadToken = function(){
+			authService.token = localStorage.getItem('k');
+		}
+
+		authService.loadToken();
+		authService.getMyFriends();
 
 		return authService;
 	}]);

@@ -1,13 +1,17 @@
 //dimentions
-$navbar_height:50px;
+$navbar_height:65px;
 $sidebar_width: 270px;
+$image_w: 50px;
+$image_b_rad: 10px;
 $float :    left;
 $direction: rtl;
+$notif_w: 35px;
+$username_w:150px;
 //colors
 $navbar_bg:     $blue;
 $sidebar_bg:    $blue;
 $stream_bg:     $white;
-$profile_bg:    $orange;
+$profile_bg:    $violet;
 $stream_main:   $light_gray;
 $user_image_bg: $orange;
 
@@ -31,24 +35,118 @@ $user_image_bg: $orange;
             float: $float;
             width: $sidebar_width;
             height: $navbar_height;
-            // background-color: $profile_bg;
+            background-color: $profile_bg;
             .user-image{
-                width: 40px;
-                height: 40px;
+                width: $image_w;
+                height: $image_w;
                 float: $float;
-                margin: 5px;
-                border-radius: 5px;
+                margin: 8px;
+                border-radius: $image_b_rad;
                 background-color: $user_image_bg;
+                overflow: hidden;
+                cursor: pointer;
+                border: 2px solid $orange;
+                img{
+                    width:$image_w;
+                    height:$image_w;
+                }
+                .user-shadow{
+                    width: $image_w;
+                    height: $image_w;
+                    position: relative;
+                    top: -55px;
+                    left: -1px;
+                    border-radius:$image_b_rad;
+                    box-shadow: inset 0px 0px 10px 1px #000000;
+                }
             }
+            .user-name{
+                text-align:center;
+                color:white;
+                font-size:20px;
+                font-weight:bold;
+                float:$float;
+                width: $username_w;
+                line-height:$navbar_height;
+            }
+            .notification{
+                position: relative;
+                float: left;
+                fill: white;
+                width: $notif_w;
+                height: $notif_w;
+                float: $float;
+                margin: 18px;
+                margin-right:5px;
+                margin-left:10px;
+                cursor:pointer;
+            }
+
         }
     }
     .sidebar{
         height:100%;
         position: static;
-        padding-top:$navbar_height;
+        margin-botton:$navbar_height;
+        margin-top: $navbar_height;
+        overflow:hidden;
         width: $sidebar_width;
         top:$navbar_height;
         float:$float;
         background-color: $sidebar_bg;
+        @include slideInRight();
+        .profile{
+            float: $float;
+            width: $sidebar_width;
+            height: $navbar_height;
+            background-color: $profile_bg;
+            .user-image{
+                width: $image_w;
+                height: $image_w;
+                float: $float;
+                margin: 8px;
+                border-radius: $image_b_rad;
+                background-color: $user_image_bg;
+                overflow: hidden;
+                cursor: pointer;
+                border: 2px solid $orange;
+                img{
+                    width:$image_w;
+                    height:$image_w;
+                }
+                .user-shadow{
+                    width: $image_w;
+                    height: $image_w;
+                    position: relative;
+                    top: -55px;
+                    left: -1px;
+                    border-radius:$image_b_rad;
+                    box-shadow: inset 0px 0px 10px 1px #000000;
+                }
+            }
+            .user-name{
+                text-align:center;
+                color:white;
+                font-size:20px;
+                font-weight:bold;
+                float:$float;
+                width: $username_w;
+                line-height:$navbar_height;
+            }
+            .notification{
+                position: relative;
+                float: left;
+                fill: white;
+                width: $notif_w;
+                height: $notif_w;
+                float: $float;
+                margin: 18px;
+                margin-right:5px;
+                margin-left:10px;
+                cursor:pointer;
+            }
+
+        }
+
     }
 }
