@@ -1,6 +1,7 @@
 var token = require('lib/token')
 	, appRuntime = require('lib/app').get('env')
-	, error = require('lib/resFormat').error;
+	, error = require('lib/resFormat').error
+	, ObjectId = require('mongoose').Types.ObjectId;
 	
 //attach token to res and continue on next router or deny access
 var attachToken = function(req,res,next){
@@ -20,6 +21,12 @@ var attachToken = function(req,res,next){
             		.json(error(undefined,'invalid token'));
 		}
 		else{
+
+			for (var i = decoded.classId.length - 1; i >= 0; i--) {
+					decoded.classId[i] = ObjectId(decoded.classId[i]);
+			};
+			decoded._id = ObjectId(decoded._id);
+			
 			req.userToken = decoded;
 			return next();
 		}

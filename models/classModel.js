@@ -28,12 +28,11 @@ exports.getClassById = function(classId,next){
 		return next(err,doc);
 	});	
 }
-exports.getAllClasses = function(next) {
-	Class.find({}).exec(function(err,docs) {
-		return next(err,docs);
-	});
+exports.getAllClasses = function(next){
+	Class.find({}).exec(function(err,doc){
+		return next(err,doc);
+	});	
 }
-
 exports.addUserToClasses = function(classIds,userId,next){
 	if( classIds.length !=0){
 		for(var i = classIds.length - 1; i >= 0; i--) {	

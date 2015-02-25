@@ -34,9 +34,11 @@ exports.getUserById = function(id,next){
 	});
 }
 exports.getMyInfo = function(id,next) {
-	user.findOne({_id : id},function(err,doc){
-			return next(err,doc);
-		});
+	user.findOne({_id : id})
+	.populate('classId','className')
+	.exec(function(err,doc){
+		return next(err,doc);
+	});	
 }
 exports.getUserInfoById = function(id,userClassId,reqId,next){ 
 	if(id == reqId){
@@ -72,10 +74,17 @@ exports.getAllUsers = function(next) {
 	});
 }
 exports.getAllFriends = function(id,classIds,next) {
-
-	user.find({_id: { $ne: id },classId:{$in:classIds}},{'userName':1,'imageUrl':1},function(err,docs) {
-		return next(err,docs);
-	});
+	user.aggregate( 
+		{$match:{_id:{$ne:id},classId:{$in:classIds}}}
+		,{$unwind : "$classId" }
+		,{$match:{classId:{$in:classIds}}}
+		,{$group:{_id: "$_id",classId: { $addToSet: "$classId" },type:{$first:"$type"},userName:{$first:"$userName"}}}
+		,function (err,res) {
+			user.populate(res, [{ path: 'classId', select: 'className' }]
+				,function(err,popRes){
+				return next(err,popRes);
+			});
+		});
 }
 exports.removeClassFromUsers = function(classId,userIds,next){
 	if( userIds.length !=0){
@@ -90,7 +99,11 @@ exports.removeClassFromUsers = function(classId,userIds,next){
 					next(err);
 				})
 }
-
+exports.getUserStatus = function(id,next){
+	user.findOne({_id:id },{'chatStatus':1},function(err,doc) {
+		return next(err,doc);
+	});
+}
 user.schema.path('imageUrl').validate(function (value) {
 	if(!value && !this.imageUrl && this.email){
 		this.imageUrl = gravatar.url(this.email, {s:'50',r:'pg',d:'identicon'}, true);

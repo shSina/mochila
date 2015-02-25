@@ -1,6 +1,7 @@
 var router = require('express').Router()
 	, bodyParser = require('body-parser')
 	, userModel = require('models/userModel')
+	, classModel = require('models/classModel')
 	, success = require('lib/resFormat').success
 	, error = require('lib/resFormat').error
 	, userToken = require('controllers/middlewares/userTokenMidd')
@@ -20,7 +21,7 @@ router.get('/',function(req,res,next){
 	});
 })
 router.get('/friends',function(req,res,next){
-	userModel.getAllFriends(req.userToken._id,req.userToken.classId, function(err,dbRes){
+	 userModel.getAllFriends(req.userToken._id,req.userToken.classId, function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
@@ -38,4 +39,4 @@ router.get('/:userId',function (req,res,next) {
 		}
 	});
 })
-module.exports = router;
+module.exports = router;    

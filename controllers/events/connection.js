@@ -1,6 +1,7 @@
 var io = require('lib/sio').io
 	, token = require('lib/token')
-	, error = require('lib/resFormat').error;
+	, error = require('lib/resFormat').error
+	, userModel = require('models/userModel');
 
 io.set('authorization', function (handshakeData, callback) {
 	var reqToken = handshakeData._query.name;
@@ -12,15 +13,15 @@ io.set('authorization', function (handshakeData, callback) {
 	});
 });
 
-// var users = [];
 var sockets = { };
 io.on('connection', function(socket){ 
 	
 	console.log('someone connected.');
 	var userId = socket.handshake.headers.token._id;
 
-	// where should write it?
-	socket.join(socket.handshake.headers.token.classId[0]);
+	for (var i = socket.handshake.headers.token.classId.length - 1; i >= 0; i--) {	
+		socket.join(socket.handshake.headers.token.classId[i]);
+	};
 
 	if(userId in sockets)
 	{
@@ -28,12 +29,18 @@ io.on('connection', function(socket){
 	} 
 	else
 	{
-		// sockets[userId] = {};
 		sockets[userId] = {
 		    socketss:[socket],
-			classId:socket.handshake.headers.token.classId[0],
-			status : "online"
+			classId:socket.handshake.headers.token.classId,
+			chatStatus : ""
 		}
+		userModel.getUserStatus(userId,function(err,dbRes){
+			if(err)
+				console.log(new Error(err));//return next(new Error(err));
+			else{
+				sockets[userId].chatStatus = dbRes.chatStatus;
+			}
+		});
 	}
 	
 	socket.on('bcMessage', function(msg){

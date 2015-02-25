@@ -16,6 +16,7 @@ var userSchema = new Schema({
 	accesssToken: {type:String, select:false},
 	tokenExpDate: {type:Date, select:false},
 	imageUrl:{type:String, default:""},
+	chatStatus:{type:String, default:"invis"},
 	__v: { type: Number, select: false}
 });
 

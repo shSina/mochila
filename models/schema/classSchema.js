@@ -3,6 +3,7 @@ var mongoose = require('mongoose')
 	, ObjectId = Schema.Types.ObjectId;
 
 var classSchema = new Schema({
+	className : { type:String, lowercase: true},
 	teacherId : {type : ObjectId , ref : 'user'},
 	studentsIds : [{type : ObjectId , ref : 'user'}],
 	studentsCount : {type:Number, select:false},
