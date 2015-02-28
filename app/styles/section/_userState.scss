@@ -1,16 +1,19 @@
-//dimentions
+//navbar
 $navbar_height:65px;
-$sidebar_width: 270px;
+//profile pic
 $image_w: 50px;
 $image_b_rad: 10px;
-$float :    left;
-$direction: rtl;
-$notif_w: 35px;
+//profile username
 $username_w:150px;
+//profile notif
+$notif_w: 35px;
+//sidebar
+$sidebar_width: 270px;
+
 //colors
 $navbar_bg:     $blue;
-$sidebar_bg:    $blue;
-$stream_bg:     $white;
+$sidebar_bg:    #E5E5E5;
+$user_bg:       $light_gray;
 $profile_bg:    $violet;
 $stream_main:   $light_gray;
 $user_image_bg: $orange;
@@ -18,7 +21,7 @@ $user_image_bg: $orange;
 .user{
     width: 100%;
     height: 100%;
-    background-color: $stream_bg;
+    background-color: $user_bg;
     .main{
         overflow: hidden;
         width:auto;
@@ -31,6 +34,7 @@ $user_image_bg: $orange;
         width: 100%;
         position: fixed;
         background-color: $navbar_bg;
+        z-index:5;
         .profile{
             float: $float;
             width: $sidebar_width;
@@ -82,71 +86,68 @@ $user_image_bg: $orange;
                 cursor:pointer;
             }
 
+        }
+        .profile:hover{
+            background-color:#664557;
         }
     }
     .sidebar{
         height:100%;
-        position: static;
-        margin-botton:$navbar_height;
-        margin-top: $navbar_height;
+        padding-top: $navbar_height;
         overflow:hidden;
         width: $sidebar_width;
-        top:$navbar_height;
         float:$float;
+        // padding:5px;
         background-color: $sidebar_bg;
-        @include slideInRight();
-        .profile{
-            float: $float;
-            width: $sidebar_width;
-            height: $navbar_height;
-            background-color: $profile_bg;
-            .user-image{
-                width: $image_w;
-                height: $image_w;
+        @include slideInLeft();
+        border-right: 1px solid black;
+        .chatbox{
+            // padding-top:$navbar_height;
+            height:auto;
+            .friend{
                 float: $float;
-                margin: 8px;
-                border-radius: $image_b_rad;
-                background-color: $user_image_bg;
-                overflow: hidden;
-                cursor: pointer;
-                border: 2px solid $orange;
-                img{
-                    width:$image_w;
-                    height:$image_w;
+                width: 100%;
+                // height: 55px;
+                // background-color: $profile_bg;
+                .user-image{
+                    width: 40px;
+                    height: 40px;
+                    float: $float;
+                    margin: 7px;
+                    margin-left: 13px;
+                    border-radius: 5px;
+                    background-color: $user_image_bg;
+                    overflow: hidden;
+                    cursor: pointer;
+                    border: 2px solid $violet;
+                    img{
+                        width:40px;
+                        height:40px;
+                    }
+                    .user-shadow{
+                        width: 40px;
+                        height: 40px;
+                        position: relative;
+                        top: -44px;
+                        left: -1px;
+                        border-radius:5px;
+                        box-shadow: inset 0px 0px 10px 1px #000000;
+                    }
                 }
-                .user-shadow{
-                    width: $image_w;
-                    height: $image_w;
-                    position: relative;
-                    top: -55px;
-                    left: -1px;
-                    border-radius:$image_b_rad;
-                    box-shadow: inset 0px 0px 10px 1px #000000;
+                .user-name{
+                    text-align:center;
+                    color:rgb(14, 82, 90);
+                    font-size:20px;
+                    font-weight:bold;
+                    float:$float;
+                    width: 160px;
+                    line-height:55px;
                 }
             }
-            .user-name{
-                text-align:center;
-                color:white;
-                font-size:20px;
-                font-weight:bold;
-                float:$float;
-                width: $username_w;
-                line-height:$navbar_height;
+            .friend:hover{
+                background-color:#3FB8C8;
+                box-shadow: inset 0px 0px 19px -6px #000000;
             }
-            .notification{
-                position: relative;
-                float: left;
-                fill: white;
-                width: $notif_w;
-                height: $notif_w;
-                float: $float;
-                margin: 18px;
-                margin-right:5px;
-                margin-left:10px;
-                cursor:pointer;
-            }
-
         }
-
     }
 }
