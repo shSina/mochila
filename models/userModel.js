@@ -78,7 +78,7 @@ exports.getAllFriends = function(id,classIds,next) {
 		{$match:{_id:{$ne:id},classId:{$in:classIds}}}
 		,{$unwind : "$classId" }
 		,{$match:{classId:{$in:classIds}}}
-		,{$group:{_id: "$_id",classId: { $addToSet: "$classId" },type:{$first:"$type"},userName:{$first:"$userName"}}}
+		,{$group:{_id: "$_id",classId: { $addToSet: "$classId" },type:{$first:"$type"},userName:{$first:"$userName"},imageUrl:{$first:"$imageUrl"}}}
 		,function (err,res) {
 			user.populate(res, [{ path: 'classId', select: 'className' }]
 				,function(err,popRes){
