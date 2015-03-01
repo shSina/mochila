@@ -1,7 +1,8 @@
 var io = require('lib/sio').io
 	, token = require('lib/token')
 	, error = require('lib/resFormat').error
-	, userModel = require('models/userModel');
+	, userModel = require('models/userModel')
+	, messageModel = require('models/messageModel');
 
 io.set('authorization', function (handshakeData, callback) {
 	var reqToken = handshakeData._query.name;
@@ -13,11 +14,14 @@ io.set('authorization', function (handshakeData, callback) {
 	});
 });
 
-var sockets = { };
+var sockets   = {},
+	bcMessage = {},
+	toMessage = {};
 io.on('connection', function(socket){ 
 	
 	console.log('someone connected.');
-	var userId = socket.handshake.headers.token._id;
+	var userId 	= socket.handshake.headers.token._id;
+	var classIds = socket.handshake.headers.token.classId;
 
 	for (var i = socket.handshake.headers.token.classId.length - 1; i >= 0; i--) {	
 		socket.join(socket.handshake.headers.token.classId[i]);
@@ -25,12 +29,12 @@ io.on('connection', function(socket){
 
 	if(userId in sockets)
 	{
-		sockets[userId].socketss.push(socket);
+		sockets[userId].socket.push(socket);
 	} 
 	else
 	{
 		sockets[userId] = {
-		    socketss:[socket],
+		    socket:[socket],
 			classId:socket.handshake.headers.token.classId,
 			chatStatus : ""
 		}
@@ -38,41 +42,90 @@ io.on('connection', function(socket){
 			if(err)
 				console.log(new Error(err));//return next(new Error(err));
 			else{
+				console.log("dbRes  " + dbRes.chatStatus);
 				sockets[userId].chatStatus = dbRes.chatStatus;
 			}
 		});
 	}
 	
-	socket.on('bcMessage', function(msg){
-    	socket.broadcast.to(socket.handshake.headers.token.classId[0])
-    	.emit('bcMessage', {
-    		from : userId,
-    		message : msg
-    	});
+	socket.on('bcMessage', function(data){
+		var valid = false;
+    	for (var i = socket.handshake.headers.token.classId.length - 1; i >= 0; i--) {
+    		if(data.to == socket.handshake.headers.token.classId[i])
+    			valid = true;
+    	};
+    	if(valid){
+    		bcMessage = {
+    			body : data.message,
+    			from : userId,
+    			toClass : data.to
+    		}
+    		messageModel.saveMessage(bcMessage,function(err,dbRes){
+    			if(err)
+					console.log(new Error(err));//return next(new Error(err));
+				else{
+					console.log(dbRes);
+				}
+    		});
+	    	socket.broadcast.to(data.to)
+	    	.emit('bcMessage', {
+	    		to : data.to,
+	    		from : userId,
+	    		message : data.message
+	    	});
+    	}
+    	else{
+    		//something
+    	}
   	});
 
-	socket.on('toMessage', function(msg){
+	socket.on('toMessage', function(data){
    		// sockets[users[to]].socket.emit(
-   		if(  sockets[msg.to] && sockets[msg.to].socketss)
-    	sockets[msg.to].socketss.forEach(function(value){
-    		value.emit('toMessage', 
-            { 
-                from : userId,
-                message : msg.message
-            });
-    	});
+   		if( sockets[data.to] && sockets[data.to].socket)
+   		{
+   			userModel.isFriend(data.to,classIds,function(err,res){
+   				if(err)
+					console.log(new Error(err));//return next(new Error(err));
+				else{
+					if(res >= 1)
+					{
+						toMessage = {
+		    			body : data.message,
+		    			from : userId,
+		    			toUser : data.to
+			    		}
+			    		messageModel.saveMessage(toMessage,function(err,dbRes){
+			    			if(err)
+								console.log(new Error(err));//return next(new Error(err));
+							else{
+								console.log(dbRes);
+							}
+			    		});
+				    	sockets[data.to].socket.forEach(function(value){
+				    		value.emit('toMessage', 
+				            { 
+				                from : userId,
+				                message : data.message
+				            });
+				    	});
+					}
+				}
+   			});
+   		}
   	});
 
   	socket.on('disconnect', function () {
   		
-    	socket.leave(socket.handshake.headers.token.classId[0]);
+    	for (var i = socket.handshake.headers.token.classId.length - 1; i >= 0; i--) {	
+			socket.leave(socket.handshake.headers.token.classId[i]);
+		};
 
-    	if(sockets[userId].socketss.length = 1 )
+    	if(sockets[userId].socket.length = 1 )
     		delete sockets.userId;
     	else{
-	    	sockets[userId].socketss.forEach(function(value,index){
+	    	sockets[userId].socket.forEach(function(value,index){
 	    		if(value.id == socket.id)
-	    			delete sockets[userId].socketss[index];
+	    			delete sockets[userId].socket[index];
 	    	});
     	}
 	  

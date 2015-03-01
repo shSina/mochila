@@ -86,6 +86,11 @@ exports.getAllFriends = function(id,classIds,next) {
 			});
 		});
 }
+exports.isFriend = function(reqId,classIds,next) {
+	user.count({_id:reqId,classId:{$in:classIds}},function(err,res){
+		return next(err,res);
+	});
+}
 exports.removeClassFromUsers = function(classId,userIds,next){
 	if( userIds.length !=0){
 		for(var i = userIds.length - 1; i >= 0; i--) {  
