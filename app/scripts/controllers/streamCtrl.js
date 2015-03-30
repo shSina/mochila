@@ -11,10 +11,14 @@ angular
             console.log('streamCtrl');
             $scope.items = [];
 
-            eventFact.emit('hello',{salam:1});
-            eventFact.on('test',function(msg){
+            eventFact.emit('createRoom',{to:'54ece3a7058cd48622672e9c'});
+            eventFact.emit('toMessage',{message:"testing",to:'54ece3a7058cd48622672e9c'});
+            eventFact.on('toMessage',function(msg){
                 console.log(msg)
             })
+            //  eventFact.on('test',function(msg){
+            //     console.log(msg)
+            // })
             $scope.addItem = function(postInput) {
                 console.log(postInput);
                 itemFact.addItem(postInput.text);

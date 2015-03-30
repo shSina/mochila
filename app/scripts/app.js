@@ -1,11 +1,11 @@
 'use strict';
 
 angular
-    .module('app', ['ui.router','btford.socket-io'])
+    .module('app', ['ui.router','btford.socket-io','duScroll'])
     .config(['$urlRouterProvider','$stateProvider','$locationProvider',
         function($urlRouterProvider,$stateProvider,$locationProvider){
             $urlRouterProvider.otherwise('/');
-            	$locationProvider.html5Mode(true).hashPrefix('#');
+            $locationProvider.html5Mode(true).hashPrefix('#');
 
             $stateProvider
                 .state('auth',{

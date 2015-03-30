@@ -1,59 +1,30 @@
-.loginForm{
-          position: relative;
-          width:400px;
-          margin:0 auto;
-          padding:2em;
-          border-radius:4px;
-          .blur{
-               width: 82%;
-               position: absolute;
-               height: 83%;
-               top: 3em;
-               background-color: rgba(255, 255, 255, 0.27);
-               -webkit-filter: blur(12px);
-               filter: blur(12px);
-          }
-          button{
-               width: 9em;
-               height: 3em;
-               border: none;
-               border-radius: 4px;
-               position: relative;
-               margin-left: 16px;
-          }
-}
-// html * {
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-// }
-//
-// *, *:after, *:before {
-//   -webkit-box-sizing: border-box;
-//   -moz-box-sizing: border-box;
-//   box-sizing: border-box;
-// }
-
-.cd-container {
-  /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
-  width: 90%;
-  max-width: 768px;
-  margin: 0 auto;
-}
-.cd-container::after {
-  /* clearfix */
-  content: '';
-  display: table;
-  clear: both;
-}
-.cd-main-content {
+.auth-main {
   /* you need to assign a min-height to the main content so that the children can inherit it*/
   height: 100%;
   position: absolute;
   width: 100%;
   z-index: 1;
 }
-
-.cd-fixed-bg {
+.loginForm{
+          float:right; //??
+          position: relative;
+          width:400px;
+          // margin:0 auto;
+          padding:2em;
+          border-radius:4px;
+          margin-top: 235px;
+          button{
+            // color: black;
+            // font-family: 'Patua One', cursive;
+            width: 9em;
+            height: 3em;
+            border: none;
+            border-radius: 4px;
+            position: relative;
+            margin-left: 16px;
+          }
+}
+.fixed {
   position: relative;
   min-height: 100%;
   background-size: cover;
@@ -61,65 +32,120 @@
   background-position: center center;
   z-index: 1;
 }
-.cd-fixed-bg h1, .cd-fixed-bg h2 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  bottom: auto;
-  right: auto;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -o-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  width: 90%;
-  max-width: 1170px;
-  text-align: center;
-  font-size: 30px;
-  font-size: 1.875rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  color: white;
+.fixed.home {
+  background-image:  linear-gradient(
+      rgba(0, 0, 0, 0.5),
+      rgba(0, 0, 0, 0.5)
+    ), 
+    url("/images/laptop.jpg");
 }
-.cd-fixed-bg.cd-bg-1 {
-  background-image: url("/images/bag.jpg");
-}
-.cd-fixed-bg.cd-bg-2 {
+.fixed.about{
   height: 600px;
-  background-image: url("/images/light.jpg");
+  background-image: url("/images/lamp.jpg");
+}
+.nav{
+  position :fixed;
+  width:100%;
+  z-index: 5;
+  height: 60px;
+  background-color: #232323;
+}
+.tab-container{
+  width: 46%;
+  float:right;
+}
+.tabs{
+  cursor: pointer;
+  font-family: 'Patua One', cursive;
+  background-color : #232323;
+}
+// .nav ul{
+//   float: right;
+//   padding-top : 20px;
+//   padding-right : 75px;
+//   word-spacing: 50px;
+// }
+// .nav ul li{
+//   display: inline;
+//   color: white;
+//   font-family: 'Patua One', cursive;
+//   font-size: 18px;
+//   font-weight: 400;
+//   text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.5);
+//   letter-spacing: 0.5px;
+// }
+.msg{
+  float : left;
+  font-family: 'Patua One', cursive;
+  font-weight: 700;
+  font-size: 60px;
+  // font-size: 30px;
+  // font-size: 1.875rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  padding : 70px;
+  padding-top : 160px;
+  color: white;
+  .sub-msg{
+    margin-left: 80px;
+    margin-top: 20px;
+  }
+}
+.emp{
+  // 'Roboto', sans-serif
+  color: #00e7b4 !important;
+}
+.col{
+  float: left;
+  width: 33%;
 }
 @media only screen and (min-width: 768px) {
-  .cd-fixed-bg h1, .cd-fixed-bg h2 {
-    font-size: 36px;
-  }
+  // .fixed h1, .fixed h2 {
+  //   font-size: 36px;
+  // }
 }
 @media only screen and (min-width: 1170px) {
-  .cd-fixed-bg {
+  .fixed {
     background-attachment: fixed;
   }
-  .cd-fixed-bg h1, .cd-fixed-bg h2 {
-    font-size: 48px;
-    font-weight: 300;
-  }
+  // .fixed h1, .fixed h2 {
+  //   font-size: 48px;
+  //   font-weight: 300;
+  // }
 }
-
-.cd-scrolling-bg {
+.scrolling {
   position: relative;
   min-height: 100%;
-  padding: 4em 0;
+  height: 100%;
+  // padding: 4em 0;
   line-height: 1.6;
   box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
-.cd-scrolling-bg.cd-color-1 {
-  background-color: #999999;
+.scrolling.service {
+  // background-color: #C4B481;
+  background-color : white;//#232323;
   color: #a6989a;
 }
-.cd-scrolling-bg.cd-color-2 {
-  background-color: #FFDE00;
-  color: #3d3536;
+.scrolling.contact {
+  // background-color: #C4B481;
+  background-color : white;//#232323;
+  color: #a6989a;
+}
+.cd-container {
+  text-align: center;
+  width: 100%;
+  // max-width: 768px;
+  // margin: 0 auto;
+    margin-top: -85px;
+
+}
+.cd-container::after {
+  content: '';
+  display: table;
+  clear: both;
 }
 @media only screen and (min-width: 768px) {
-  .cd-scrolling-bg {
+  .scrolling {
     padding: 8em 0;
     font-size: 20px;
     font-size: 1.25rem;
