@@ -1,0 +1,45 @@
+$tabs-text-color : white;
+$tabs-underline-color : #00e7b4;
+
+.tabs {
+  position: relative;
+  height: 60px;
+  background-color: #FFF;
+  margin: 0 auto;
+  // width: 100%;
+  white-space: nowrap;
+
+  li.tab {
+    display: block;
+    float: left;
+    text-align: center;
+    background-color: #232323;
+    line-height: 54px;
+    height: 48px;
+    padding: 0 20px;
+    margin: 0;
+    letter-spacing: .8px;
+    width: 15%;
+
+    a {
+      text-decoration: none;
+      color: $tabs-text-color;
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include transition( color .28s ease);
+      &:hover {
+        color: lighten($tabs-text-color, 20%);
+      }
+    }
+  }
+  .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: $tabs-underline-color;
+    will-change: left, right;
+  }
+}
+
+ul.tabs li.tab { padding: 0; }
