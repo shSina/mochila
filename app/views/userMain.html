@@ -3,32 +3,31 @@
         <div class="profile">
             <div class="user-image">
                 <img src="{{user.imageUrl}}" ng-if='user.imageUrl'></img>
-                <div class="user-shadow"></div>
             </div>
             <div class="user-name">{{user.userName}}</div>
-            <div class="notification">
-                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.556 456.556" xml:space="preserve">
+        </div>
+    </div>
+    <div class="sidebar">
+        <div class="navigation">
+
+            <div class="section">
+                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 314.014 314.013" xml:space="preserve">
                     <g>
-                    	<path d="M363.582,397.311H92.974c-7.417,0-13.428-6.011-13.428-13.428V209.349c0-82.013,66.721-148.734,148.734-148.734
-                    		c82.009,0,148.73,66.721,148.73,148.734v174.534C377.01,391.3,370.999,397.311,363.582,397.311z M106.402,370.455h243.752V209.349
-                    		c0-67.204-54.674-121.878-121.874-121.878c-67.204,0-121.878,54.674-121.878,121.878V370.455z"/>
-                    	<path d="M228.28,456.556c-40.071,0-72.673-32.602-72.673-72.673c0-7.417,6.011-13.428,13.428-13.428
-                    		c7.417,0,13.428,6.011,13.428,13.428c0,25.262,20.555,45.816,45.816,45.816s45.816-20.555,45.816-45.816
-                    		c0-7.417,6.011-13.428,13.428-13.428c7.417,0,13.428,6.011,13.428,13.428C300.952,423.954,268.351,456.556,228.28,456.556z"/>
-                    	<path d="M144.214,242.636c-5.934,0-10.742-4.808-10.742-10.742v-32.234c0-42.774,34.798-77.572,77.572-77.572
-                    		c5.934,0,10.742,4.808,10.742,10.743s-4.808,10.742-10.742,10.742c-30.927,0-56.087,25.16-56.087,56.087v32.234
-                    		C154.957,237.828,150.148,242.636,144.214,242.636z"/>
-                    	<path d="M197.175,90.675c-7.417,0-13.428-6.011-13.428-13.428V44.533C183.747,19.978,203.724,0,228.28,0s44.53,19.978,44.53,44.533
-                    		v29.51c0,7.417-6.011,13.428-13.428,13.428c-7.417,0-13.428-6.011-13.428-13.428v-29.51c0-9.746-7.927-17.677-17.673-17.677
-                    		c-9.746,0-17.677,7.931-17.677,17.677v32.714C210.603,84.664,204.592,90.675,197.175,90.675z"/>
+                    	<g id="_x37_3._Messages">
+                    		<g>
+                    			<path d="M282.611,121.828H266.91v31.492h15.701v78.374H141.306v-31.362h-31.4v31.454c0,17.341,14.061,31.402,31.4,31.402h15.701
+                    				v31.347c0,8.672,4.216,10.082,9.413,3.138l25.876-34.492h90.315c17.345,0,31.402-14.059,31.402-31.402v-78.542
+                    				C314.014,135.888,299.956,121.828,282.611,121.828z M251.213,153.228V43.325c0-17.342-14.062-31.395-31.401-31.395H31.402
+                    				C14.06,11.93,0,25.982,0,43.325v109.903c0,17.349,14.06,31.402,31.402,31.402h15.699v47.104c0,8.668,4.218,10.078,9.416,3.134
+                    				l37.68-50.237h125.615C237.151,184.63,251.213,170.577,251.213,153.228z M31.402,153.236V43.325h188.41v109.912H31.402z"/>
+                    		</g>
+                    	</g>
                     </g>
                 </svg>
             </div>
         </div>
-    </div>
-    <div class="sidebar">
         <div class="chatbox">
-            <div class="friend" ng-repeat='friend in friends'>
+            <div class="friend" ng-repeat='friend in friends' ng-click='startChat(friend)'>
                 <div class="user-image">
                     <img src='{{friend.imageUrl}}'></img>
                     <div class="user-shadow"></div>
@@ -36,8 +35,33 @@
                 <div class="user-name">
                     {{friend.userName}}
                 </div>
+                <div class="history">
+
+                </div>
+                <div class="last-act">
+                    98
+                </div>
             </div>
         </div>
     </div>
     <div ui-view class="main"></div>
+    <div class="chats">
+        <div class="box" ng-repeat='chat in chats'>
+            <div class="bar">
+
+            </div>
+            <!-- <div ng-repeat='message in messages' class="messages">
+
+            </div> -->
+            <div class="messages">
+                <div class="message">
+                    <div class="user-image">
+                        <img src="https://secure.gravatar.com/avatar/ee23849618501d676a8516cbcfa7651a?s=50&r=pg&d=identicon" alt="" />
+                    </div>
+                </div>
+
+            </div>
+            <textarea class="" type="text" name="message" value=""></textarea>
+        </div>
+    </div>
 <div>

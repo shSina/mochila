@@ -1,20 +1,20 @@
 //navbar
-$navbar_height:65px;
+$navbar_height:75px;
 //profile pic
-$image_w: 50px;
-$image_b_rad: 10px;
+$image_w: 40px;
+$image_b_rad: 25px;
 //profile username
-$username_w:150px;
+$username_w:110px;
 //profile notif
 $notif_w: 35px;
 //sidebar
-$sidebar_width: 270px;
+$sidebar_width: 250px;
 
 //colors
-$navbar_bg:     $blue;
-$sidebar_bg:    #E5E5E5;
+$navbar_bg:     $nice_green;
+$sidebar_bg:    white;
 $user_bg:       $light_gray;
-$profile_bg:    $violet;
+$profile_bg:    $dark_blue;
 $stream_main:   $light_gray;
 $user_image_bg: $orange;
 
@@ -35,6 +35,7 @@ $user_image_bg: $orange;
         position: fixed;
         background-color: $navbar_bg;
         z-index:5;
+        box-shadow: 0 0 17px -2px gray;
         .profile{
             float: $float;
             width: $sidebar_width;
@@ -44,46 +45,24 @@ $user_image_bg: $orange;
                 width: $image_w;
                 height: $image_w;
                 float: $float;
-                margin: 8px;
+                margin: 18px;
                 border-radius: $image_b_rad;
                 background-color: $user_image_bg;
                 overflow: hidden;
                 cursor: pointer;
-                border: 2px solid $orange;
+                // border: 2px solid $orange;
                 img{
                     width:$image_w;
                     height:$image_w;
                 }
-                .user-shadow{
-                    width: $image_w;
-                    height: $image_w;
-                    position: relative;
-                    top: -55px;
-                    left: -1px;
-                    border-radius:$image_b_rad;
-                    box-shadow: inset 0px 0px 10px 1px #000000;
-                }
             }
             .user-name{
-                text-align:center;
+                text-align:$text-align;
                 color:white;
                 font-size:20px;
-                font-weight:bold;
                 float:$float;
                 width: $username_w;
                 line-height:$navbar_height;
-            }
-            .notification{
-                position: relative;
-                float: left;
-                fill: white;
-                width: $notif_w;
-                height: $notif_w;
-                float: $float;
-                margin: 18px;
-                margin-right:5px;
-                margin-left:10px;
-                cursor:pointer;
             }
 
         }
@@ -97,56 +76,87 @@ $user_image_bg: $orange;
         overflow:hidden;
         width: $sidebar_width;
         float:$float;
-        // padding:5px;
+        position:relative;
+        z-index:4;
+        border-left: 1px solid rgb(208, 208, 208);
+        box-shadow: 0 0 43px -9px gray;
         background-color: $sidebar_bg;
-        @include slideInLeft();
+        @include slideInRight();
         border-right: 1px solid black;
+        .navigation{
+            height:32px;
+            background-color:$nice_green;
+            .section{
+                height:40px;
+                float:$float;
+                width:50%;
+                svg{
+                    width:30px;
+                    padding:5px;
+                }
+            }
+        }
         .chatbox{
             // padding-top:$navbar_height;
             height:auto;
             .friend{
                 float: $float;
                 width: 100%;
-                // height: 55px;
-                // background-color: $profile_bg;
                 .user-image{
-                    width: 40px;
-                    height: 40px;
-                    float: $float;
-                    margin: 7px;
-                    margin-left: 13px;
-                    border-radius: 5px;
+                    width: 35px;
+                    height: 35px;
+                    float: left;
+                    margin:10px;
+                    border-radius: 25px;
                     background-color: $user_image_bg;
                     overflow: hidden;
                     cursor: pointer;
-                    border: 2px solid $violet;
+                    // border: 2px solid $violet;
                     img{
-                        width:40px;
-                        height:40px;
-                    }
-                    .user-shadow{
-                        width: 40px;
-                        height: 40px;
-                        position: relative;
-                        top: -44px;
-                        left: -1px;
-                        border-radius:5px;
-                        box-shadow: inset 0px 0px 10px 1px #000000;
+                        width:35px;
+                        height:35px;
                     }
                 }
                 .user-name{
-                    text-align:center;
+                    text-align:left;
                     color:rgb(14, 82, 90);
                     font-size:20px;
-                    font-weight:bold;
-                    float:$float;
-                    width: 160px;
+                    float:left;
+                    width: 110px;
                     line-height:55px;
                 }
             }
             .friend:hover{
-                background-color:#3FB8C8;
-                box-shadow: inset 0px 0px 19px -6px #000000;
+                // background-color:#3FB8C8;
+                background-color:gray;
+                // box-shadow: inset 0px 0px 19px -6px #000000;
+            }
+        }
+    }
+    .chats{
+        position: fixed;
+        height: 350px;
+        width: 100%;
+        bottom: 0;
+        padding-right:270px;
+        .box{
+            float:$float;
+            width:300px;
+            height:350px;
+            margin-left: 10px;
+            background-color:blue;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+            background-color: #696B6C;
+            textarea{
+                position: absolute;
+                bottom: 0;
+                width: 300px;
+                min-height: 3em;
+                max-height: 5em;
+                overflow-y: auto;
+                outline: 0;
+                resize: none;
             }
         }
     }

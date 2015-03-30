@@ -6,7 +6,8 @@
     "angular-ui-router": "~0.2.11",
     "angular-socket-io": "~0.7.0",
     "sio-client": "~1.3.3",
-    "skel": "~2.2.1"
+    "skel": "~2.2.1",
+    "angular-moment": "~0.9.0"
   },
   "devDependencies": {},
   "appPath": "app"

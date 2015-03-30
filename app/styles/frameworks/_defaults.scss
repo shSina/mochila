@@ -1,5 +1,6 @@
-$float :    left;
-$direction: rtl;
+$float :    right;
+$text_align: $float;
+$direction: ltr;
 
 body, html , .container,{
 	height: 100%;
