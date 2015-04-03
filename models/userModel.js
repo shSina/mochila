@@ -17,11 +17,11 @@ exports.addUser = function(item,next) {
 }
 
 exports.deleteUser = function(id,next) {
-	console.log(id);
+	// console.log(id);
 	user.findOneAndRemove({_id : id}).exec(function(err,doc){
 		if(err)
 			return next(err);
-		console.log(doc);
+		// console.log(doc);
 		Class.removeUserFromClasses(doc.classId,id,function(err){
 			next(err);
 		});

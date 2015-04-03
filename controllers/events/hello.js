@@ -1,8 +1,8 @@
-var io_router = require('socket.io-events')();
-
-io_router.on('hello', function (socket, args, next) {
-	console.log('salam');
+var middleware = function(socket,next){
+	socket.on('hello', function (socket, next) {
+		console.log('salam');
+	});
 	next();
-});
+}
 
-module.exports = io_router;
+module.exports = middleware;
