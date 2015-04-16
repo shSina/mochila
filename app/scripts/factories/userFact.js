@@ -55,7 +55,6 @@ angular
 		}
 
 		authService.loadToken();
-		// authService.getMyFriends();
 
 		return authService;
 	}]);

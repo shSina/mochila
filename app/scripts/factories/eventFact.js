@@ -18,5 +18,6 @@ angular
             sio.on('error', function (reason){
 				console.error('Unable to connect Socket.IO', reason);
 			});
+            socket.emit('hello',{rest:"asf"});
             return socket;
     }]);

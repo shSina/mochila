@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('app', ['ui.router','btford.socket-io','duScroll'])
+    .module('app', ['ui.router','btford.socket-io'])
     .config(['$urlRouterProvider','$stateProvider','$locationProvider',
         function($urlRouterProvider,$stateProvider,$locationProvider){
             $urlRouterProvider.otherwise('/');
@@ -30,7 +30,14 @@ angular
                         controller:'streamCtrl'
                     })
     }])
-    .run(['$state',function($state){
+    .run(['$state','$rootScope','$timeout',function($state,$rootScope,$timeout){
+        $rootScope.$on('$stateChangeStart',
+			function(event, toState, toParams, fromState, fromParams){
+                if(localStorage.getItem('k') !== null && toState.name =='auth'){
+                    event.preventDefault();
+                    $state.go('stream');
+                }
+		})
         skel.init({
           reset: 'full',
           containers: '100%',
