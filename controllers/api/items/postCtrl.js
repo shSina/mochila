@@ -17,7 +17,8 @@ router.post('/',jsonParser,function(req,res,next){
 	//req.body.classId : add later! 
 	req.body.authorId = req.userToken._id;
 	req.body.authorType = req.userToken.type;
-	req.body.classId = req.userToken.classId[0];
+	if(req.body.classId in req.userToken.classIds)
+		return next(new Error("check this code"));
 	// req.body.itemType = 'post';
 	
 	postModel.addPost( req.body , function(err,dbRes){

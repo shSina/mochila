@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 	, classSchema = require('models/schema/classSchema')
-	, ObjectId = require('mongoose').Types.ObjectId
+	, toObj = require('lib/toObj')
 	, user = require('models/userModel');
 
  
@@ -16,7 +16,7 @@ exports.deleteClassById = function(classId,next) {
 		user.removeClassFromUsers(classId,doc.studentsIds,function(err){
 			return next(err);
 		});
-	});//shoud remove from user classes
+	});
 }
 exports.updateClassById = function(classId,item,next){
 	Class.update({_id:classId},{$set:item},function(err) {
@@ -33,13 +33,8 @@ exports.getAllClasses = function(next){
 		return next(err,doc);
 	});	
 }
-exports.addUserToClasses = function(classIds,userId,next){
-	if( classIds.length !=0){
-		for(var i = classIds.length - 1; i >= 0; i--) {	
-			classIds[i] = ObjectId(classIds[i]);
-		};
-	}
-	Class.update({_id:{$in:classIds}},
+exports.addUserToClasses = function(classIds,userId,next){//check user exist
+	Class.update({_id:{$in:toObj(classIds)}},
 				{$push:{"studentsIds":userId},
 				 $inc : {"studentsCount":1}},
 				 {multi:true})
@@ -48,22 +43,22 @@ exports.addUserToClasses = function(classIds,userId,next){
 				});
 }	
 exports.removeUserFromClasses = function(classIds,userId,next){
-	if( classIds.length !=0){
-		for(var i = classIds.length - 1; i >= 0; i--) {	
-			classIds[i] = ObjectId(classIds[i]);
-		};
-	}
-	Class.update({_id: {$in:classIds}},
-				 {$pull:{studentsIds:ObjectId(userId)}},
+	Class.update({_id: {$in:toObj(classIds)}},
+				 {$pull:{studentsIds:toObj(userId)}},
 				 {multi:true})
 				.exec(function(err){
 					next(err);
 				})
 }
-// var Schema = mongoose.Schema
-//  	, ObjectId = mongoose.Types.ObjectId;
-// Class.find({}).populate('studentsIds').exec(function(err,res){
-// 	console.log(res);
-// 	// Class.update({_id:res[0]._id},
-// 	// 	{$push:{"studentsIds":ObjectId('54992bf43cb5329a16188e18')}}).exec();
-// });
+exports.checkExist = function(classIds,next){
+	if(!Array.isArray(classIds))
+		classIds = [classIds];
+	Class.count({_id:{$in:classIds}},function (err, count) {
+	  if (err) return next(err);
+
+	  if(classIds.length != count) 
+	  	next(new Error('class not exist'));
+	  else 
+	  	next();
+	});
+}

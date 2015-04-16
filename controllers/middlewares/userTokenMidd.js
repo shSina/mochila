@@ -22,8 +22,8 @@ var attachToken = function(req,res,next){
 		}
 		else{
 
-			for (var i = decoded.classId.length - 1; i >= 0; i--) {
-					decoded.classId[i] = ObjectId(decoded.classId[i]);
+			for (var i = decoded.classIds.length - 1; i >= 0; i--) {
+					decoded.classIds[i] = ObjectId(decoded.classIds[i]);
 			};
 			decoded._id = ObjectId(decoded._id);
 			

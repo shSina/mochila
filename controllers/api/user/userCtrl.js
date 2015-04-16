@@ -30,8 +30,7 @@ router.get('/friends',function(req,res,next){
 	});
 })
 router.get('/:userId',function (req,res,next) {
-	userModel.getUserInfoById(req.userToken._id,req.userToken.classId
-						 ,req.params.userId, function(err,dbRes){
+	userModel.getUserInfoById(req.params.userId,req.userToken.classId, function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{

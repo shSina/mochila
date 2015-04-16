@@ -8,8 +8,8 @@ var router = require('express').Router()
 	, userToken = require('controllers/middlewares/userTokenMidd')
 	, jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
 
-//all admin/user routing must have userToken
-router.use(userToken);
+//all admin/user routing must have ADMIN Token
+// router.use(userToken);
 
 router.param('userId', function (req, res, next, userId) {
 	user.getUserById(userId,function(err,dbRes){
@@ -28,17 +28,6 @@ router.param('userId', function (req, res, next, userId) {
 });
 
 router.post('/',jsonParser,function (req,res,next) {
-	//add this part to mongoose itself pre save validation
-	if(req.body && req.body.classId && Array.isArray(req.body.classId)){
-		for(var i = req.body.classId.length - 1; i >= 0; i--) {	
-			req.body.classId[i] = ObjectId(req.body.classId[i]);
-		};
-	}else{
-		return res
-				 .status(400)
-				 .json(error(undefined,'classId invalid or not exist'));
-	}
-
 	user.addUser( req.body , function(err,item){
 		if(err)
 			return next(new Error(err));
@@ -59,7 +48,7 @@ router.get('/',function(req,res,next){
 })
 
 router.delete('/:userId',function(req,res,next){
-	user.deleteUser(req.userParam._id,function(err){
+	user.deleteUser(req.param('userId'),function(err){
 		if(err)
 			return next(new Error(err));
 		else{

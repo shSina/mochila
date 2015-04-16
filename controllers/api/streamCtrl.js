@@ -12,7 +12,12 @@ router.use(userToken);
 
 
 router.get('/' , function(req,res,next){
-	itemModel.getAllByClassId (req.userToken.classId[0] , function(err,dbRes){
+	if(!req.params.classId)
+		return res
+				.status(400)
+				.json(error(undefined,'classId required'));
+
+	itemModel.getAllByClassId (req.params.classId , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{

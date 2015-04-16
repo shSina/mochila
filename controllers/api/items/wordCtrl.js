@@ -4,8 +4,8 @@ var router = require('express').Router()
 	, success = require('lib/resFormat').success
 	, error = require('lib/resFormat').error
 	, userToken = require('controllers/middlewares/userTokenMidd')
-	, jsonParser = bodyParser.json({limit:1000})//limit request body json less than 1k
-	, userEmiter = require('controllers/events/connection');
+	, jsonParser = bodyParser.json({limit:1000});//limit request body json less than 1k
+	// , userEmiter = require('controllers/events/connection');
 
 router.use(userToken);
 
@@ -14,7 +14,9 @@ router.post('/',jsonParser,function(req,res,next){
 	//req.body.classId : add later! 
 	req.body.authorId = req.userToken._id;
 	req.body.authorType = req.userToken.type;
-	req.body.classId = req.userToken.classId[0];
+	if(req.body.classId in req.userToken.classIds)
+		return next(new Error("check this code"));
+
 	// req.body.itemType = 'post';
 	
 	wordModel.addWord( req.body , function(err,dbRes){
@@ -22,9 +24,9 @@ router.post('/',jsonParser,function(req,res,next){
 			return next(new Error(err));
 		else{
 			res.json(success(dbRes));
-			userEmiter.forEach(function(userSocket){
-				userSocket.emit('newItem',null);
-			})
+			// userEmiter.forEach(function(userSocket){
+			// 	userSocket.emit('newItem',null);
+			// })
 		}
 	});
 })

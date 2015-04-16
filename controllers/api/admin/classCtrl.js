@@ -10,7 +10,7 @@ var router = require('express').Router()
 
 //all admin/class routing must have userToken 
 //simple user in token added to req object
-router.use(userToken);
+// router.use(userToken);
 
 //adding parameters to req object
 router.param('classId', function (req, res, next, classId) {
@@ -31,16 +31,16 @@ router.param('classId', function (req, res, next, classId) {
 
 router.post('/',jsonParser,function(req,res,next){
 	//add this part to mongoose itself pre save validation
-	if(req.body && req.body.classId && Array.isArray(req.body.classId)){
-		for(var i = req.body.classId.length - 1; i >= 0; i--) {	
-			req.body.classId[i] = ObjectId(req.body.classId[i]);
-		};
-	}
-	if(req.body && req.body.teacherId){
-		req.body.teacherId = ObjectId(req.body.teacherId);
-	}else{
-		delete req.body.teacherId;
-	}
+	// if(req.body && req.body.classId && Array.isArray(req.body.classId)){
+	// 	for(var i = req.body.classId.length - 1; i >= 0; i--) {	
+	// 		req.body.classId[i] = ObjectId(req.body.classId[i]);
+	// 	};
+	// }
+	// if(req.body && req.body.teacherId){
+	// 	req.body.teacherId = ObjectId(req.body.teacherId);
+	// }else{
+	// 	delete req.body.teacherId;
+	// }
 	
 	classModel.addClass( req.body , function(err,dbRes){
 		if(err)

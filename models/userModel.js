@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
 	, userSchema = require('models/schema/userSchema')
 	, Class = require('./classModel')
-	, ObjectId = require('mongoose').Types.ObjectId
+	, toObj = require('lib/toObj')
 	, gravatar = require('gravatar');
  
 var user = mongoose.model('user', userSchema);
@@ -10,7 +10,7 @@ exports.addUser = function(item,next) {
 	new user(item).save(function(err2,doc){
 		if(err2)
 			return next(err2,doc);
-		Class.addUserToClasses(item.classId,doc._id,function(err1){
+		Class.addUserToClasses(item.classIds,doc._id,function(err1){
 			return next(err1,doc);
 		})
 	});
@@ -40,18 +40,10 @@ exports.getMyInfo = function(id,next) {
 		return next(err,doc);
 	});	
 }
-exports.getUserInfoById = function(id,userClassId,reqId,next){ 
-	if(id == reqId){
-		user.findOne({_id : reqId},function(err,doc){
-			return next(err,doc);
-		});
-	}
-	else{
-		user.findOne({_id : reqId,classId:{$in:userClassId}},{'userName':1 ,'imageUrl': 1 },function(err,doc){
-			return next(err,doc);
-		});
-	}
-
+exports.getUserInfoById = function(userid,finderClassId,next){ 
+	user.findOne({_id : userid,classId:{$in:finderClassId}},{'userName':1 ,'imageUrl': 1 },function(err,doc){
+		return next(err,doc);
+	});
 }
 exports.userExist = function(email,password,next) {
 	user.findOne({email :email,password:password})
@@ -60,12 +52,13 @@ exports.userExist = function(email,password,next) {
 			return next(err,doc);
 		});
 }
-exports.updateUser = function(query,item,next){
-	user.update(query,{$set:item},function(err,num) {
-		if(err)
-			next(err);
-		// else
-		//  next(num);
+exports.updateUser = function(id,newUser,next){
+	delete newUser._id; // shouldn't update user id
+	if(newUser && newUser.classId){
+		newUser.classId = toObj(newUser.classId);
+	}
+	user.findOneAndUpdate({_id:id},{$set:newUser},function(err,doc) {
+		return next(err,doc);
 	});
 }
 exports.getAllUsers = function(next) {
@@ -93,12 +86,10 @@ exports.isFriend = function(reqId,classIds,next) {
 }
 exports.removeClassFromUsers = function(classId,userIds,next){
 	if( userIds.length !=0){
-		for(var i = userIds.length - 1; i >= 0; i--) {  
-			userIds[i] = ObjectId(userIds[i]);
-		};
+		userIds = toObj(userIds);
 	}
 	user.update({_id: {$in:userIds}},
-				 {$pull:{classId:ObjectId(classId)}},
+				 {$pull:{classId:toObj(classId)}},
 				 {multi:true})
 				.exec(function(err){
 					next(err);
@@ -109,11 +100,27 @@ exports.getUserStatus = function(id,next){
 		return next(err,doc);
 	});
 }
-user.schema.path('imageUrl').validate(function (value) {
-	if(!value && !this.imageUrl && this.email){
-		this.imageUrl = gravatar.url(this.email, {s:'50',r:'pg',d:'identicon'}, true);
-	}else if(this.imageUrl){
-		this.imageUrl = value;
-	}
-	return true;
-}, 'Invalid image URL');
+exports.checkExist = function(userIds,next){
+	if(!Array.isArray(userIds))
+		userIds = [userIds];
+	user.count({_id:{$in:userIds}},function (err, count) {
+	  if (err) return next(err);
+
+	  if(count == 0) 
+	  	next(new Error('user not exist'));
+	  else 
+	  	next();
+	});
+}
+exports.teacherExist = function(userIds,next){
+	if(!Array.isArray(userIds))
+		userIds = [userIds];
+	user.count({_id:{$in:userIds},type:'te'},function (err, count) {
+	  if (err) return next(err);
+
+	  if(count == 0)
+	  	next(new Error('teacher not exist'));
+	  else 
+	  	next();
+	});
+}
