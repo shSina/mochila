@@ -1,24 +1,15 @@
-var io_router = require('socket.io-events')();
-var tmp=0;
-io_router.on('message', function (socket, args, next) {
+var io = require('lib/sio').io
 
-		// socket.on('message', function(msg){
-    socket.broadcast.to(socket.handshake.headers.token.classId[0])
-    	.emit('message', msg);
-    console.log(msg);
-  // });
-	// console.log(++tmp);
-	//console.log(socket.sock.handshake.headers.token);
-	// socket.broadcast.to(socket.handshake.headers.token.classId[0])
- // 		.emit('message', data);
-	// console.log(data);
+var middleware = function(socket,next){
+	socket.on('message', function (data) {
+		// console.log(data);
+		
+		// io.sockets.emit('an event sent to all connected clients');
+		io.sockets.in(socket.handshake.headers.token.classIds[0])
+					.emit('message',{message:data.message,
+									from:socket.handshake.headers.token._id});
+	});
 	next();
-});
+}
 
-module.exports = io_router;
-
-
-// var io = require('lib/sio').io;
-// io.on('message:send',function(socket,data){
-// 	console.log(data);
-// });
+module.exports = middleware;

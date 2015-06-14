@@ -21,7 +21,8 @@ router.get('/',function(req,res,next){
 	});
 })
 router.get('/friends',function(req,res,next){
-	 userModel.getAllFriends(req.userToken._id,req.userToken.classId, function(err,dbRes){
+	console.log(req.userToken.classIds[0]);
+	 userModel.getAllFriends(req.userToken._id,req.userToken.classIds, function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{
@@ -30,7 +31,7 @@ router.get('/friends',function(req,res,next){
 	});
 })
 router.get('/:userId',function (req,res,next) {
-	userModel.getUserInfoById(req.params.userId,req.userToken.classId, function(err,dbRes){
+	userModel.getUserInfoById(req.params.userId,req.userToken.classIds, function(err,dbRes){
 		if(err)
 			return next(new Error(err));
 		else{

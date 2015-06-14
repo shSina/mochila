@@ -35,7 +35,7 @@ exports.getUserById = function(id,next){
 }
 exports.getMyInfo = function(id,next) {
 	user.findOne({_id : id})
-	.populate('classId','className')
+	.populate('classIds','className')
 	.exec(function(err,doc){
 		return next(err,doc);
 	});	
@@ -68,19 +68,19 @@ exports.getAllUsers = function(next) {
 }
 exports.getAllFriends = function(id,classIds,next) {
 	user.aggregate( 
-		{$match:{_id:{$ne:id},classId:{$in:classIds}}}
-		,{$unwind : "$classId" }
-		,{$match:{classId:{$in:classIds}}}
-		,{$group:{_id: "$_id",classId: { $addToSet: "$classId" },type:{$first:"$type"},userName:{$first:"$userName"},imageUrl:{$first:"$imageUrl"}}}
+		{$match:{_id:{$ne:id},classIds:{$in:classIds}}}
+		,{$unwind : "$classIds" }
+		,{$match:{classIds:{$in:classIds}}}
+		,{$group:{_id: "$_id",classIds: { $addToSet: "$classIds" },type:{$first:"$type"},userName:{$first:"$userName"},imageUrl:{$first:"$imageUrl"}}}
 		,function (err,res) {
-			user.populate(res, [{ path: 'classId', select: 'className' }]
+			user.populate(res, [{ path: 'classIds', select: 'className' }]
 				,function(err,popRes){
 				return next(err,popRes);
 			});
 		});
 }
 exports.isFriend = function(reqId,classIds,next) {
-	user.count({_id:reqId,classId:{$in:classIds}},function(err,res){
+	user.count({_id:reqId,classIds:{$in:classIds}},function(err,res){
 		return next(err,res);
 	});
 }
@@ -89,7 +89,7 @@ exports.removeClassFromUsers = function(classId,userIds,next){
 		userIds = toObj(userIds);
 	}
 	user.update({_id: {$in:userIds}},
-				 {$pull:{classId:toObj(classId)}},
+				 {$pull:{classIds:toObj(classId)}},
 				 {multi:true})
 				.exec(function(err){
 					next(err);
