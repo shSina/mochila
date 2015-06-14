@@ -17,11 +17,29 @@ angular
 
             $scope.startChat = function(friend){
                 console.log(friend);
+                //check if not exist
                 $scope.chats.push({to:friend,
                             logs:[],
-                            messages:[{friend:'asd'},{}]});
+                            messages:[]});
             }
-            // eventFact.emit('hello',{salam:1});
+
+            $scope.sendMessage = function(message , friend){
+                console.log(message,friend);
+                eventFact.emit('message',{text:message,to:friend});
+                $scope.field = '';
+            }
+
+            $rootScope.$on('message',function(event , data){
+                console.log(data);
+                // if($scope.chats)
+                    $scope.chats[0].messages.push({text:data.from});
+                // else{
+                    // $scope.chats.push({to:friend,
+                    //         logs:[],
+                    //         messages:[]});
+                    // $scope.chats[0].messages.push({text:data.text});
+                // }
+            });
             // eventFact.on('test',function(msg){
             //     console.log(msg)
             // })

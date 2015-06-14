@@ -7,8 +7,8 @@
 
 angular
     .module('app')
-    .factory('eventFact',['$http','$state','socketFactory','userFact',
-        function ($http,$state,socketFactory,userFact) {
+    .factory('eventFact',['$http','$state','socketFactory','userFact','$rootScope',
+        function ($http,$state,socketFactory,userFact,$rootScope) {
             console.log('eventFact');
             var sio = io.connect('localhost:9000',{query:'name='+userFact.token})
             var socket = socketFactory({
@@ -18,6 +18,10 @@ angular
             sio.on('error', function (reason){
 				console.error('Unable to connect Socket.IO', reason);
 			});
-            socket.emit('hello',{rest:"asf"});
+            sio.on('message',function(obj){
+                console.log(obj);
+                $rootScope.$emit('message',{text:obj.from,from:obj.from});
+            })
+            // socket.emit('hello',{rest:"asf"});
             return socket;
     }]);

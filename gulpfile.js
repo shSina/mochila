@@ -45,7 +45,12 @@ gulp.task('livereload',function(){
 		    		}
         },
         startPath: '/',
-        open:false
+        open:false,
+        ghostMode: {
+            clicks: false,
+            forms: false,
+            scroll: false
+        }
     });
 });
 

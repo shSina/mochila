@@ -38,9 +38,9 @@
                 <div class="history">
 
                 </div>
-                <div class="last-act">
+                <!-- <div class="last-act">
                     98
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -50,18 +50,21 @@
             <div class="bar">
 
             </div>
-            <!-- <div ng-repeat='message in messages' class="messages">
-
-            </div> -->
-            <div class="messages">
-                <div class="message">
+            <div ng-repeat='message in messages' class="messages">
                     <div class="user-image">
                         <img src="https://secure.gravatar.com/avatar/ee23849618501d676a8516cbcfa7651a?s=50&r=pg&d=identicon" alt="" />
                     </div>
-                </div>
-
+                    <div class="text">
+                        {{message.text}}
+                    </div>
             </div>
-            <textarea class="" type="text" name="message" value=""></textarea>
+            <form >
+              <input type="text" ng-model="field" required>
+              <button type="submit" ng-click="sendMessage(field,chat.to._id)">
+                send
+              </button>
+            </form>
+            <!-- <textarea class="" type="text" name="message" value=""></textarea> -->
         </div>
     </div>
 <div>

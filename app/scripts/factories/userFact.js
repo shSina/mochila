@@ -22,8 +22,7 @@ angular
 				console.log(success);
 				$state.go('stream');
 				localStorage.setItem('k',success.data.token);
-				if(!authService.token)
-					authService.loadToken();
+				authService.loadToken();
 			    return success;
 			  },function(error){
 			  	console.log(error);
@@ -42,7 +41,7 @@ angular
 					headers: {'x-access-token': authService.token}
 				})
 				.then(function (success) {
-					// console.log(success);
+					console.log(success);
 					authService.friends = success.data.data;
 					return success;
 				},function(error){
@@ -55,6 +54,7 @@ angular
 		}
 
 		authService.loadToken();
+		authService.getMyFriends();
 
 		return authService;
 	}]);

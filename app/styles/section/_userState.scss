@@ -148,7 +148,17 @@ $user_image_bg: $orange;
             border-top-right-radius: 5px;
             border-top-left-radius: 5px;
             background-color: #696B6C;
-            textarea{
+            .message{
+                background: white;
+                margin: 10px;
+                .user-image{
+                    img{
+                        margin:10px;
+                        border-radius:25px;
+                    }
+                }
+            }
+            form{
                 position: absolute;
                 bottom: 0;
                 width: 300px;
