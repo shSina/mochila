@@ -20,7 +20,7 @@ angular
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);
-				$state.go('stream');
+				$state.go('user');
 				localStorage.setItem('k',success.data.token);
 				authService.loadToken();
 			    return success;

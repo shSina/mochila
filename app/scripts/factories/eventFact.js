@@ -20,7 +20,7 @@ angular
 			});
             sio.on('message',function(obj){
                 console.log(obj);
-                $rootScope.$emit('message',{text:obj.from,from:obj.from});
+                $rootScope.$emit('message',{text:obj.message,from:obj.from});
             })
             // socket.emit('hello',{rest:"asf"});
             return socket;

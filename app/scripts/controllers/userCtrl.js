@@ -14,7 +14,8 @@ angular
             $scope.user = userMyInfo.data.data;
             $scope.friends = userFact.friends;
             $scope.chats = [];
-
+            $scope.field = '';
+            $scope.messages= [];
             $scope.startChat = function(friend){
                 console.log(friend);
                 //check if not exist
@@ -24,15 +25,17 @@ angular
             }
 
             $scope.sendMessage = function(message , friend){
-                console.log(message,friend);
+                // console.log(message,frined);
                 eventFact.emit('message',{text:message,to:friend});
                 $scope.field = '';
+                $scope.$apply();
             }
 
             $rootScope.$on('message',function(event , data){
                 console.log(data);
                 // if($scope.chats)
-                    $scope.chats[0].messages.push({text:data.from});
+                    $scope.messages.push({text:data.text});
+                    $scope.$apply();
                 // else{
                     // $scope.chats.push({to:friend,
                     //         logs:[],
