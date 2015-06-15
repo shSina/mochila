@@ -6,7 +6,7 @@ var middleware = function(socket,next){
 		
 		// io.sockets.emit('an event sent to all connected clients');
 		io.sockets.in(socket.handshake.headers.token.classIds[0])
-					.emit('message',{message:data.message,
+					.emit('message',{message:data.text,
 									from:socket.handshake.headers.token._id});
 	});
 	next();
