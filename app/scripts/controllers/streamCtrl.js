@@ -32,7 +32,7 @@ angular
                     });
 
             }
-            eventFact.on('newItem', function () {
+            eventFact.socket.on('newItem', function () {
                 $scope.getItems();
             });
     }]);

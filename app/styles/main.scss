@@ -9,6 +9,8 @@
 @import "modules/_prefixer.scss";
 @import "modules/_tabs.scss";
 @import "modules/_buttons.scss";
+@import "modules/_tables.scss";
+@import "modules/_modal.scss";
 
 @import "frameworks/_defaults.scss";
 @import "frameworks/_media.scss";
@@ -16,3 +18,4 @@
 @import "section/_authState.scss";
 @import "section/_userState.scss";
 @import "section/_streamState.scss";
+@import "section/_admin.scss";

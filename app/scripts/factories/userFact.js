@@ -20,9 +20,9 @@ angular
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);
-				$state.go('user');
 				localStorage.setItem('k',success.data.token);
 				authService.loadToken();
+				$state.go('stream');
 			    return success;
 			  },function(error){
 			  	console.log(error);
@@ -52,9 +52,6 @@ angular
 		authService.loadToken = function(){
 			authService.token = localStorage.getItem('k');
 		}
-
-		authService.loadToken();
-		authService.getMyFriends();
 
 		return authService;
 	}]);

@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('app', ['ui.router','btford.socket-io'])
+    .module('app', ['ui.router','btford.socket-io','ui.select', 'ngSanitize'])
     .config(['$urlRouterProvider','$stateProvider','$locationProvider',
         function($urlRouterProvider,$stateProvider,$locationProvider){
             $urlRouterProvider.otherwise('/');
@@ -18,7 +18,10 @@ angular
                     controller:'userCtrl',
                     abstract:true,
                     resolve:{
-                        userMyInfo:['userFact',function(userFact){
+                        userMyInfo:['userFact','eventFact',function(userFact,eventFact){
+                            userFact.loadToken();
+                            userFact.getMyFriends();
+                            eventFact.start();
                             return userFact.getMyInfo();
                         }]
                     }
@@ -29,6 +32,11 @@ angular
                         templateUrl:'views/stream.html',
                         controller:'streamCtrl'
                     })
+                .state('admin',{
+                    url:'/admin',
+                    templateUrl:'views/admin.html',
+                    controller:'adminCtrl',
+                })
     }])
     .run(['$state','$rootScope','$timeout',function($state,$rootScope,$timeout){
         $rootScope.$on('$stateChangeStart',

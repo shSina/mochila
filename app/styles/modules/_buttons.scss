@@ -1,12 +1,16 @@
-// shared styles
-$button-height : 3em;
-$button-line-height : 4px;
-$button-font-size-shared : 70.25%;
-$button-bg-color-disabled : #00e7b4;
-$button-color-disabled : white;
-$button-color-raised : white;
-$button-color : #00e7b4;//#26a69a;
+/*** Buttons ***/
+$secondary-color: #26a69a !default;
+$button-bg-color-disabled: #DFDFDF !default;
+$button-color: $secondary-color !default;
+$button-color-disabled: #9F9F9F !default;
+$button-color-flat: #343434 !default;
+$button-color-raised: #FFF !default;
+$button-floating-size: 37px !default;
+$button-height: 36px !default;
+$button-font-size-shared: 1.3rem !default;
+$button-line-height: 36px !default;
 
+// shared styles
 .btn, .btn-flat {
   display: inline-block;
   height: $button-height;
@@ -25,7 +29,6 @@ $button-color : #00e7b4;//#26a69a;
   background-color: $button-bg-color-disabled;
   box-shadow: none;
   color: $button-color-disabled;
-  cursor: default;
 
   &:hover {
     background-color: $button-bg-color-disabled;
@@ -56,3 +59,65 @@ $button-color : #00e7b4;//#26a69a;
     @extend .z-depth-1-half;
   }
 }
+
+// Floating button
+.btn-floating {
+  display: inline-block;
+  color: $button-color-raised;
+  position: relative;
+  z-index: 1;
+  width: $button-floating-size;
+  height: $button-floating-size;
+  line-height: $button-floating-size;
+  padding: 0;
+  background-color: $button-color;
+  @include border-radius(50%);
+  @extend .z-depth-1;
+  @include transition(.3s);
+  cursor: pointer;
+
+  i {
+    width: inherit;
+    display: inline-block;
+    text-align: center;
+    color: $button-color-raised;
+    font-size: 1.6rem;
+    line-height: $button-floating-size;
+  }
+
+  &:hover {
+    @extend .z-depth-1-half;
+  }
+  &.btn-large {
+    width: $button-floating-size * 1.5;
+    height: $button-floating-size * 1.5;
+    i{
+      line-height: $button-floating-size * 1.5;
+    }
+  }
+}
+
+// Flat button
+.btn-flat {
+  box-shadow: none;
+  background-color: transparent;
+  color: $button-color-flat;
+  cursor: pointer;
+
+  &.disabled {
+    color: lighten(#999, 10%);
+  }
+}
+
+// Large button
+.btn-large {
+  @extend .btn;
+  height: $button-height * 1.5;
+  line-height: 56px;
+
+  i {
+    font-size: 1.6rem;
+  }
+}
+
+

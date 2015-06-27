@@ -1,0 +1,77 @@
+<div class="manage">
+	<div class="part">
+		class manager
+	</div>
+	<table class="striped centered">
+		<thead>
+		  <tr>
+		      <th data-field="studentsCount">count</th>
+		      <th data-field="startDate">start</th>
+		      <th data-field="className">name</th>
+		      <th data-field="teacherId">teacher</th>
+		      <th data-field="studentsIds">students</th>
+		      <th data-field="studentsIds">edit</th>
+		  </tr>
+		</thead>
+
+		<tbody>
+		  <tr ng-repeat='class in classes'>
+		    <td>{{class.studentsCount}}</td>
+		    <td>{{class.startDate}}</td>
+		    <td>{{class.className}}</td>
+		    <td>{{class.teacherId.userName}}</td>
+		    <td>
+			    <div ng-repeat='user in class.studentsIds'>{{user.userName}}</div>
+		    </td>
+		    <td>
+		    	<a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal1" ng-click='editClass(class)'>
+		    		edit
+		    	</a>
+		    	<div class="btn btn-large waves-effect waves-light red">
+		    		delete
+		    	</div>
+		    </td>
+		  </tr>
+		</tbody>
+	</table>
+</div>
+<!-- <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a> -->
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <form>
+        <span class="input input--hoshi ">
+          <input  type="text" ng-model="classModal.className" class="input__field input__field--hoshi" autocomplete=off required>
+          <label class="mat_input mat_input--hoshi" for="input-1">
+            <span class="mat_input-content mat_input-content--hoshi">Class Name</span>
+          </label>
+        </span>
+        <span class="input input--hoshi ">
+        <input  type="text" ng-model="classModal.startDate" class="input__field input__field--hoshi" required>
+          <label class="mat_input mat_input--hoshi" for="input-1">
+            <span class="mat_input-content mat_input-content--hoshi">Start Date</span>
+          </label>
+        </span>
+
+
+        <button class="btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid">
+          login
+        </button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>
+  
+<ui-select ng-model="person.selected" theme="select2" ng-disabled="disabled" style="min-width: 300px;">
+    <ui-select-match placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
+    <ui-select-choices repeat="person in people | propsFilter: {name: $select.search, age: $select.search}">
+      <div ng-bind-html="person.name | highlight: $select.search"></div>
+      <small>
+        email: {{person.email}}
+        age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
+      </small>
+    </ui-select-choices>
+</ui-select>
