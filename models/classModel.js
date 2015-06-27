@@ -29,9 +29,15 @@ exports.getClassById = function(classId,next){
 	});	
 }
 exports.getAllClasses = function(next){
-	Class.find({}).exec(function(err,doc){
-		return next(err,doc);
-	});	
+	Class.find({},{studentsCount:true,studentsIds:true
+					,teacherId:true,startDate:true,className:true})
+		 .exec(function(err,doc){
+			Class.populate(doc, [{ path: 'studentsIds', select: 'userName' },
+								{ path: 'teacherId', select: 'userName' }]
+					,function(err,popRes){
+					return next(err,popRes);
+			});
+		 });	
 }
 exports.addUserToClasses = function(classIds,userId,next){//check user exist
 	Class.update({_id:{$in:toObj(classIds)}},
