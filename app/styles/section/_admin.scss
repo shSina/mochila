@@ -1,4 +1,35 @@
 .manage{
-	width:600px;
+	width:800px;
 	margin: 0 auto;
+}
+.col .s12{
+      font-family: 'Patua One', cursive;
+  background-color : white;
+}
+
+.nav-admin{
+  // position :fixed;
+  width:100%;
+  z-index: 5;
+  height: 60px;
+  // background-color: #232323;
+  .tab-links{
+    width: 46%;
+    // float:right;
+  }
+  .tabs{
+    height: 60px;
+    cursor: pointer;
+    font-family: 'Patua One', cursive;
+    background-color : #232323;
+    li.tab{
+      background-color: #232323;
+      line-height: 54px;
+      a{
+        text-decoration: none;
+
+      }
+
+    }
+  }
 }

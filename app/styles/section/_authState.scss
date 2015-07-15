@@ -49,15 +49,25 @@
   z-index: 5;
   height: 60px;
   background-color: #232323;
-}
-.tab-container{
-  width: 46%;
-  float:right;
-}
-.tabs{
-  cursor: pointer;
-  font-family: 'Patua One', cursive;
-  background-color : #232323;
+  .tab-container{
+    width: 46%;
+    float:right;
+  }
+  .tabs{
+    height: 60px;
+    cursor: pointer;
+    font-family: 'Patua One', cursive;
+    background-color : #232323;
+    li.tab{
+      background-color: #232323;
+      line-height: 54px;
+      a{
+        text-decoration: none;
+
+      }
+
+    }
+  }
 }
 // .nav ul{
 //   float: right;

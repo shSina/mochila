@@ -1,5 +1,4 @@
 (function ($) {
-
   var methods = {
     init : function() {
       return this.each(function() {

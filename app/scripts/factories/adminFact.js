@@ -12,6 +12,51 @@ angular
 		console.log('adminFact');
 		var factory = {};
 
+
+		factory.edit = function (edit) {
+			return $http
+			  .put('http://localhost:9000/admin/class/'+edit._id,{
+				    	className:edit.className,
+				    	startDate:edit.startDate,
+				    	studentsCount:edit.studentsCount
+			    	})
+			  .then(function (success) {
+				console.log(success);
+			    return success;
+			  },function(error){
+			  	console.log(error);
+			  	return error;
+			  });
+		};
+
+		factory.change = function (edit) {
+			return $http
+			  .put('http://localhost:9000/admin/user/'+edit._id,{
+				    	userName:edit.userName				 })
+			  .then(function (success) {
+				console.log(success);
+			    return success;
+			  },function(error){
+			  	console.log(error);
+			  	return error;
+			  });
+		};
+
+
+		factory.deleteClass = function (obj) {
+			return $http
+			  .delete('http://localhost:9000/admin/class/'+obj._id)
+			  .then(function (success) {
+				console.log(success);
+			    return success;
+			  },function(error){
+			  	console.log(error);
+			  	return error;
+			  });
+		};
+
+
+
 		factory.addClass = function (obj) {
 			return $http
 			  .post('http://localhost:9000/admin/class',obj)
@@ -36,6 +81,19 @@ angular
 			  	console.log(error);
 			  	return error;
 			  });	
+		}
+		factory.getAllUsers = function(){
+				return $http
+			  .get('http://localhost:9000/admin/user')
+			    	// },{headers: {'auth-type': 0}})
+			  .then(function (success) {
+				console.log(success);
+				$rootScope.$emit('user:all',success.data);
+			    return success;
+			  },function(error){
+			  	console.log(error);
+			  	return error;
+			  });
 		}
 		return factory;
 	}]);

@@ -41,15 +41,43 @@ angular
         function($scope,$rootScope,$state,$http,adminFact,eventFact){
             console.log('adminCtrl');
             $scope.classes = [];
+            $scope.users = [];
             $scope.classModal = {};
+            $scope.userModal = {};
+
             $scope.editClass = function(obj){
-                $scope.classModal =obj;
+                $scope.classModal = obj;
             };
+            $scope.editUser = function(obj){
+                $scope.userModal = obj;
+            }
+
+            $scope.edit = function(){
+                adminFact.edit($scope.classModal);
+            };
+             $scope.change = function(){
+                adminFact.change($scope.userModal);
+            };
+            $scope.deleteClass = function(){
+                adminFact.deleteClass($scope.classModal);
+                
+                setTimeout(function(){
+                   adminFact.getAllClasses();
+                },300);
+            }
 
             adminFact.getAllClasses();
             $rootScope.$on('class:all',function(event,results){
-                // console.log(results);
                 $scope.classes = results.data;
+                setTimeout(function(){
+                    $('.modal-trigger').leanModal();
+                },300);
+            });
+
+            adminFact.getAllUsers();
+            $rootScope.$on('user:all',function(event,results){
+                // console.log(results);
+                $scope.users = results.data;
                 setTimeout(function(){
                     $('.modal-trigger').leanModal();
                 },300);
