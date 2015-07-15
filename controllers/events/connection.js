@@ -2,13 +2,13 @@ var io = require('lib/sio').io
 	, token = require('lib/token')
 	, error = require('lib/resFormat').error
 	, userModel = require('models/userModel')
-	, messageModel = require('models/messageModel')
-	, redis = require('redis');
+	, messageModel = require('models/messageModel');
+	// , redis = require('redis');
 
-var redis_client = redis.createClient(process.env.REDIS_PORT,process.env.REDIS_HOST);
-redis_client.on('connect', function() {
-    console.log('redis connected');
-});
+// var redis_client = redis.createClient(process.env.REDIS_PORT,process.env.REDIS_HOST);
+// redis_client.on('connect', function() {
+//     console.log('redis connected');
+// });
 
 io.set('authorization', function (handshakeData, callback) {
 	var reqToken = handshakeData._query.name;

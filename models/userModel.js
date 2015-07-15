@@ -62,9 +62,13 @@ exports.updateUser = function(id,newUser,next){
 	});
 }
 exports.getAllUsers = function(next) {
-	user.find({},function(err,docs) {
-		return next(err,docs);
-	});
+	user.find({},{userName:true,type:true,email:true,classIds:true})
+		.exec(function(err,doc){
+			user.populate(doc,[{ path: 'classIds', select: 'className' }],
+				function(err,popRes){
+					return next(err,popRes);
+			});
+		});
 }
 exports.getAllFriends = function(id,classIds,next) {
 	user.aggregate( 

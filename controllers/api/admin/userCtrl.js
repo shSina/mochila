@@ -58,6 +58,7 @@ router.delete('/:userId',function(req,res,next){
 })
 
 router.put('/:userId',function(req,res,next){
+		console.log(req.body);
 	user.updateUser(req.param('userId') , req.body , function(err){
 		next(err);
 	});

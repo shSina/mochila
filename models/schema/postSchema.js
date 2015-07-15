@@ -8,6 +8,12 @@ var postSchema = new Schema({
 	authorType : { type:String, required:true, enum:enumTypes.userTypes },
 	body : {
 		message:{ type:String ,required:true},
+		// attach : {
+		// 	type : {}
+		//image array schema joda
+		//gif / files
+		// }
+		//url : []
 	},
 	itemType : {type:String,required:true,enum:enumTypes.itemTypes},
 	itemTag : Array, 
