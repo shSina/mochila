@@ -1,5 +1,18 @@
 <div class="stream">
-    <div class="">
-        
+    <div class="card additem">
+    	<form>
+	    	<span class="input input--hoshi ">
+	          <input  type="text" ng-model="postItem" class="input__field input__field--hoshi" autocomplete=off>
+	          <label class="mat_input mat_input--hoshi" for="input-1">
+	            <span class="mat_input-content mat_input-content--hoshi"> </span>
+	          </label>
+	        </span>
+	        <button type='submit' class="btn" ng-click="addItem()">Share</button>
+    	</form>
+    </div>
+    <div class="card" ng-repeat='item in items'>
+    	<div class="body">
+    		{{item.body.message}}
+    	</div>
     </div>
 </div>

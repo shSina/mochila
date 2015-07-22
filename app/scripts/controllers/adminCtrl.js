@@ -39,11 +39,29 @@ angular
     .module('app')
     .controller('adminCtrl', ['$scope','$rootScope','$state','$http','adminFact','eventFact',
         function($scope,$rootScope,$state,$http,adminFact,eventFact){
+
+            $('ul.tabs').tabs();
+
+
             console.log('adminCtrl');
             $scope.classes = [];
             $scope.users = [];
             $scope.classModal = {};
             $scope.userModal = {};
+
+            $scope.$watch('classes', function() {
+                setTimeout(function(){
+                    $('.dropdown-button').dropdown({
+                            inDuration: 300,
+                            outDuration: 225,
+                            constrain_width: false, // Does not change width of dropdown to that of the activator
+                            hover: false, // Activate on hover
+                            gutter: 0, // Spacing from edge
+                            belowOrigin: false // Displays dropdown below the button
+                        }
+                    );
+                },300)
+            });
 
             $scope.editClass = function(obj){
                 $scope.classModal = obj;
@@ -52,11 +70,11 @@ angular
                 $scope.userModal = obj;
             }
 
-            $scope.edit = function(){
-                adminFact.edit($scope.classModal);
+            $scope.changeClass = function(){
+                adminFact.changeClass($scope.classModal);
             };
-             $scope.change = function(){
-                adminFact.change($scope.userModal);
+             $scope.changeUser = function(){
+                adminFact.changeUser($scope.userModal);
             };
             $scope.deleteClass = function(){
                 adminFact.deleteClass($scope.classModal);
@@ -65,6 +83,27 @@ angular
                    adminFact.getAllClasses();
                 },300);
             }
+            $scope.deleteUser = function(){
+                adminFact.deleteUser($scope.userModal);
+                
+                setTimeout(function(){
+                   adminFact.getAllUsers();
+                },300);
+            }
+            $scope.addClass = function(){
+                adminFact.addClass($scope.classModal);
+                
+                setTimeout(function(){
+                   adminFact.getAllClasses();
+                },300);
+            }
+            $scope.addUser = function(){
+                adminFact.addUser($scope.userModal);
+                
+                setTimeout(function(){
+                    adminFact.getAllUsers();
+                },300);
+            }    
 
             adminFact.getAllClasses();
             $rootScope.$on('class:all',function(event,results){

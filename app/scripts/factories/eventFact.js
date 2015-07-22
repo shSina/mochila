@@ -20,9 +20,10 @@ angular
     				console.error('Unable to connect Socket.IO', reason);
     			});
                 sio.on('message',function(obj){
-                    console.log(obj);
+                    console.log('message',obj);
                     $rootScope.$emit('message',{text:obj.message,from:obj.from});
                 });
+                factory.sio = sio;
             };
             // socket.emit('hello',{rest:"asf"});
             return factory;

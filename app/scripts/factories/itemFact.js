@@ -7,8 +7,8 @@
 
 angular
     .module('app')
-    .factory('itemFact', ['$http','$state','$location','userFact',
-        function ($http,$state,$location,userFact) {
+    .factory('itemFact', ['$http','$state','$location','userFact','eventFact',
+        function ($http,$state,$location,userFact,eventFact) {
             console.log('itemFact');
 
             var itemService = {};
@@ -19,9 +19,11 @@ angular
                             body:{message:itemInput},
                             authorType:'st',
                             itemType:'post'
+                            // classId:
                         },{headers: {'x-access-token': userFact.token}})
                     .then(function (success) {
                         // console.log(success);
+                        eventFact.sio.emit('additem');
                         return success;
                     },function(error){
                         console.log(error);

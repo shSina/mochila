@@ -1,22 +1,17 @@
-.manage{
+#classes,#users{
 	width:800px;
 	margin: 0 auto;
 }
-.col .s12{
-      font-family: 'Patua One', cursive;
-  background-color : white;
-}
-
 .nav-admin{
-  // position :fixed;
   width:100%;
   z-index: 5;
   height: 60px;
   // background-color: #232323;
-  .tab-links{
-    width: 46%;
-    // float:right;
-  }
+  // .tab-links{
+  //   width: 46%;
+  //   margin : 0 auto;
+  //   // float:right;
+  // }
   .tabs{
     height: 60px;
     cursor: pointer;
@@ -31,5 +26,10 @@
       }
 
     }
+  }
+}
+.modal-content form{
+  .input__field{
+    color: black;
   }
 }

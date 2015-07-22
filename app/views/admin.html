@@ -1,40 +1,161 @@
-<div class="manage">
-  <div class="part">
-    class manager
+<div class="nav-admin">
+  <div class="tab-links">
+    <ul class="tabs">
+      <li class="tab"><a class="active" href="#classes">Classes</a></li>
+      <li class="tab"><a href="#users">Users</a></li>
+    </ul>
   </div>
-  <table class="striped centered">
-    <thead>
-      <tr>
-          <th data-field="className">Class Name</th>
-          <th data-field="studentsCount">Count</th>
-          <th data-field="startDate">Start Date</th>
-          <th data-field="teacherId">Teacher Name</th>
-          <th data-field="studentsIds">Students</th>
-          <th data-field="studentsIds">edit</th>
-      </tr>
-    </thead>
+  <div id="classes">
+    <div class="manage">
+      <table class="striped centered">
+        <thead>
+          <tr>
+              <th data-field="className">Class Name</th>
+              <th data-field="studentsCount">Count</th>
+              <th data-field="startDate">Start Date</th>
+              <th data-field="teacherId">Teacher Name</th>
+              <th data-field="studentsIds">Students</th>
+              <th data-field="studentsIds">edit</th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <tr ng-repeat='class in classes'>
-        <td>{{class.className}}</td>
-        <td>{{class.studentsCount}}</td>
-        <td>{{class.startDate}}</td>
-        <td>{{class.teacherId.userName}}</td>
-        <td>
-          <div ng-repeat='user in class.studentsIds'>{{user.userName}}</div>
-        </td>
-        <td>
-          <a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal1" ng-click='editClass(class)'>
-            edit
-          </a>
-          <div class="btn btn-large waves-effect waves-light modal-trigger" href="#modal2" ng-click='editClass(class)' >
-            delete
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        <tbody>
+          <tr ng-repeat='class in classes'>
+            <td>{{class.className}}</td>
+            <td>{{class.studentsCount}}</td>
+            <td>{{class.startDate}}</td>
+            <td>{{class.teacherId.userName}}</td>
+            <td>
+              <div ng-repeat='user in class.studentsIds'>{{user.userName}}</div>
+            </td>
+            <td>
+              <a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal1" ng-click='editClass(class)'>
+                edit
+              </a>
+              <div class="btn btn-large waves-effect waves-light modal-trigger" href="#deleteClass" ng-click='editClass(class)' >
+                delete
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+       <div class="btn btn-large waves-effect waves-light modal-trigger" href="#addClass" >
+        Add Class
+      </div>
+    </div>
+  </div>
+  <div id="users">
+    <div class="manage">
+      <table class="striped centered">
+        <thead>
+          <tr>
+            <th data-field="userName">User Name</th>
+            <th data-field="type">Type</th>
+            <th data-field="email">Email</th>
+            <th data-field="classIds">Class Name</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr ng-repeat='user in users'>
+            <td>{{user.userName}}</td>
+            <td>{{user.type}}</td>
+            <td>{{user.email}}</td>
+<!--             <td>{{user.classIds.className}}</td> -->
+            <td>
+              <div ng-repeat='class in user.classIds'>{{class.className}}</div>
+            </td>
+            <td>
+              <a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal3" ng-click='editUser(user)'>
+              edit
+              </a>
+              <div class="btn btn-large waves-effect waves-light modal-trigger" href="#deleteUser" ng-click='editUser(user)'>
+                delete
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="btn btn-large waves-effect waves-light modal-trigger" href="#addUser" >
+      Add User
+    </div>
+      <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
+        <ul id='dropdown1' class='dropdown-content' >  
+          <li ng-repeat='class in classes'><a href="#!">{{class.className}}</li>
+     <!--      <li><a href="#!">two</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">three</a></li> -->
+        </ul>
+
+
+    </div>
+  </div>
+  <br>
 </div>
+
+<div id="addClass" class="modal">
+  <div class="modal-content">
+    <form >
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="classModal.className" class="input__field input__field--hoshi" autocomplete=off required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">Class Name</span>
+        </label>
+      </span>
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="classModal.startDate" class="input__field input__field--hoshi" required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">Start Date</span>
+        </label>
+      </span>
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="classModal.studentsCount" class="input__field input__field--hoshi" required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">studentsCount</span>
+        </label>
+      </span>
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="addClass()">
+        Save
+      </button>
+    </form>
+  </div>
+</div>
+
+<div id="addUser" class="modal">
+  <div class="modal-content">
+    <form >
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="userModal.userName" class="input__field input__field--hoshi" autocomplete=off required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">User Name</span>
+        </label>
+      </span>
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="userModal.type" class="input__field input__field--hoshi" required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">type</span>
+        </label>
+      </span>
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="userModal.email" class="input__field input__field--hoshi" required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">email</span>
+        </label>
+      </span>
+      <span class="input input--hoshi ">
+        <input  type="text" ng-model="userModal.classIds" class="input__field input__field--hoshi" required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">classId</span>
+        </label>
+      </span>
+    
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action"  ng-click="addUser()">
+        Save
+      </button>
+    </form>
+  </div>
+</div>
+
 <div id="modal1" class="modal">
   <div class="modal-content">
     <form >
@@ -59,63 +180,41 @@
 
 
 
-      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="edit()">
-        login
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="changeClass()">
+        Save
       </button>
     </form>
   </div>
 </div>
   
-<div id="modal2" class="modal">
+<div id="deleteClass" class="modal">
   <div class="modal-content">
-    <p>Are you sure you want to delete?</p>
+    <p>Are you sure you want to delete this class?</p>
       <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action"  ng-click="deleteClass(classModal)">
-        login
+        Yes
+      </button>
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action">
+        No
       </button>
   </div>
 <!--  <div class="modal-footer">
     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
   </div> -->
 </div>
-
-
-<div class="manage">
-  <div class="part">
-    user manager
+<div id="deleteUser" class="modal">
+  <div class="modal-content">
+    <p>Are you sure you want to delete this user?</p>
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action"  ng-click="deleteUser(userModal)">
+        Yes
+      </button>
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action">
+        No
+      </button>
   </div>
-  <table class="striped centered">
-    <thead>
-      <tr>
-          <th data-field="userName">User Name</th>
-          <th data-field="type">Type</th>
-          <th data-field="email">Email</th>
-          <th data-field="classIds">Class Name</th>
-          <th data-field="studentsIds">edit</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr ng-repeat='user in users'>
-        <td>{{user.userName}}</td>
-        <td>{{user.type}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.classIds.className}}</td>
-        <td>
-          <div ng-repeat='class in user.classIds'>{{class.className}}</div>
-        </td>
-        <td>
-          <a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal3" ng-click='editUser(user)'>
-            edit
-          </a>
-          <div class="btn btn-large waves-effect waves-light red">
-            delete
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<!--  <div class="modal-footer">
+    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div> -->
 </div>
-
 
 <div id="modal3" class="modal">
   <div class="modal-content">
@@ -132,8 +231,8 @@
             <span class="mat_input-content mat_input-content--hoshi">Type</span>
           </label>
       </span>
-      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="change()">
-        login
+      <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="changeUser()">
+        save
       </button>
     </form>
   </div>
@@ -141,13 +240,3 @@
     <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
   </div> -->
 </div>
-<!-- <ui-select ng-model="person.selected" theme="select2" ng-disabled="disabled" style="min-width: 300px;">
-    <ui-select-match placeholder="Select a person in the list or search his name/age...">{{$select.selected.name}}</ui-select-match>
-    <ui-select-choices repeat="person in people | propsFilter: {name: $select.search, age: $select.search}">
-      <div ng-bind-html="person.name | highlight: $select.search"></div>
-      <small>
-        email: {{person.email}}
-        age: <span ng-bind-html="''+person.age | highlight: $select.search"></span>
-      </small>
-    </ui-select-choices>
-</ui-select> -->

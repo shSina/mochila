@@ -10,29 +10,27 @@ angular
         function($scope,$rootScope,$state,$http,userFact,itemFact,eventFact){
             console.log('streamCtrl');
             $scope.items = [];
+            $scope.postItem = '';
 
-            // eventFact.emit('createRoom',{to:'54ece3a7058cd48622672e9c'});
-            // eventFact.emit('toMessage',{message:"testing",to:'54ece3a7058cd48622672e9c'});
-            // eventFact.on('toMessage',function(msg){
-            //     console.log(msg)
-            // })
-            //  eventFact.on('test',function(msg){
-            //     console.log(msg)
-            // })
-            $scope.addItem = function(postInput) {
-                console.log(postInput);
-                itemFact.addItem(postInput.text);
+            $scope.addItem = function() {
+                // console.log($scope.postItem);
+                itemFact.addItem($scope.postItem);
             }
-            $scope.getItems = function(){
-                itemFact.getItems()
+            
+            itemFact.getItems()
                     .then(function (success) {
                         if(!success.data)
                             return;
                         $scope.items = success.data.data;
                     });
 
-            }
-            eventFact.socket.on('newItem', function () {
-                $scope.getItems();
+            eventFact.sio.on('newItem',function(obj){
+                itemFact.getItems()
+                    .then(function (success) {
+                        if(!success.data)
+                            return;
+                        $scope.items = success.data.data;
+                    });
+                // console.log('newitem');
             });
     }]);

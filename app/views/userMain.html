@@ -50,7 +50,7 @@
             <div class="bar">
 
             </div>
-            <div ng-repeat='message in messages' class="messages">
+            <div ng-repeat='message in chat.messages' class="messages">
                     <div class="user-image">
                         <img src="https://secure.gravatar.com/avatar/ee23849618501d676a8516cbcfa7651a?s=50&r=pg&d=identicon" alt="" />
                     </div>
@@ -58,7 +58,7 @@
                         {{message.text}}
                     </div>
             </div>
-            <form >
+            <form ng-init='field =""'>
               <input type="text" ng-model="field" required>
               <button type="submit" ng-click="sendMessage(field,chat.to._id)">
                 send
