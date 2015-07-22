@@ -16,5 +16,5 @@ app.use(require('controllers/middlewares/500Midd'));
 require('controllers/events/connection');
 io.use(require('controllers/events/message'));
 io.use(require('controllers/events/bcMessage'));
-io.use(require('controllers/events/toMessage'));
+io.use(require('controllers/events/additem'));
 io.use(require('controllers/events/disconnect'));

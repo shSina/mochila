@@ -14,8 +14,9 @@ router.use(userToken);
 
 router.post('/',jsonParser,function(req,res,next){
 	
-	//req.body.classId : add later! 
+	//req.body.classId : add later!
 	req.body.authorId = req.userToken._id;
+	req.body.classId = req.userToken.classIds[0];//req.body.classId
 	req.body.authorType = req.userToken.type;
 	if(req.body.classId in req.userToken.classIds)
 		return next(new Error("check this code"));
@@ -26,9 +27,9 @@ router.post('/',jsonParser,function(req,res,next){
 			return next(new Error(err));
 		else{
 			res.json(success(dbRes));
-			userEmiter.forEach(function(userSocket){
-				userSocket.emit('newItem',null);
-			})
+			// userEmiter.forEach(function(userSocket){
+			// 	userSocket.emit('newItem',null);
+			// })
 		}
 	});
 })

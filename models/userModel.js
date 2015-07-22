@@ -21,10 +21,13 @@ exports.deleteUser = function(id,next) {
 	user.findOneAndRemove({_id : id}).exec(function(err,doc){
 		if(err)
 			return next(err);
-		// console.log(doc);
-		Class.removeUserFromClasses(doc.classId,id,function(err){
-			next(err);
-		});
+		console.log(doc.classIds);
+		if(doc.classIds.length != 0)
+		{
+			Class.removeUserFromClasses(doc.classIds,id,function(err){
+				next(err);
+			});
+		}
 	});
 }
 

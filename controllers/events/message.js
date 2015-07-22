@@ -1,4 +1,4 @@
-var io = require('lib/sio').io
+var io = require('lib/sio').io;
 
 var middleware = function(socket,next){
 	socket.on('message', function (data) {
