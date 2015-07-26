@@ -26,5 +26,6 @@ io.on('connection', function(socket){
 	var userId 	= socket.handshake.headers.token._id;
 	var classIds = socket.handshake.headers.token.classIds;
 	socket.join(classIds[0]);
-	console.log(userId,classIds[0]);
+	socket.join(userId);
+	// console.log(userId,classIds[0]);
 });
