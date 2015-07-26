@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-    .module('app', ['ui.router','btford.socket-io','ui.select', 'ngSanitize'])
+    .module('app', ['ui.router','btford.socket-io','ui.select'])
     .config(['$urlRouterProvider','$stateProvider','$locationProvider',
         function($urlRouterProvider,$stateProvider,$locationProvider){
             $urlRouterProvider.otherwise('/');
@@ -45,21 +45,10 @@ angular
                     event.preventDefault();
                     $state.go('stream');
                 }
-		})
-        skel.init({
-          reset: 'full',
-          containers: '100%',
-          viewport:{
-            scalable:false,
-            height:'device-height'
-          },
-          breakpoints: {
-            medium: {
-              media: '(min-width: 769px) and (max-width: 1024px)'
-            },
-            small: {
-              media: '(max-width: 768px)'
-            }
-          }
+		});
+        skel.layout({
+            reset: "normalize",
+            grid: true,
+            containers: true
         });
     }]);
