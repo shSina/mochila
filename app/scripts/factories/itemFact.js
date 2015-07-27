@@ -43,5 +43,37 @@ angular
                         return error;
                     });
             }
+
+            itemService.addWord = function (wordInput , defInput) {
+                return $http
+                    .post('http://localhost:9000/items/word',{
+                            body:{word:wordInput ,
+                                  definition:defInput},
+                            authorType:'st',
+                            itemType:'word'
+                            // classId:
+                        },{headers: {'x-access-token': userFact.token}})
+                    .then(function (success) {
+                        // console.log(success);
+                        eventFact.sio.emit('addword');
+                        return success;
+                    },function(error){
+                        console.log(error);
+                        return error;
+                    });
+            };
+            itemService.getWords = function(){
+                return $http
+                    .get('http://localhost:9000/items/word',{
+                            headers: {'x-access-token': userFact.token}
+                        })
+                    .then(function (success) {
+                        // console.log(success);
+                        return success;
+                    },function(error){
+                        console.log(error);
+                        return error;
+                    });
+            }
             return itemService;
     }]);

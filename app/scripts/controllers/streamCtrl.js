@@ -22,6 +22,7 @@ angular
                         if(!success.data)
                             return;
                         $scope.items = success.data.data;
+                        console.log($scope.items[0]);
                     });
 
             eventFact.sio.on('newItem',function(obj){

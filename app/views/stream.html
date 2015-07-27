@@ -1,8 +1,8 @@
 <div class="stream">
-    <div class="card additem">
+    <div class="additem">
     	<form>
 	    	<span class="input input--hoshi ">
-	          <input  type="text" ng-model="postItem" class="input__field input__field--hoshi" autocomplete=off>
+	          <input  type="text" value="Share what`s new?" ng-model="postItem" class="input__field input__field--hoshi" autocomplete=off>
 	          <label class="mat_input mat_input--hoshi" for="input-1">
 	            <span class="mat_input-content mat_input-content--hoshi"> </span>
 	          </label>
@@ -11,8 +11,17 @@
     	</form>
     </div>
     <div class="card" ng-repeat='item in items'>
-    	<div class="body">
-    		{{item.body.message}}
-    	</div>
+        <div class="user-image">
+            <img src='{{item.authorId.imageUrl}}'></img>
+        </div>
+        <div class='author'>
+            {{item.authorId.userName}}
+        </div>
+        <div class='date'>
+            {{item.date | date:'short'}}
+        </div>
+        <div class="body">
+            {{item.body.message}}
+        </div>
     </div>
 </div>

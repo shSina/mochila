@@ -16,6 +16,10 @@ angular
             $scope.chats = [];
             // $scope.field = '';
             // $scope.messages= [];
+            $scope.changeState = function(state)
+            {
+                $state.go(state);
+            };
             $scope.startChat = function(friend){
                 console.log(friend);
                 //check if not exist

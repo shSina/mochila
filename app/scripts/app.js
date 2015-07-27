@@ -32,6 +32,12 @@ angular
                         templateUrl:'views/stream.html',
                         controller:'streamCtrl'
                     })
+                    .state('words',{
+                        url:'/words',
+                        parent:'user',
+                        templateUrl:'views/word.html',
+                        controller:'wordCtrl'
+                    })
                 .state('admin',{
                     url:'/admin',
                     templateUrl:'views/admin.html',

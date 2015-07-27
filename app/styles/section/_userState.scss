@@ -36,6 +36,9 @@ $user_image_bg: $orange;
         background-color: $navbar_bg;
         z-index:5;
         box-shadow: 0 0 17px -2px gray;
+        button{
+            float: right;
+        }
         .profile{
             float: $float;
             width: $sidebar_width;
@@ -69,6 +72,29 @@ $user_image_bg: $orange;
         .profile:hover{
             background-color:#664557;
         }
+        .navigation{
+            float: left;
+            button{
+                background-color: #28B290;
+                width: 55px; 
+                height: 53px; 
+                margin: 16px;
+                border-radius: 87px;
+                border: 2px solid #28B290;
+            }
+            button:focus{
+                outline:0;
+            }
+            .section{
+                height:40px;
+                float:left;
+                width:50%;
+                svg{
+                    width:30px;
+                    padding:5px;
+                }
+            }
+        }
     }
     .sidebar{
         height:100%;
@@ -87,6 +113,7 @@ $user_image_bg: $orange;
             height:32px;
             background-color:$nice_green;
             .section{
+                cursor: auto;
                 height:40px;
                 float:$float;
                 width:50%;
@@ -171,3 +198,4 @@ $user_image_bg: $orange;
         }
     }
 }
+

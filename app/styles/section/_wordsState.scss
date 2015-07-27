@@ -1,0 +1,62 @@
+.words{
+	.addword{
+		height: 210px;
+		width: 400px;
+		margin: 0 auto;
+		margin-top: 20px;
+
+		box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.04);
+		background-color: white;
+		border: 1px solid #e4e4e4;
+		button{
+			margin-left: 140px;
+		}
+		.input__field--hoshi {
+			color: black;
+			padding-top : 0px;
+		}
+		border-bottom: none;
+		color: #404040;
+		font-size: 16px;
+	}
+	.card{
+		.flip-container {
+        float: left;
+        margin: 18px;
+        border-radius: 8px;
+        background-color: #28B290;
+        box-shadow: inset 0 2px 4px 0 rgba(0,0,0,.04);
+		// background-color: white;
+		border: 1px solid #e4e4e4;
+        overflow: hidden;
+        cursor: pointer;
+		}
+		.flip-container:hover .flipper, .flip-container.hover .flipper {
+			transform: rotateY(180deg);
+		}
+
+		.flip-container, .front, .back {
+	 		width: 100px;
+	        height: 100px;
+	        padding-top : 18px;
+	        text-align: center;
+		}
+		.flipper {
+			transition: 0.9s;
+			transform-style: preserve-3d;
+
+			position: relative;
+		}
+		.front, .back {
+			backface-visibility: hidden;
+			position: absolute;
+		}
+		.front {
+			z-index: 2;
+			transform: rotateY(0deg);
+		}
+		.back {
+			transform: rotateY(180deg);
+		}
+	}
+}
