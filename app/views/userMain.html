@@ -87,22 +87,30 @@
     </div>
     <div ui-view class="main"></div>
     <div class="chats">
-        <div class="box" ng-repeat='chat in chats'>
+        <div class="box" ng-repeat='chat in chats' ng-if='chat.show'>
             <div class="bar">
-
+                <div class="user-image">
+                    <img src="{{chat.imageUrl}}" alt="" />
+                </div>
+                <div class="user-name">
+                    {{chat.name}}
+                </div>
+                <div class="close" ng-click='hideChat($index)'>
+                    x
+                </div>
             </div>
             <div ng-repeat='message in chat.messages' class="messages">
                     <div class="user-image">
-                        <img src="https://secure.gravatar.com/avatar/ee23849618501d676a8516cbcfa7651a?s=50&r=pg&d=identicon" alt="" />
+                        <img src="{{message.imageUrl}}" alt="" />
                     </div>
                     <div class="text">
                         {{message.text}}
                     </div>
             </div>
             <form ng-init='field =""'>
-              <input type="text" ng-model="field" required>
-              <button type="submit" ng-click="sendMessage(field,chat.to._id)">
-                send
+              <input type="text" ng-model="chat.field">
+              <button type="submit" ng-click="sendMessage(chat.field,chat.to._id,$index)" class='btn-floating'>
+                >
               </button>
             </form>
             <!-- <textarea class="" type="text" name="message" value=""></textarea> -->

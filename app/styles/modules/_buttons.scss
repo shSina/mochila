@@ -65,7 +65,8 @@ $button-line-height: 36px !default;
   display: inline-block;
   color: $button-color-raised;
   position: relative;
-  z-index: 1;
+  z-index: 1; 
+  border: none
   width: $button-floating-size;
   height: $button-floating-size;
   line-height: $button-floating-size;

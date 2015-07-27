@@ -172,9 +172,38 @@ $user_image_bg: $orange;
             height:350px;
             margin-left: 10px;
             background-color:blue;
-            border-top-right-radius: 5px;
-            border-top-left-radius: 5px;
             background-color: #696B6C;
+            padding-bottom: 90px;
+            overflow-y: scroll;
+            margin-top: 40px;
+            .bar{
+                position:absolute;
+                border-top-right-radius: 5px;
+                border-top-left-radius: 5px;
+                top: 0;
+                width: 300px;
+                height: 40px;
+                background-color:gray;
+                .user-image{
+                    width: 40px;
+                    float: left;
+                    img{
+                        border-radius:15px;
+                        height: 30px;
+                        margin:5px;
+                    }
+                }
+                .user-name{
+                    width: 50%;
+                    margin:10px;
+                    float: left;
+                }
+                .close{
+                    width: 20px;
+                    margin:10px;
+                    float: right;
+                }
+            }
             .message{
                 background: white;
                 margin: 10px;
