@@ -48,7 +48,6 @@ router.get('/',function(req,res,next) {
 		}
 	});
 })
-
 router.get('/:classId',function (req,res,next) {
 	res.json(success(req.class));
 })

@@ -12,10 +12,13 @@ router.use(userToken);
 router.post('/',jsonParser,function(req,res,next){
 	
 	//req.body.classId : add later! 
+
 	req.body.authorId = req.userToken._id;
+	req.body.classId = req.userToken.classIds[0];//req.body.classId
 	req.body.authorType = req.userToken.type;
 	if(req.body.classId in req.userToken.classIds)
 		return next(new Error("check this code"));
+
 
 	// req.body.itemType = 'post';
 	
@@ -43,6 +46,7 @@ router.put('/:itemId',jsonParser,function(req,res,next){
 }) 
 
 router.get('/' , function(req,res,next){
+
 	wordModel.getTodayWords(req.userToken._id , function(err,dbRes){
 		if(err)
 			return next(new Error(err));
