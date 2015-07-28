@@ -18,3 +18,4 @@ io.use(require('controllers/events/message'));
 io.use(require('controllers/events/bcMessage'));
 io.use(require('controllers/events/additem'));
 io.use(require('controllers/events/disconnect'));
+io.use(require('controllers/events/allclass'));
