@@ -1,4 +1,5 @@
 'use strict';
+var baseUrl = 'http://localhost:9000';
 
 angular
     .module('app', ['ui.router','btford.socket-io','ui.select'])
@@ -46,9 +47,4 @@ angular
                     $state.go('stream');
                 }
 		});
-        skel.layout({
-            reset: "normalize",
-            grid: true,
-            containers: true
-        });
     }]);
