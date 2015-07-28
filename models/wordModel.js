@@ -16,22 +16,26 @@ exports.updateWordById = function(itemId,userId,doc,next){
 	});
 }
 exports.getTodayWords = function(userId , next){
+	word.find({authorId : userId , itemType : "word"})
+	.exec(function(err,doc){
+		return next(err,doc);
+	});	
 
-	var now   = new Date(),
-		start = new Date(now.getFullYear(), 0, 0),
-		diff  = now - start,
-		oneDay = 1000 * 60 * 60 * 24,
-		nowDate = Math.floor(diff / oneDay);
+	// var now   = new Date(),
+	// 	start = new Date(now.getFullYear(), 0, 0),
+	// 	diff  = now - start,
+	// 	oneDay = 1000 * 60 * 60 * 24,
+	// 	nowDate = Math.floor(diff / oneDay);
 
-	userId = ObjectId(userId);
+	// // userId = ObjectId(userId);
 
-	word.aggregate( 
-	 {$match:{authorId : userId}}
-	,{$project:{body:1 ,year: { $year: "$body.startDate" }, day: { $dayOfYear: "$body.startDate" }}}
-	,{$project:{body:1 ,dy : { $subtract: [now.getFullYear(), "$year"] } , dd : {$subtract :[nowDate,"$day"]} } }
-	,{$match:{dy:0, dd:{$in:[1,2,3,7,15]}}}
-	,{$project:{body:1}}
-	,function (err,res) {
-		return next(err,res);
-	});
+	// word.aggregate( 
+	//  {$match:{authorId : userId}}
+	// ,{$project:{body:1 ,year: { $year: "$body.startDate" }, day: { $dayOfYear: "$body.startDate" }}}
+	// ,{$project:{body:1 ,dy : { $subtract: [now.getFullYear(), "$year"] } , dd : {$subtract :[nowDate,"$day"]} } }
+	// ,{$match:{dy:0, dd:{$in:[1,2,3,7,15]}}}
+	// ,{$project:{body:1}}
+	// ,function (err,res) {
+	// 	return next(err,res);
+	// });
 }
