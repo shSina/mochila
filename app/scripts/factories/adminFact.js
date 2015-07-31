@@ -28,6 +28,17 @@ angular
 			  	return error;
 			  });
 		};
+		factory.getClass = function (name) {
+		return $http
+		  .get('http://localhost:9000/admin/class/'+name)
+		  .then(function (success) {
+			console.log(success);
+		    return success;
+		  },function(error){
+		  	console.log(error);
+		  	return error;
+		  });
+		};
 
 		factory.changeUser = function (edit) {
 			return $http
@@ -110,6 +121,19 @@ angular
 			  .then(function (success) {
 				console.log(success);
 				$rootScope.$emit('user:all',success.data);
+			    return success;
+			  },function(error){
+			  	console.log(error);
+			  	return error;
+			  });
+		}
+		factory.getTeachers = function(){
+				return $http
+			  .get('http://localhost:9000/admin/user/teachers')
+			    	// },{headers: {'auth-type': 0}})
+			  .then(function (success) {
+				console.log(success);
+				$rootScope.$emit('teachers:all',success.data);
 			    return success;
 			  },function(error){
 			  	console.log(error);
