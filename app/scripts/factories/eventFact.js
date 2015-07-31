@@ -12,7 +12,7 @@ angular
             console.log('eventFact');
             var factory ={};
             factory.start = function(){
-                var sio = io.connect('localhost:9000',{query:'name='+userFact.token})
+                var sio = io.connect(baseUrl,{query:'name='+userFact.token})
                 factory.socket = socketFactory({
                     ioSocket: sio
                 });
@@ -22,6 +22,10 @@ angular
                 sio.on('message',function(obj){
                     console.log('message',obj);
                     $rootScope.$emit('message',{text:obj.message,from:obj.from});
+                });
+                sio.on('allclass',function(obj){
+                    // console.log('message',obj);
+                    $rootScope.$emit('allclass',{text:obj.message,from:obj.from});
                 });
                 factory.sio = sio;
             };

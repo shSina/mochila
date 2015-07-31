@@ -13,7 +13,7 @@ angular
 
 		authService.login = function (loginInput) {
 			return $http
-			  .post('http://localhost:9000/auth/signin',{
+			  .post(baseUrl+'/auth/signin',{
 				    	email:loginInput.email,
 				    	password:loginInput.password
 			    	})
@@ -31,13 +31,13 @@ angular
 		};
 		authService.getMyInfo = function(){
 			return $http
-				.get('http://localhost:9000/user',{
+				.get(baseUrl+'/user',{
 					headers: {'x-access-token': authService.token}
 				});
 		}
 		authService.getMyFriends = function(){
 			return $http
-				.get('http://localhost:9000/user/friends',{
+				.get(baseUrl+'/user/friends',{
 					headers: {'x-access-token': authService.token}
 				})
 				.then(function (success) {

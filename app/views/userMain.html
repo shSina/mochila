@@ -83,6 +83,21 @@
                     98
                 </div> -->
             </div>
+            <div class="friend" ng-click='startChat(user.classIds[0])'>
+                <div class="user-image">
+                    <img src='/images/persons8.png'></img>
+                    <div class="user-shadow"></div>
+                </div>
+                <div class="user-name">
+                    {{user.classIds[0].className}}
+                </div>
+                <div class="history">
+
+                </div>
+                <!-- <div class="last-act">
+                    98
+                </div> -->
+            </div>
         </div>
     </div>
     <div ui-view class="main"></div>
@@ -120,7 +135,7 @@
             </div>
             <form ng-init='field =""'>
               <input type="text" ng-model="chat.field">
-              <button type="submit" ng-click="sendMessage(chat.field,chat.to._id,$index)" class='btn-floating'>
+              <button type="submit" ng-click="sendMessage(chat.field,chat.to._id,$index,chat.to.className)" class='btn-floating'>
                 >
               </button>
             </form>

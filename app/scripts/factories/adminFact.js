@@ -15,7 +15,7 @@ angular
 
 		factory.changeClass = function (edit) {
 			return $http
-			  .put('http://localhost:9000/admin/class/'+edit._id,{
+			  .put(baseUrl+'/admin/class/'+edit._id,{
 				    	className:edit.className,
 				    	startDate:edit.startDate,
 				    	studentsCount:edit.studentsCount
@@ -42,7 +42,7 @@ angular
 
 		factory.changeUser = function (edit) {
 			return $http
-			  .put('http://localhost:9000/admin/user/'+edit._id,{
+			  .put(baseUrl+'/admin/user/'+edit._id,{
 				    	userName:edit.userName				 })
 			  .then(function (success) {
 				console.log(success);
@@ -56,7 +56,7 @@ angular
 
 		factory.deleteClass = function (obj) {
 			return $http
-			  .delete('http://localhost:9000/admin/class/'+obj._id)
+			  .delete(baseUrl+'/admin/class/'+obj._id)
 			  .then(function (success) {
 				console.log(success);
 			    return success;
@@ -67,7 +67,7 @@ angular
 		};
 		factory.deleteUser = function(obj){
 			return $http
-			  .delete('http://localhost:9000/admin/user/'+obj._id)
+			  .delete(baseUrl+'/admin/user/'+obj._id)
 			  .then(function (success) {
 				console.log(success);
 			    return success;
@@ -79,7 +79,7 @@ angular
 
 		factory.addClass = function (obj) {
 			return $http
-			  .post('http://localhost:9000/admin/class',obj)
+			  .post(baseUrl+'/admin/class',obj)
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);
@@ -91,7 +91,7 @@ angular
 		};
 		factory.addUser = function (obj) {
 			return $http
-			  .post('http://localhost:9000/admin/user',obj)
+			  .post(baseUrl+'/admin/user',obj)
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);
@@ -103,7 +103,7 @@ angular
 		};
 		factory.getAllClasses = function(){
 			return $http
-			  .get('http://localhost:9000/admin/class')
+			  .get(baseUrl+'/admin/class')
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);
@@ -116,7 +116,7 @@ angular
 		}
 		factory.getAllUsers = function(){
 				return $http
-			  .get('http://localhost:9000/admin/user')
+			  .get(baseUrl+'/admin/user')
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
 				console.log(success);

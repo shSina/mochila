@@ -70,7 +70,7 @@ $user_image_bg: $orange;
 
         }
         .profile:hover{
-            background-color:#664557;
+            background-color : #664557;
         }
         .navigation{
             float: left;
@@ -82,7 +82,7 @@ $user_image_bg: $orange;
                 border-radius: 87px;
                 border: 2px solid #28B290;
             }
-            button:focus{
+            button :focus{
                 outline:0;
             }
             .section{
@@ -135,7 +135,7 @@ $user_image_bg: $orange;
                     float: left;
                     margin:10px;
                     border-radius: 25px;
-                    background-color: $user_image_bg;
+                    background-color: #CFCAC3;
                     overflow: hidden;
                     cursor: pointer;
                     // border: 2px solid $violet;
@@ -204,14 +204,22 @@ $user_image_bg: $orange;
                     float: right;
                 }
             }
-            .message{
-                background: white;
-                margin: 10px;
+            .messages{
+                  background: white;
+                  margin: 10px;
+                  height: 69px;
                 .user-image{
+                    float: left;
+                  width: 65px;
+                    border-radius:25px;
                     img{
                         margin:10px;
                         border-radius:25px;
                     }
+                }
+                .text{
+                    width: 190px;
+                    float: left;
                 }
             }
             form{
@@ -223,8 +231,19 @@ $user_image_bg: $orange;
                 overflow-y: auto;
                 outline: 0;
                 resize: none;
+                input{
+                      width: 100%;
+                      height: 48px;
+                      overflow: hidden;
+                }
+                button{
+                  position: absolute;
+                  z-index: 2;
+                  top: 6px;
+                  right: 6px;
+
+                }
             }
         }
     }
 }
-

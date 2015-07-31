@@ -15,7 +15,7 @@ angular
 
             itemService.addItem = function (itemInput) {
                 return $http
-                    .post('http://localhost:9000/items/post',{
+                    .post(baseUrl+'/items/post',{
                             body:{message:itemInput},
                             authorType:'st',
                             itemType:'post'
@@ -32,7 +32,7 @@ angular
             };
             itemService.getItems = function(){
                 return $http
-                    .get('http://localhost:9000/stream',{
+                    .get(baseUrl+'/stream',{
                             headers: {'x-access-token': userFact.token}
                         })
                     .then(function (success) {
