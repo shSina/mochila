@@ -166,6 +166,7 @@ $user_image_bg: $orange;
         width: 100%;
         bottom: 0;
         padding-right:270px;
+        pointer-events:none;
         .box{
             float:$float;
             width:300px;

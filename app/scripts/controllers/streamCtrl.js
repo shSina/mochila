@@ -38,6 +38,7 @@ angular
                 // console.log('newitem');
             });
             $scope.shareImage = function(){
+                console.log('asdfasd');
                 Upload.upload({
                     url: baseUrl+'/items/image',
                     fields: {'message': $scope.postImage},

@@ -1,5 +1,5 @@
 'use strict';
-var baseUrl = 'http://192.168.1.7:9000';
+var baseUrl = 'http://localhost:9000';
 
 angular
     .module('app', ['ui.router','btford.socket-io','ui.select','ngFileUpload'])

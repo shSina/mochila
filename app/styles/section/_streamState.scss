@@ -10,7 +10,7 @@
     	// top: 19px;
 		margin:  25px 50px;
 		float: left;
-		height: 213px;
+		// height: 213px;
 		
       .user-image{
         width: 40px;
@@ -49,8 +49,14 @@
 			padding-left : 10px;
 			padding-right : 10px;
     	}
+		.image{
+			width: 100%;
+			img{
+				width: 100%;
+			}
+		}
     }
-	.additem{
+	.additem,.addimage{
 
 		height: 160px;
     	width: 400px;
@@ -66,12 +72,6 @@
 		.input__field--hoshi {
 			color: black;
 			padding-top : 35px;
-		}
-		.image{
-			width: 100%;
-			img{
-				width: 100%;
-			}
 		}
     }
 	.additem,.addimage{
