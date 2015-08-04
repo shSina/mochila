@@ -14,7 +14,6 @@ router.use(userToken);
 
 router.post('/',jsonParser,function(req,res,next){
 	
-	//req.body.classId : add later!
 	req.body.authorId = req.userToken._id;
 	req.body.classId = req.userToken.classIds[0];//req.body.classId
 	req.body.authorType = req.userToken.type;

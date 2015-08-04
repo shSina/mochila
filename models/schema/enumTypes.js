@@ -1,6 +1,6 @@
 // post reffers to simple post
 // word leitner to word
-var itemTypes = ['post','word'];
+var itemTypes = ['post','word','image'];
 
 // ad reffers to admin
 // te reffers to teacher

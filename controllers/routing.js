@@ -1,12 +1,14 @@
 var app = require('lib/app')
-	, io = require('lib/sio').io;
-
+	, io = require('lib/sio').io
+	, path = require('path')
+	, express = require('express');
 app.use('/stream'     , require('controllers/api/streamCtrl'));
 app.use('/auth'       , require('controllers/api/auth/signinCtrl'));
 app.use('/user'       , require('controllers/api/user/userCtrl'));
-app.use('/items/word' , require('controllers/api/items/wordCtrl'));
 app.use('/items'      , require('controllers/api/items/indexCtrl'));
 app.use('/items/post' , require('controllers/api/items/postCtrl'));
+app.use('/items/word' , require('controllers/api/items/wordCtrl'));
+app.use('/items/image', require('controllers/api/items/imageCtrl'));
 app.use('/admin/user' , require('controllers/api/admin/userCtrl'));
 app.use('/admin/class', require('controllers/api/admin/classCtrl'));
 
