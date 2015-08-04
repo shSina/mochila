@@ -7,12 +7,28 @@
 	            <span class="mat_input-content mat_input-content--hoshi"> </span>
 	          </label>
 	        </span>
-	        <button type='submit' class="btn" ng-click="addItem()">Share</button>
+	        <button type='submit' class="btn" ng-click="shareItem()">Share</button>
     	</form>
+    </div>
+    <div class="card addimage">
+        <form>
+            <span class="input input--hoshi ">
+              <input  type="text" ng-model="postImage" class="input__field input__field--hoshi" autocomplete=off>
+              <label class="mat_input mat_input--hoshi" for="input-1">
+                <span class="mat_input-content mat_input-content--hoshi"> </span>
+              </label>
+            </span>
+            <button type='submit' class="btn" ngf-select ng-model="fileImage" ngf-accept="'.png,.jpg'" ng-hide='fileImage'>select image</button>
+            <button class='btn' ng-click="shareImage()" ng-if='fileImage'>share</button>
+
+        </form>
     </div>
     <div class="card" ng-repeat='item in items'>
     	<div class="body">
     		{{item.body.message}}
     	</div>
+        <div class="image" ng-if='item.itemType=="image"'>
+            <img src="{{baseUrl+'/public/'+item.body.imageName}}" alt="">
+        </div>
     </div>
 </div>

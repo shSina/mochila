@@ -1,8 +1,8 @@
 'use strict';
-var baseUrl = 'http://localhost:9000';
+var baseUrl = 'http://192.168.1.7:9000';
 
 angular
-    .module('app', ['ui.router','btford.socket-io','ui.select'])
+    .module('app', ['ui.router','btford.socket-io','ui.select','ngFileUpload'])
     .config(['$urlRouterProvider','$stateProvider','$locationProvider',
         function($urlRouterProvider,$stateProvider,$locationProvider){
             $urlRouterProvider.otherwise('/');
