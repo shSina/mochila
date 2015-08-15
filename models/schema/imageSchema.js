@@ -7,7 +7,7 @@ var postSchema = new Schema({
 	authorId : { type:ObjectId, required:true, ref : 'user' },
 	authorType : { type:String, required:true, enum:enumTypes.userTypes },
 	body : {
-		message:{ type:String ,required:true},
+		message:{ type:String }, //,required:true
 		imageName:{type:String,required:true}
 	},
 	itemType : {type:String,required:true,enum:enumTypes.itemTypes},

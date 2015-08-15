@@ -8,7 +8,7 @@ var classSchema = new Schema({
 	className : { type:String, lowercase: true},
 	teacherId : {type : ObjectId , ref : 'user'},
 	studentsIds : [{type : ObjectId , ref : 'user'}],
-	studentsCount : {type:Number, select:false},
+	studentsCount : {type:Number, select:false , default : 0},
 	startDate : {type : Date , default : Date.now},
 	endDate : Date,
 	__v: { type: Number, select: false}

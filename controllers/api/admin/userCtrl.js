@@ -46,6 +46,15 @@ router.get('/',function(req,res,next){
 		}
 	})
 })
+router.get('/teachers',function(req,res,next){
+	user.getTeachers(function(err,items){
+		if(err)
+			return next(new Error(err));
+		else{
+			res.json(success(items));
+		}
+	})
+})
 
 router.delete('/:userId',function(req,res,next){
 	user.deleteUser(req.param('userId'),function(err){

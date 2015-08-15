@@ -10,6 +10,7 @@ exports.addUser = function(item,next) {
 	new user(item).save(function(err2,doc){
 		if(err2)
 			return next(err2,doc);
+		console.log(item.classIds);
 		Class.addUserToClasses(item.classIds,doc._id,function(err1){
 			return next(err1,doc);
 		})
@@ -66,6 +67,15 @@ exports.updateUser = function(id,newUser,next){
 }
 exports.getAllUsers = function(next) {
 	user.find({},{userName:true,type:true,email:true,classIds:true})
+		.exec(function(err,doc){
+			user.populate(doc,[{ path: 'classIds', select: 'className' }],
+				function(err,popRes){
+					return next(err,popRes);
+			});
+		});
+}
+exports.getTeachers = function(next) {
+	user.find({type:'te'},{userName:true,type:true,email:true,classIds:true})
 		.exec(function(err,doc){
 			user.populate(doc,[{ path: 'classIds', select: 'className' }],
 				function(err,popRes){
