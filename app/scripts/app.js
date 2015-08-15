@@ -3,8 +3,9 @@ var baseUrl = 'http://localhost:9000';
 
 angular
     .module('app', ['ui.router','btford.socket-io','ui.select','ngFileUpload'])
-    .config(['$urlRouterProvider','$stateProvider','$locationProvider',
-        function($urlRouterProvider,$stateProvider,$locationProvider){
+    .config(['$sceProvider','$urlRouterProvider','$stateProvider','$locationProvider',
+        function($sceProvider,$urlRouterProvider,$stateProvider,$locationProvider){
+            $sceProvider.enabled(false);
             $urlRouterProvider.otherwise('/');
             $locationProvider.html5Mode(true).hashPrefix('#');
 

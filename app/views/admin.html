@@ -23,7 +23,7 @@
           <tr ng-repeat='class in classes'>
             <td>{{class.className}}</td>
             <td>{{class.studentsCount}}</td>
-            <td>{{class.startDate}}</td>
+            <td>{{class.startDate | date:'shortDate'}}</td>
             <td>{{class.teacherId.userName}}</td>
             <td>
               <div ng-repeat='user in class.studentsIds'>{{user.userName}}</div>
@@ -61,7 +61,7 @@
             <td>{{user.userName}}</td>
             <td>{{user.type}}</td>
             <td>{{user.email}}</td>
-<!--             <td>{{user.classIds.className}}</td> -->
+            <!-- <td>{{user.classIds.className}}</td> -->
             <td>
               <div ng-repeat='class in user.classIds'>{{class.className}}</div>
             </td>
@@ -79,15 +79,6 @@
       <div class="btn btn-large waves-effect waves-light modal-trigger" href="#addUser" >
       Add User
     </div>
-      <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Drop Me!</a>
-        <ul id='dropdown1' class='dropdown-content' >  
-          <li ng-repeat='class in classes'><a href="#!">{{class.className}}</li>
-     <!--      <li><a href="#!">two</a></li>
-          <li class="divider"></li>
-          <li><a href="#!">three</a></li> -->
-        </ul>
-
-
     </div>
   </div>
   <br>
@@ -108,12 +99,17 @@
           <span class="mat_input-content mat_input-content--hoshi">Start Date</span>
         </label>
       </span>
-      <span class="input input--hoshi ">
+   <!--    <span class="input input--hoshi ">
         <input  type="text" ng-model="classModal.studentsCount" class="input__field input__field--hoshi" required>
         <label class="mat_input mat_input--hoshi" for="input-1">
           <span class="mat_input-content mat_input-content--hoshi">studentsCount</span>
         </label>
-      </span>
+      </span> -->
+      <label>Teacher:
+        <select ng-model="selectedTeacher" ng-options="teacher.userName for teacher in teachers">
+            <option value="">-- choose teacher --</option>
+        </select>
+      </label>
       <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="addClass()">
         Save
       </button>
@@ -131,6 +127,12 @@
         </label>
       </span>
       <span class="input input--hoshi ">
+        <input  type="password" ng-model="userModal.password" class="input__field input__field--hoshi" autocomplete=off required>
+        <label class="mat_input mat_input--hoshi" for="input-1">
+          <span class="mat_input-content mat_input-content--hoshi">Password</span>
+        </label>
+      </span>
+      <span class="input input--hoshi ">
         <input  type="text" ng-model="userModal.type" class="input__field input__field--hoshi" required>
         <label class="mat_input mat_input--hoshi" for="input-1">
           <span class="mat_input-content mat_input-content--hoshi">type</span>
@@ -142,12 +144,24 @@
           <span class="mat_input-content mat_input-content--hoshi">email</span>
         </label>
       </span>
-      <span class="input input--hoshi ">
+        <!--  <a class='dropdown-button btn' href='#' data-activates='dropdown1'>Choose Class</a>
+        <ul id='dropdown1' class='dropdown-content' >  
+          <li ng-repeat='class in classes'><a href="#!">{{class.className}}</li> -->
+     <!--      <li><a href="#!">two</a></li>
+          <li class="divider"></li>
+          <li><a href="#!">three</a></li> -->
+       <!--  </ul> -->
+      <label>Class:
+          <select ng-model="selectedClass" ng-options="class.className for class in classes">
+            <option value="">-- choose class --</option>
+          </select>
+      </label>
+     <!--  <span class="input input--hoshi ">
         <input  type="text" ng-model="userModal.classIds" class="input__field input__field--hoshi" required>
         <label class="mat_input mat_input--hoshi" for="input-1">
           <span class="mat_input-content mat_input-content--hoshi">classId</span>
         </label>
-      </span>
+      </span> -->
     
       <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action"  ng-click="addUser()">
         Save

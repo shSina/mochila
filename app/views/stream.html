@@ -1,5 +1,17 @@
 <div class="stream">
-    <div class="additem">
+    <div class="menu-add">
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red">
+              <i class="large material-icons">add</i>
+            </a>
+            <ul>
+              <li><a href="#audio" class="btn-floating audio"><i class="material-icons">play_circle_filled</i></a></li>
+              <li><a href="#photo" class="btn-floating photo"><i class="material-icons">insert_photo</i></a></li>
+              <li><a href="#text" class="btn-floating text"><i class="material-icons">textsms</i></a></li>
+            </ul>
+        </div>
+    </div>
+    <div id="text" class="additem">
     	<form>
 	    	<span class="input input--hoshi ">
 	          <input  type="text" value="Share what`s new?" ng-model="postItem" class="input__field input__field--hoshi" autocomplete=off>
@@ -10,7 +22,7 @@
 	        <button type='submit' class="btn" ng-click="shareItem()">Share</button>
     	</form>
     </div>
-    <div class="card addimage">
+    <div id="photo" class="addimage inactive">
         <form>
             <span class="input input--hoshi ">
               <input  type="text" ng-model="postImage" class="input__field input__field--hoshi" autocomplete=off>
@@ -20,6 +32,19 @@
             </span>
             <button type='submit' class="btn" ngf-select ng-model="fileImage" ngf-accept="'.png,.jpg'" ng-hide='fileImage'>select image</button>
             <button class='btn' ng-click="shareImage()" ng-if='fileImage'>share</button>
+
+        </form>
+    </div>
+    <div id="audio" class="addaudio inactive">
+        <form>
+            <span class="input input--hoshi ">
+              <input  type="text" ng-model="postAudio" class="input__field input__field--hoshi" autocomplete=off>
+              <label class="mat_input mat_input--hoshi" for="input-1">
+                <span class="mat_input-content mat_input-content--hoshi"> </span>
+              </label>
+            </span>
+            <button type='submit' class="btn" ngf-select ng-model="fileAudio" ngf-accept="'.mp3'" ng-hide='fileAudio'>select audio</button>
+            <button class='btn' ng-click="shareAudio()" ng-if='fileAudio'>share</button>
 
         </form>
     </div>
@@ -38,6 +63,11 @@
         </div>
         <div class="image" ng-if='item.itemType=="image"'>
             <img src="{{baseUrl+'/public/'+item.body.imageName}}" alt="">
+        </div>
+        <div class="audio" ng-if='item.itemType=="audio"'>
+            <audio controls>
+                <source ng-src="{{baseUrl+'/public/Audio/'+item.body.audioName}}">
+            </audio>
     	</div>
     </div>
 </div>
