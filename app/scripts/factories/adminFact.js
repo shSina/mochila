@@ -18,7 +18,7 @@ angular
 			  .put(baseUrl+'/admin/class/'+edit._id,{
 				    	className:edit.className,
 				    	startDate:edit.startDate,
-				    	studentsCount:edit.studentsCount
+				    	teacherId:edit.teacherId
 			    	})
 			  .then(function (success) {
 				console.log(success);
@@ -41,9 +41,12 @@ angular
 		};
 
 		factory.changeUser = function (edit) {
-			return $http
-			  .put(baseUrl+'/admin/user/'+edit._id,{
-				    	userName:edit.userName				 })
+					return $http
+			  .put('http://localhost:9000/admin/user/'+edit._id,{
+				    	userName:edit.userName,
+				    	email:edit.email
+				    	// ,classIds:edit.classIds
+			    	})
 			  .then(function (success) {
 				console.log(success);
 			    return success;
@@ -106,7 +109,7 @@ angular
 			  .get(baseUrl+'/admin/class')
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
-				console.log(success);
+				// console.log(success);
 				$rootScope.$emit('class:all',success.data);
 			    return success;
 			  },function(error){
@@ -119,7 +122,7 @@ angular
 			  .get(baseUrl+'/admin/user')
 			    	// },{headers: {'auth-type': 0}})
 			  .then(function (success) {
-				console.log(success);
+				// console.log(success);
 				$rootScope.$emit('user:all',success.data);
 			    return success;
 			  },function(error){

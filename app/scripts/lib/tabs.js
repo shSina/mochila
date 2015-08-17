@@ -1,4 +1,5 @@
 (function ($) {
+
   var methods = {
     init : function() {
       return this.each(function() {
@@ -8,8 +9,7 @@
       var $this = $(this),
           window_width = $(window).width();
 
-      $this.width('100%');
-      
+      // $this.width('100%');
       // Set Tab Width for each tab
       var $num_tabs = $(this).children('li').length;
       $this.children('li').each(function() {

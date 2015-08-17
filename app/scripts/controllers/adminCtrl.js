@@ -22,6 +22,7 @@ angular
             $scope.selectedTeacher = {};
 
 
+
             $scope.editClass = function(obj){
                 $scope.classModal = obj;
             };
@@ -30,46 +31,76 @@ angular
             }
 
             $scope.changeClass = function(){
+                for (var i = $scope.users.length - 1; i >= 0; i--) {
+                    if( $scope.users[i].userName == $scope.selectedTeacher.userName)
+                    {
+                        $scope.classModal.teacherId = $scope.users[i]._id;
+                    }
+
+                };
                 adminFact.changeClass($scope.classModal);
+                setTimeout(function(){
+                    adminFact.getTeachers();
+                    adminFact.getAllUsers();
+                    adminFact.getAllClasses();
+
+                },300);
             };
              $scope.changeUser = function(){
+                // for (var i = $scope.classes.length - 1; i >= 0; i--) {
+                //     if( $scope.classes[i].className == $scope.selectedClass.className)
+                //     {
+                //         $scope.userModal.classIds = [$scope.classes[i]._id]; 
+                //     }
+                // };
                 adminFact.changeUser($scope.userModal);
+                  setTimeout(function(){
+                    adminFact.getTeachers();
+                    adminFact.getAllUsers();
+                    adminFact.getAllClasses();
+                },300);
             };
             $scope.deleteClass = function(){
                 adminFact.deleteClass($scope.classModal);
                 
                 setTimeout(function(){
-                   adminFact.getAllClasses();
+                    adminFact.getAllClasses();
+                    adminFact.getAllUsers();
                 },300);
             }
             $scope.deleteUser = function(){
                 adminFact.deleteUser($scope.userModal);
                 
                 setTimeout(function(){
-                   adminFact.getAllUsers();
+                    adminFact.getAllUsers();
+                    adminFact.getAllClasses();
+
                 },300);
             }
             $scope.addUser = function(){
 
-           for (var i = $scope.classes.length - 1; i >= 0; i--) {
-                if( $scope.classes[i].className == $scope.selectedClass.className)
-                {
-                    $scope.userModal.classIds = [$scope.classes[i]._id];
-                      setTimeout(function(){
-                        adminFact.getAllClasses();
-                    },300);
-                }
+               for (var i = $scope.classes.length - 1; i >= 0; i--) {
+                    if( $scope.classes[i].className == $scope.selectedClass.className)
+                    {
+                        $scope.userModal.classIds = [$scope.classes[i]._id];
+                    }
 
-            };
-
+                };
 
                 adminFact.addUser($scope.userModal);
                 
                 setTimeout(function(){
+                    adminFact.getTeachers();
                     adminFact.getAllUsers();
+                    adminFact.getAllClasses();
                 },300);
             }    
 
+            adminFact.getTeachers();
+            $rootScope.$on('teachers:all',function(event,results){
+                // console.log(results);
+                $scope.teachers = results.data;
+            });
             adminFact.getAllClasses();
             $rootScope.$on('class:all',function(event,results){
                 $scope.classes = results.data;
@@ -86,20 +117,15 @@ angular
                     $('.modal-trigger').leanModal();
                 },300);
             });
-            adminFact.getTeachers();
-            $rootScope.$on('teachers:all',function(event,results){
-                // console.log(results);
-                $scope.teachers = results.data;
-            });
             $scope.addClass = function(){
                         // console.log("blaa ", $scope.selectedTeacher.userName);
-                    for (var i = $scope.users.length - 1; i >= 0; i--) {
-                        if( $scope.users[i].userName == $scope.selectedTeacher.userName)
-                        {
-                            $scope.classModal.teacherId = $scope.users[i]._id;
-                        }
+                // for (var i = $scope.users.length - 1; i >= 0; i--) {
+                //     if( $scope.users[i].userName == $scope.selectedTeacher.userName)
+                //     {
+                //         $scope.classModal.teacherId = $scope.users[i]._id;
+                //     }
 
-                    };
+                // };
                 adminFact.addClass($scope.classModal);
                 
                 setTimeout(function(){

@@ -6,31 +6,32 @@
 */
 angular
     .module('app')
-    .controller('streamCtrl', ['$sce','$scope','$rootScope','$state','$http','userFact','itemFact','eventFact','Upload',
-        function($sce,$scope,$rootScope,$state,$http,userFact,itemFact,eventFact,Upload){
+    .controller('streamCtrl', ['$sce','$scope','$rootScope','$state','$http','userFact','itemFact','eventFact','Upload', 'userMyInfo',
+        function($sce,$scope,$rootScope,$state,$http,userFact,itemFact,eventFact,Upload,userMyInfo){
             console.log('streamCtrl');
             $scope.items = [];
             $scope.baseUrl = baseUrl;
             $scope.postItem = '';
             $scope.postImage = '';
             $scope.postAudio = '';
-
+            $scope.user = userMyInfo.data.data;
+            console.log("user Type " + $scope.user.type);
             
-            $(".audio").on('click' ,function() {
+           $scope.audio = function(){
                 $(".addaudio").removeClass('inactive');
                 $(".addimage").addClass('inactive');
                 $(".additem").addClass('inactive');
-            });
-            $(".photo").on('click' ,function() {
+            }
+            $scope.photo = function() {
                 $(".addimage").removeClass('inactive');
                 $(".addaudio").addClass('inactive');
                 $(".additem").addClass('inactive');
-            }); 
-            $(".text").on('click' ,function() {
+            }
+            $scope.text = function() {
                 $(".additem").removeClass('inactive');
                 $(".addimage").addClass('inactive');
                 $(".addaudio").addClass('inactive');
-            });
+            }
 
             $scope.shareItem = function() {
                 // console.log($scope.postItem);
@@ -77,7 +78,7 @@ angular
                 });
             }
              $scope.shareAudio = function(){
-                $scope.fileAudio = $sce.trustAsResourceUrl(fileAudio);
+                // $scope.fileAudio = $sce.trustAsResourceUrl(fileAudio);
                 Upload.upload({
                     url: baseUrl+'/items/audio',
                     fields: {'message': $scope.postAudio},

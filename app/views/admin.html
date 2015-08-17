@@ -29,7 +29,7 @@
               <div ng-repeat='user in class.studentsIds'>{{user.userName}}</div>
             </td>
             <td>
-              <a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal1" ng-click='editClass(class)'>
+              <a class="btn btn-large waves-effect waves-light modal-trigger" href="#editClass" ng-click='editClass(class)'>
                 edit
               </a>
               <div class="btn btn-large waves-effect waves-light modal-trigger" href="#deleteClass" ng-click='editClass(class)' >
@@ -66,7 +66,7 @@
               <div ng-repeat='class in user.classIds'>{{class.className}}</div>
             </td>
             <td>
-              <a class="btn btn-large waves-effect waves-light modal-trigger" href="#modal3" ng-click='editUser(user)'>
+              <a class="btn btn-large waves-effect waves-light modal-trigger" href="#editUser" ng-click='editUser(user)'>
               edit
               </a>
               <div class="btn btn-large waves-effect waves-light modal-trigger" href="#deleteUser" ng-click='editUser(user)'>
@@ -170,7 +170,7 @@
   </div>
 </div>
 
-<div id="modal1" class="modal">
+<div id="editClass" class="modal">
   <div class="modal-content">
     <form >
       <span class="input input--hoshi ">
@@ -185,12 +185,11 @@
             <span class="mat_input-content mat_input-content--hoshi">Start Date</span>
           </label>
       </span>
-      <span class="input input--hoshi ">
-        <input  type="text" ng-model="classModal.studentsCount" class="input__field input__field--hoshi" required>
-          <label class="mat_input mat_input--hoshi" for="input-1">
-            <span class="mat_input-content mat_input-content--hoshi">studentsCount</span>
-          </label>
-      </span>
+      <label>Teacher:
+        <select ng-model="selectedTeacher" ng-options="teacher.userName for teacher in teachers">
+            <option value="">-- choose teacher --</option>
+        </select>
+      </label>
 
 
 
@@ -211,9 +210,6 @@
         No
       </button>
   </div>
-<!--  <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div> -->
 </div>
 <div id="deleteUser" class="modal">
   <div class="modal-content">
@@ -225,12 +221,9 @@
         No
       </button>
   </div>
-<!--  <div class="modal-footer">
-    <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
-  </div> -->
 </div>
 
-<div id="modal3" class="modal">
+<div id="editUser" class="modal">
   <div class="modal-content">
     <form >
       <span class="input input--hoshi ">
@@ -240,11 +233,21 @@
           </label>
       </span>
       <span class="input input--hoshi ">
-        <input  type="text" ng-model="userModal.type" class="input__field input__field--hoshi" required>
+        <input  type="text" ng-model="userModal.email" class="input__field input__field--hoshi" required>
           <label class="mat_input mat_input--hoshi" for="input-1">
-            <span class="mat_input-content mat_input-content--hoshi">Type</span>
+            <span class="mat_input-content mat_input-content--hoshi">email</span>
           </label>
       </span>
+   <!--    <label>Class:
+        <select ng-model="selectedClass" ng-options="class.className for class in classes">
+          <option value="">-- choose class --</option>
+        </select>
+      </label> -->
+     <!--    <label>Class:
+          <select ng-model="selectedClass" ng-options="class.className for class in classes">
+            <option value="">-- choose class --</option>
+          </select>
+      </label> -->
       <button class="modal-action modal-close btn waves-effect waves-light" type="submit" name="action" ng-disabled="classForm.$invalid" ng-click="changeUser()">
         save
       </button>

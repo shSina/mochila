@@ -1,15 +1,15 @@
 <div class="stream">
-    <div class="menu-add">
-        <div class="fixed-action-btn">
-            <a class="btn-floating btn-large red">
-              <i class="large material-icons">add</i>
-            </a>
-            <ul>
-              <li><a href="#audio" class="btn-floating audio"><i class="material-icons">play_circle_filled</i></a></li>
-              <li><a href="#photo" class="btn-floating photo"><i class="material-icons">insert_photo</i></a></li>
-              <li><a href="#text" class="btn-floating text"><i class="material-icons">textsms</i></a></li>
-            </ul>
-        </div>
+        <div class="menu-add" ng-if='user.type=="te"' >
+            <div class="fixed-action-btn">
+                <a class="btn-floating btn-large red">
+                  <i class="large material-icons">add</i>
+                </a>
+                <ul>
+                  <li><a href="#audio" ng-click="audio()" class="btn-floating audio"><i class="material-icons">play_circle_filled</i></a></li>
+                  <li><a href="#photo" ng-click="photo()" class="btn-floating photo"><i class="material-icons">insert_photo</i></a></li>
+                  <li><a href="#text" ng-click="text()" class="btn-floating text"><i class="material-icons">textsms</i></a></li>
+                </ul>
+            </div>
     </div>
     <div id="text" class="additem">
     	<form>
@@ -48,7 +48,7 @@
 
         </form>
     </div>
-    <div class="card" ng-repeat='item in items'>
+    <div class="card" ng-repeat='item in items' ng-if='item.itemType!="word"'>
         <div class="user-image">
             <img src='{{item.authorId.imageUrl}}'>
         </div>
